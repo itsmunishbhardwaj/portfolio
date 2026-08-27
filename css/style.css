@@ -197,3 +197,210 @@ section {
 @media (max-width: 768px) {
   .nav { padding: 16px 20px; }
 }
+
+/* ── Workshop Exterior / Hero ── */
+.workshop-exterior {
+  min-height: 100vh;
+  display: grid;
+  grid-template-rows: 1fr;
+  position: relative;
+  overflow: hidden;
+}
+
+.workshop-facade {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.workshop-sky {
+  flex: 1;
+  background: linear-gradient(180deg, #b8d4f0 0%, #daeaff 60%, #f0f0f0 100%);
+}
+
+.workshop-building {
+  height: 55vh;
+  background: #e8e2d8;
+  border-top: 3px solid var(--navy);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  padding-top: 24px;
+}
+
+.workshop-sign {
+  background: var(--navy);
+  color: #fff;
+  padding: 12px 32px;
+  border-radius: 4px;
+  text-align: center;
+  margin-bottom: 20px;
+  box-shadow: 4px 5px 0 rgba(0,0,0,0.25);
+}
+
+.sign-text {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(18px, 2.5vw, 28px);
+  letter-spacing: 0.04em;
+  display: block;
+}
+
+.sign-sub {
+  font-family: var(--font-body);
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.65);
+  display: block;
+  margin-top: 4px;
+}
+
+.door-frame {
+  position: relative;
+  width: 200px;
+  height: 280px;
+  border: 3px solid var(--navy);
+  border-bottom: none;
+  overflow: hidden;
+  border-radius: 4px 4px 0 0;
+}
+
+.door-interior {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+
+.door-panel {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 50%;
+  background: #c8b89a;
+  border: 1px solid rgba(0,0,0,0.15);
+  z-index: 1;
+}
+
+.door-left { left: 0; transform-origin: left center; }
+.door-right { right: 0; transform-origin: right center; }
+
+/* Door panel details */
+.door-panel::before {
+  content: '';
+  position: absolute;
+  inset: 12px;
+  border: 1.5px solid rgba(0,0,0,0.2);
+  border-radius: 2px;
+}
+
+/* Hero content */
+.hero-content {
+  position: relative;
+  z-index: 10;
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 120px 40px 80px;
+  text-align: center;
+}
+
+.hero-headline {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(40px, 6vw, 80px);
+  color: var(--navy);
+  line-height: 1.0;
+  letter-spacing: -0.03em;
+  margin: 12px 0 20px;
+}
+
+.hero-sub {
+  font-size: 17px;
+  line-height: 1.6;
+  color: var(--black);
+  max-width: 520px;
+  margin: 0 auto 36px;
+  opacity: 0.8;
+}
+
+.hero-stat-strip {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 24px;
+  margin-bottom: 36px;
+  flex-wrap: wrap;
+}
+
+.hero-stat { text-align: center; }
+
+.hero-stat-num {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 36px;
+  color: var(--blue);
+  letter-spacing: -0.03em;
+  display: block;
+}
+
+.hero-stat-label {
+  font-size: 12px;
+  color: var(--black);
+  opacity: 0.7;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.hero-stat-divider {
+  width: 1px;
+  height: 40px;
+  background: var(--navy);
+  opacity: 0.2;
+}
+
+.hero-buttons {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  margin-bottom: 32px;
+  flex-wrap: wrap;
+}
+
+.competency-chips {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.chip {
+  font-family: var(--font-display);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  background: var(--navy);
+  color: #fff;
+  padding: 5px 12px;
+  border-radius: 100px;
+  opacity: 0.75;
+}
+
+.scroll-hint {
+  position: absolute;
+  bottom: 32px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: var(--font-body);
+  font-size: 13px;
+  color: var(--navy);
+  opacity: 0.5;
+  z-index: 10;
+  animation: nudge 2s ease-in-out infinite;
+}
+
+@keyframes nudge {
+  0%, 100% { transform: translateX(-50%) translateY(0); }
+  50% { transform: translateX(-50%) translateY(6px); }
+}
