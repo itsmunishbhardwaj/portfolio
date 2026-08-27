@@ -1,0 +1,199 @@
+@import url('https://api.fontshare.com/v2/css?f[]=clash-grotesk@700,600,500&display=swap');
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --blue: #194DC4;
+  --red: #DA0D00;
+  --black: #141413;
+  --navy: #0D2040;
+  --card-bg: #FAFAFA;
+  --page-bg: #F0F0F0;
+  --card-shadow: 10px 12px 12px rgba(0,0,0,0.27);
+  --card-radius: 15px;
+  --card-border: 2px solid var(--navy);
+  --font-display: 'Clash Grotesk', sans-serif;
+  --font-body: 'Inter', sans-serif;
+}
+
+html { background: var(--page-bg); }
+
+body {
+  font-family: var(--font-body);
+  color: var(--black);
+  background: var(--page-bg);
+  overflow-x: hidden;
+}
+
+/* Grain overlay */
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='0.4'/%3E%3C/svg%3E");
+  opacity: 0.035;
+  pointer-events: none;
+  z-index: 9999;
+}
+
+/* Nav */
+.nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 40px;
+  mix-blend-mode: multiply;
+}
+
+.nav-logo {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 18px;
+  color: var(--navy);
+  letter-spacing: -0.02em;
+}
+
+.nav-links {
+  display: flex;
+  gap: 32px;
+}
+
+.nav-links a {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 14px;
+  color: var(--navy);
+  text-decoration: none;
+  letter-spacing: -0.01em;
+}
+
+/* Pill button */
+.btn {
+  display: inline-block;
+  background: var(--blue);
+  color: #fff;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 15px;
+  padding: 10px 22px;
+  border-radius: 100px;
+  text-decoration: none;
+  border: none;
+  cursor: pointer;
+  transition: opacity 0.15s;
+}
+
+.btn:hover { opacity: 0.85; }
+
+.btn-ghost {
+  background: transparent;
+  color: var(--navy);
+  border: 2px solid var(--navy);
+}
+
+.btn-ghost:hover { background: var(--navy); color: #fff; opacity: 1; }
+
+/* Section base */
+section {
+  position: relative;
+  width: 100%;
+}
+
+/* Card shell */
+.card {
+  background: var(--card-bg);
+  border: var(--card-border);
+  border-radius: var(--card-radius);
+  box-shadow: var(--card-shadow);
+}
+
+/* Pegboard dot-grid */
+.pegboard-bg {
+  background-color: var(--card-bg);
+  background-image: radial-gradient(circle, var(--navy) 1.5px, transparent 1.5px);
+  background-size: 24px 24px;
+}
+
+/* Red section label */
+.section-label {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--red);
+}
+
+/* Skill badge */
+.skill-badge {
+  display: inline-flex;
+  flex-direction: column;
+  background: var(--card-bg);
+  border: var(--card-border);
+  border-radius: 10px;
+  padding: 12px 16px;
+  box-shadow: 6px 7px 0px rgba(0,0,0,0.18);
+  transform: rotate(var(--tilt, 0deg));
+  min-width: 120px;
+}
+
+.badge-name {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 16px;
+  color: var(--navy);
+  letter-spacing: -0.02em;
+}
+
+.badge-tag {
+  font-family: var(--font-body);
+  font-size: 11px;
+  color: var(--red);
+  margin-top: 3px;
+}
+
+/* Notecard */
+.notecard {
+  background: var(--card-bg);
+  border: var(--card-border);
+  border-radius: var(--card-radius);
+  box-shadow: var(--card-shadow);
+  padding: 32px;
+  max-width: 420px;
+}
+
+.notecard-heading {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 28px;
+  color: var(--red);
+  letter-spacing: -0.03em;
+  margin-bottom: 8px;
+}
+
+/* Impact stat */
+.impact-num {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(48px, 6vw, 80px);
+  color: var(--blue);
+  line-height: 1;
+  letter-spacing: -0.04em;
+}
+
+.impact-label {
+  font-family: var(--font-body);
+  font-size: 14px;
+  color: var(--black);
+  margin-top: 4px;
+}
+
+/* Responsive base */
+@media (max-width: 768px) {
+  .nav { padding: 16px 20px; }
+}
