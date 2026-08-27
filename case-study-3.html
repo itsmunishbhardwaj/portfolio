@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Outage Runbook — Munish Bhardwaj</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/case-study.css">
+</head>
+<body>
+
+<nav class="cs-nav">
+  <a href="index.html" class="cs-nav-back">← All Work</a>
+  <a href="index.html" class="cs-nav-logo">MB</a>
+</nav>
+
+<header class="cs-hero">
+  <span class="cs-category">Incident Response · Kubernetes · Jan 2026</span>
+  <h1 class="cs-title">The Outage That Became a Runbook</h1>
+  <p class="cs-overview">A full-cluster outage, root-caused, fixed across 9 namespaces, and turned into a script so it can't happen the same way twice.</p>
+  <div class="cs-headline-stats">
+    <div class="cs-hstat"><span class="cs-hstat-num">33+</span><span class="cs-hstat-label">Pods down simultaneously</span></div>
+    <div class="cs-hstat"><span class="cs-hstat-num">9/9</span><span class="cs-hstat-label">Namespaces recovered</span></div>
+    <div class="cs-hstat"><span class="cs-hstat-num">1</span><span class="cs-hstat-label">Root cause found</span></div>
+  </div>
+</header>
+
+<main class="cs-content">
+
+  <div class="cs-block">
+    <span class="cs-block-label">Before → After</span>
+    <div class="cs-ba-table">
+      <div class="cs-ba-col">
+        <p class="cs-ba-head">Before: Silent expiration, full outage</p>
+        <p>A Docker PAT token expired with no warning; every pod needing a fresh image pull started failing.</p>
+        <p>33+ pods in ImagePullBackOff across the entire client environment.</p>
+      </div>
+      <div class="cs-ba-col">
+        <p class="cs-ba-head">After: Scripted recovery, documented root cause</p>
+        <p><code>fix_docker_credentials.sh</code> rotates the credential and force-restarts affected pods across every namespace in one run.</p>
+        <p>A written investigation report so the next engineer doesn't re-diagnose from zero.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="cs-block">
+    <span class="cs-block-label">The Problem</span>
+    <h2 class="cs-block-title">One shared secret. Every namespace down.</h2>
+    <div class="cs-stats-grid">
+      <div class="cs-stat-cell"><span class="cs-stat-num">33+</span><span class="cs-stat-label">Pods down simultaneously, ImagePullBackOff across every namespace</span></div>
+      <div class="cs-stat-cell"><span class="cs-stat-num">9</span><span class="cs-stat-label">Namespaces affected by one expired secret</span></div>
+      <div class="cs-stat-cell"><span class="cs-stat-num">1</span><span class="cs-stat-label">Shared registry secret (h2oai-registry) — a single point of failure for the whole environment</span></div>
+      <div class="cs-stat-cell"><span class="cs-stat-num">0</span><span class="cs-stat-label">Warning before the token expired — it just stopped working</span></div>
+    </div>
+  </div>
+
+  <div class="cs-block">
+    <span class="cs-block-label">The Solution</span>
+    <h2 class="cs-block-title">Fix it live. Then make the fix a script.</h2>
+    <ul class="cs-solution-list">
+      <li class="cs-solution-item"><strong>Root-caused to the actual failure, not the symptom</strong> — traced ImagePullBackOff back to an expired Docker PAT in the shared registry secret, not a Kubernetes scheduling issue.</li>
+      <li class="cs-solution-item"><strong>Fixed it live</strong> — updated credentials across all 9 affected namespaces and force-restarted every impacted pod.</li>
+      <li class="cs-solution-item"><strong>Then didn't stop there</strong> — built <code>fix_docker_credentials.sh</code> so the same fix is a script next time, not a live investigation. <em>One command, any namespace.</em></li>
+      <li class="cs-solution-item"><strong>Wrote the investigation report</strong> — root cause, blast radius, and fix, documented while it was fresh.</li>
+    </ul>
+    <div class="cs-principle">A fix that isn't automated is a promise to debug the same thing again.</div>
+  </div>
+
+  <div class="cs-block">
+    <span class="cs-block-label">The Impact</span>
+    <div class="cs-stats-grid">
+      <div class="cs-stat-cell"><span class="cs-stat-num">9/9</span><span class="cs-stat-label">Namespaces recovered</span></div>
+      <div class="cs-stat-cell"><span class="cs-stat-num">1</span><span class="cs-stat-label">Reusable script for the next occurrence</span></div>
+      <div class="cs-stat-cell"><span class="cs-stat-num">1</span><span class="cs-stat-label">Written investigation report for institutional memory</span></div>
+    </div>
+  </div>
+
+  <div class="cs-block">
+    <span class="cs-block-label">Key Learnings</span>
+    <div class="cs-learnings">
+      <div class="cs-learning">
+        <span class="cs-learning-num">1</span>
+        <div>
+          <p class="cs-learning-title">A single shared secret is a single point of failure, full stop.</p>
+          <p class="cs-learning-body">The outage wasn't really a Docker problem — it was an architecture problem (one secret, every namespace depends on it) that happened to surface as a Docker problem.</p>
+        </div>
+      </div>
+      <div class="cs-learning">
+        <span class="cs-learning-num">2</span>
+        <div>
+          <p class="cs-learning-title">The fix isn't done until it's reusable.</p>
+          <p class="cs-learning-body">Restoring service ends the incident. Writing the script ends the next incident before it starts.</p>
+        </div>
+      </div>
+      <div class="cs-learning">
+        <span class="cs-learning-num">3</span>
+        <div>
+          <p class="cs-learning-title">Document while it's fresh, not after.</p>
+          <p class="cs-learning-body">The investigation report was written during recovery, not weeks later from memory — that's the difference between an accurate root cause and a guess.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</main>
+
+<footer class="cs-footer-nav">
+  <a href="case-study-2.html">← Cluster Isolation</a>
+  <a href="case-study-4.html" class="btn">Next: Test Suite →</a>
+</footer>
+
+</body>
+</html>

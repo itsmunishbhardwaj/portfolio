@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cluster Isolation — Munish Bhardwaj</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/case-study.css">
+</head>
+<body>
+
+<nav class="cs-nav">
+  <a href="index.html" class="cs-nav-back">← All Work</a>
+  <a href="index.html" class="cs-nav-logo">MB</a>
+</nav>
+
+<header class="cs-hero">
+  <span class="cs-category">Infrastructure Strategy · ROSA / AWS · Feb–Apr 2026</span>
+  <h1 class="cs-title">Four Options, One Decision: Isolating a Production Cluster</h1>
+  <p class="cs-overview">Airgapping a production OpenShift cluster — and choosing the boring option on purpose.</p>
+  <div class="cs-headline-stats">
+    <div class="cs-hstat"><span class="cs-hstat-num">4</span><span class="cs-hstat-label">Approaches evaluated</span></div>
+    <div class="cs-hstat"><span class="cs-hstat-num">6</span><span class="cs-hstat-label">Clusters in the shared account</span></div>
+    <div class="cs-hstat"><span class="cs-hstat-num">0</span><span class="cs-hstat-label">New shared dependencies introduced</span></div>
+  </div>
+</header>
+
+<main class="cs-content">
+
+  <div class="cs-block">
+    <span class="cs-block-label">Before → After</span>
+    <div class="cs-ba-table">
+      <div class="cs-ba-col">
+        <p class="cs-ba-head">Before: Open cluster, shared blast radius</p>
+        <p>No network isolation boundary on a QA-priority ROSA cluster.</p>
+        <p>The "obvious" tool (AWS Network Firewall) would have made this cluster's firewall the control plane for all 6 clusters in the account.</p>
+      </div>
+      <div class="cs-ba-col">
+        <p class="cs-ba-head">After: Scoped isolation, matched to the constraint</p>
+        <p>AWS Security Groups enforcing the boundary — implemented, not just proposed.</p>
+        <p>Isolation scoped to this cluster only, zero shared blast radius introduced.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="cs-block">
+    <span class="cs-block-label">The Problem</span>
+    <h2 class="cs-block-title">Every obvious option had a hidden cost</h2>
+    <div class="cs-stats-grid">
+      <div class="cs-stat-cell"><span class="cs-stat-num">6</span><span class="cs-stat-label">Clusters in the same AWS account — any shared firewall becomes everyone's dependency</span></div>
+      <div class="cs-stat-cell"><span class="cs-stat-num">20+</span><span class="cs-stat-label">Namespaces — per-namespace firewall policy is unmanageable at that scale</span></div>
+      <div class="cs-stat-cell"><span class="cs-stat-num">4</span><span class="cs-stat-label">Isolation approaches on the table, each with a real cost</span></div>
+      <div class="cs-stat-cell"><span class="cs-stat-num">0</span><span class="cs-stat-label">Of the "obvious" options fit without a hidden trade-off</span></div>
+    </div>
+    <p class="cs-block-body" style="font-style:italic; opacity:0.65; font-size:14px; border-left: 3px solid var(--red); padding-left: 16px;">"I spent the last few days working on airgapping the ROSA cluster." — reporting findings to Joby, Satish, and Jeffrey, Mar 23 2026</p>
+  </div>
+
+  <div class="cs-block">
+    <span class="cs-block-label">The Solution</span>
+    <h2 class="cs-block-title">Four evaluated, one selected for the right reason</h2>
+    <ul class="cs-solution-list">
+      <li class="cs-solution-item"><strong>AWS Network Firewall</strong> — rejected: becomes the shared control-plane firewall for all 6 clusters in the account. <em>Wrong blast radius.</em></li>
+      <li class="cs-solution-item"><strong>EgressFirewall (OVN-Kubernetes)</strong> — rejected: needs a policy per namespace across 20+ namespaces. <em>Unmanageable at scale.</em></li>
+      <li class="cs-solution-item"><strong>AdminNetworkPolicy / BaselineAdminNetworkPolicy</strong> — rejected: not yet part of the ROSA integration surface. <em>Not production-ready here.</em></li>
+      <li class="cs-solution-item"><strong>AWS Security Groups</strong> — selected: fastest to implement, smallest footprint, met the actual QA-priority requirement. <em>Matched the real constraint.</em></li>
+    </ul>
+    <div class="cs-principle">The best tool on paper is wrong if it doesn't match your blast radius.</div>
+  </div>
+
+  <div class="cs-block">
+    <span class="cs-block-label">The Impact</span>
+    <div class="cs-stats-grid">
+      <div class="cs-stat-cell"><span class="cs-stat-num">1</span><span class="cs-stat-label">Isolation boundary shipped</span></div>
+      <div class="cs-stat-cell"><span class="cs-stat-num">0</span><span class="cs-stat-label">New shared dependencies introduced across the other 5 clusters</span></div>
+      <div class="cs-stat-cell"><span class="cs-stat-num">4</span><span class="cs-stat-label">Options documented for the next person who hits this decision</span></div>
+    </div>
+  </div>
+
+  <div class="cs-block">
+    <span class="cs-block-label">Key Learnings</span>
+    <div class="cs-learnings">
+      <div class="cs-learning">
+        <span class="cs-learning-num">1</span>
+        <div>
+          <p class="cs-learning-title">Powerful and correct aren't the same thing.</p>
+          <p class="cs-learning-body">Network Firewall is the more capable product. It was still the wrong choice, because "capable" here meant "becomes a shared dependency for 5 clusters you don't own."</p>
+        </div>
+      </div>
+      <div class="cs-learning">
+        <span class="cs-learning-num">2</span>
+        <div>
+          <p class="cs-learning-title">Write down what you rejected, not just what you shipped.</p>
+          <p class="cs-learning-body">The 3 rejected options are as useful to the next engineer as the 1 that got picked — they prevent the same evaluation from being redone from scratch.</p>
+        </div>
+      </div>
+      <div class="cs-learning">
+        <span class="cs-learning-num">3</span>
+        <div>
+          <p class="cs-learning-title">QA-priority infrastructure needs correctly-scoped tooling, not enterprise-grade tooling.</p>
+          <p class="cs-learning-body">Matching the solution to the actual stakes is a judgment call, not a technical one.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</main>
+
+<footer class="cs-footer-nav">
+  <a href="case-study-1.html">← Zero Static Secrets</a>
+  <a href="case-study-3.html" class="btn">Next: The Outage Runbook →</a>
+</footer>
+
+</body>
+</html>

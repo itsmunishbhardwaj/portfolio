@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Zero Static Secrets — Munish Bhardwaj</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/case-study.css">
+</head>
+<body>
+
+<nav class="cs-nav">
+  <a href="index.html" class="cs-nav-back">← All Work</a>
+  <a href="index.html" class="cs-nav-logo">MB</a>
+</nav>
+
+<header class="cs-hero">
+  <span class="cs-category">Identity &amp; Security · Azure · ~7 weeks (Mar–May 2025)</span>
+  <h1 class="cs-title">Zero Static Secrets, One Banking Cluster</h1>
+  <p class="cs-overview">Eliminating every static secret from a Fortune 500 banking environment — passwordless, by design, at scale.</p>
+  <div class="cs-headline-stats">
+    <div class="cs-hstat"><span class="cs-hstat-num">24</span><span class="cs-hstat-label">Federated credentials</span></div>
+    <div class="cs-hstat"><span class="cs-hstat-num">13</span><span class="cs-hstat-label">Managed identities</span></div>
+    <div class="cs-hstat"><span class="cs-hstat-num">0</span><span class="cs-hstat-label">Static secrets remaining</span></div>
+    <div class="cs-hstat"><span class="cs-hstat-num">11</span><span class="cs-hstat-label">Namespaces secured</span></div>
+  </div>
+</header>
+
+<main class="cs-content">
+
+  <div class="cs-block">
+    <span class="cs-block-label">Before → After</span>
+    <div class="cs-ba-table">
+      <div class="cs-ba-col">
+        <p class="cs-ba-head">Before: Static-secret sprawl</p>
+        <p>10+ services authenticating with long-lived static secrets to PostgreSQL and Blob Storage.</p>
+        <p>Every audit flags the same finding: secrets that can leak, expire silently, or need manual rotation.</p>
+      </div>
+      <div class="cs-ba-col">
+        <p class="cs-ba-head">After: Passwordless by design</p>
+        <p>Every connected service — Keycloak, AppStore, AIEM, Telemetry, MLOps, Authz, Drive, Securestore, Feature Store, H2O GPTe — authenticates via short-lived federated tokens.</p>
+        <p>Zero secrets to rotate, leak, or explain to an auditor.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="cs-block">
+    <span class="cs-block-label">The Problem</span>
+    <h2 class="cs-block-title">A credential failure waiting to happen</h2>
+    <div class="cs-stats-grid">
+      <div class="cs-stat-cell"><span class="cs-stat-num">10+</span><span class="cs-stat-label">Services needing federated auth, none passwordless yet</span></div>
+      <div class="cs-stat-cell"><span class="cs-stat-num">2</span><span class="cs-stat-label">Recurring Azure AD errors blocking every attempt (AADSTS700211, AADSTS700213)</span></div>
+      <div class="cs-stat-cell"><span class="cs-stat-num">~7 wks</span><span class="cs-stat-label">Of cascading credential failures before the first working token</span></div>
+      <div class="cs-stat-cell"><span class="cs-stat-num">24</span><span class="cs-stat-label">Federated credentials ultimately required, by design not guesswork</span></div>
+    </div>
+    <p class="cs-block-body" style="font-style:italic; opacity:0.65; font-size:14px; border-left: 3px solid var(--red); padding-left: 16px;">"I might have found an alternative to make this work. We can register an app to create a service principal." — opening the investigation in #proj-workload-identity before the first working attempt existed</p>
+  </div>
+
+  <div class="cs-block">
+    <span class="cs-block-label">The Solution</span>
+    <h2 class="cs-block-title">Terraform-authored identity, automated from the start</h2>
+    <ul class="cs-solution-list">
+      <li class="cs-solution-item"><strong>Terraform-authored identity, not console clicks</strong> — 13 managed identities and 24 federated credentials as reusable <code>for_each</code> loops, not one-off setup. <em>Repeatable next environment.</em></li>
+      <li class="cs-solution-item"><strong>Automation for the boring part</strong> — <code>check-and-create-federated-credentials.sh</code> creates credentials across 11 namespaces in one run. <em>Minutes, not a checklist.</em></li>
+      <li class="cs-solution-item"><strong>A separate audit script</strong> to verify credential status independent of the creation script. <em>Trust but verify.</em></li>
+      <li class="cs-solution-item"><strong>Passwordless database and storage auth</strong> for every connected service via Azure AD tokens. <em>The actual deliverable.</em></li>
+    </ul>
+    <div class="cs-principle">If a human has to rotate it, it's a future incident. Automate the credential, not just the fix.</div>
+  </div>
+
+  <div class="cs-block">
+    <span class="cs-block-label">The Impact</span>
+    <div class="cs-stats-grid">
+      <div class="cs-stat-cell"><span class="cs-stat-num">0</span><span class="cs-stat-label">Static secrets remaining in the environment</span></div>
+      <div class="cs-stat-cell"><span class="cs-stat-num">24</span><span class="cs-stat-label">Federated credentials managing auth automatically</span></div>
+      <div class="cs-stat-cell"><span class="cs-stat-num">10+</span><span class="cs-stat-label">Services now passwordless</span></div>
+      <div class="cs-stat-cell"><span class="cs-stat-num">1</span><span class="cs-stat-label">Script that recreates all of it for the next environment</span></div>
+    </div>
+  </div>
+
+  <div class="cs-block">
+    <span class="cs-block-label">Key Learnings</span>
+    <div class="cs-learnings">
+      <div class="cs-learning">
+        <span class="cs-learning-num">1</span>
+        <div>
+          <p class="cs-learning-title">Debug the abstraction, not the symptom.</p>
+          <p class="cs-learning-body">AADSTS700211 and AADSTS700213 look like config typos; they're actually issuer/subject-trust mismatches. Fixing the symptom (re-entering values) doesn't work — you have to understand the federation model itself.</p>
+        </div>
+      </div>
+      <div class="cs-learning">
+        <span class="cs-learning-num">2</span>
+        <div>
+          <p class="cs-learning-title">Automate the fix, not just the incident.</p>
+          <p class="cs-learning-body">Solving it once for one service would have been a support ticket. Building the script that does it for any namespace turned a fix into infrastructure.</p>
+        </div>
+      </div>
+      <div class="cs-learning">
+        <span class="cs-learning-num">3</span>
+        <div>
+          <p class="cs-learning-title">Security work needs a receipt.</p>
+          <p class="cs-learning-body">The separate audit script wasn't asked for — it was built because "trust me it's configured" doesn't survive a compliance review.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</main>
+
+<footer class="cs-footer-nav">
+  <a href="index.html">← All Case Studies</a>
+  <a href="case-study-2.html" class="btn">Next: Cluster Isolation →</a>
+</footer>
+
+</body>
+</html>
