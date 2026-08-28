@@ -93,3 +93,22 @@ gsap.from('.impact-num', {
     once: true,
   }
 });
+
+// Toolkit portal effect — pegboard section emerges from door opening.
+// Clip-path starts matching the door width (200px, centered) and expands
+// to full screen. Door is fully open exactly when pegboard enters the
+// viewport bottom (200vh exterior, door opens to center = 100vh of scroll,
+// pegboard enters at 200-100 = 100vh scroll — perfect sync).
+if (window.innerWidth > 768) {
+  const doorPct = ((window.innerWidth - 200) / (2 * window.innerWidth) * 100).toFixed(2);
+  gsap.from('.pegboard-section', {
+    clipPath: `inset(0% ${doorPct}% 0% ${doorPct}% round 6px 6px 0px 0px)`,
+    ease: 'none',
+    scrollTrigger: {
+      trigger: '.pegboard-section',
+      start: 'top bottom',
+      end: 'top 15%',
+      scrub: 2,
+    }
+  });
+}

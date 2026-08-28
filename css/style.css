@@ -203,12 +203,12 @@ section {
   }
   .hero-photo { aspect-ratio: 4 / 3; }
   .hero-headline { font-size: clamp(36px, 10vw, 56px); }
-  .workshop-exterior { min-height: 200vh; }
+  .workshop-exterior { min-height: 280vh; }
 }
 
 /* ── Workshop Exterior / Hero ── */
 .workshop-exterior {
-  min-height: 150vh;
+  min-height: 200vh;
   position: relative;
   overflow: hidden;
 }
