@@ -659,19 +659,18 @@ section {
   font-weight: 700;
 }
 
-/* ── Kabir section ── */
-.kabir-section {
+/* ── Beyond the Terminal section ── */
+.beyond-section {
   padding: 80px 40px;
   background: var(--page-bg);
 }
 
-.kabir-inner {
-  max-width: 1100px;
+.beyond-inner {
+  max-width: 600px;
   margin: 0 auto;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 40px;
-  align-items: start;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
 }
 
 .kabir-photo {
@@ -716,7 +715,16 @@ section {
   color: var(--red);
 }
 
-.kabir-aside {
+/* ── Testimonials section ── */
+.testimonials-section {
+  padding: 80px 40px;
+  background: var(--card-bg);
+  border-top: var(--card-border);
+}
+
+.testimonials-inner {
+  max-width: 800px;
+  margin: 0 auto;
   display: flex;
   flex-direction: column;
   gap: 24px;
@@ -870,7 +878,6 @@ section {
 
 /* ── Responsive ── */
 @media (max-width: 768px) {
-  .kabir-inner { grid-template-columns: 1fr; }
   .catalog-header-card { flex-direction: column; }
   .stats-strip { grid-template-columns: repeat(2, 1fr); }
   .hero-content { padding: 100px 20px 60px; }
