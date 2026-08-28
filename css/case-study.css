@@ -171,6 +171,14 @@ body::after {
   opacity: 0.85;
 }
 
+.cs-pullquote {
+  font-style: italic;
+  opacity: 0.65;
+  font-size: 14px;
+  border-left: 3px solid #DA0D00;
+  padding-left: 16px;
+}
+
 /* Before/After table */
 .cs-ba-table {
   display: grid;
@@ -332,6 +340,23 @@ body::after {
   color: var(--black);
   opacity: 0.8;
 }
+
+.btn {
+  display: inline-block;
+  background: #194DC4;
+  color: #fff;
+  font-family: 'Clash Grotesk', sans-serif;
+  font-weight: 700;
+  font-size: 15px;
+  padding: 10px 22px;
+  border-radius: 100px;
+  text-decoration: none;
+  border: none;
+  cursor: pointer;
+  transition: opacity 0.15s;
+}
+
+.btn:hover { opacity: 0.85; }
 
 /* Case study footer nav */
 .cs-footer-nav {
