@@ -196,6 +196,14 @@ section {
 /* Responsive base */
 @media (max-width: 768px) {
   .nav { padding: 16px 20px; }
+  .hero-content {
+    grid-template-columns: 1fr;
+    padding: 80px 24px 60px;
+    gap: 36px;
+  }
+  .hero-photo { aspect-ratio: 4 / 3; }
+  .hero-headline { font-size: clamp(36px, 10vw, 56px); }
+  .workshop-exterior { min-height: 200vh; }
 }
 
 /* ── Workshop Exterior / Hero ── */
@@ -294,45 +302,76 @@ section {
   border-radius: 2px;
 }
 
-/* Hero content */
+/* Hero content — Vox editorial two-column */
 .hero-content {
   position: relative;
   z-index: 10;
-  max-width: 720px;
+  max-width: 1200px;
+  width: 100%;
   margin: 0 auto;
-  padding: 120px 40px 80px;
-  text-align: center;
+  padding: 100px 60px 80px;
+  display: grid;
+  grid-template-columns: 340px 1fr;
+  gap: 64px;
+  align-items: center;
+}
+
+.hero-photo-col {
+  position: relative;
+}
+
+.hero-photo {
+  width: 100%;
+  aspect-ratio: 3 / 4;
+  object-fit: cover;
+  object-position: top center;
+  border-radius: 6px;
+  border: 3px solid var(--navy);
+  box-shadow: 14px 16px 0 rgba(0,0,0,0.22);
+  display: block;
+}
+
+.hero-text-col {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.hero-text-col .section-label {
+  border-top: 3px solid var(--red);
+  padding-top: 10px;
+  margin-bottom: 16px;
 }
 
 .hero-headline {
   font-family: var(--font-display);
   font-weight: 700;
-  font-size: clamp(40px, 6vw, 80px);
+  font-size: clamp(44px, 5.5vw, 88px);
   color: var(--navy);
   line-height: 1.0;
-  letter-spacing: -0.03em;
-  margin: 12px 0 20px;
+  letter-spacing: -0.04em;
+  margin: 0 0 24px;
 }
 
 .hero-sub {
   font-size: 17px;
   line-height: 1.6;
   color: var(--black);
-  max-width: 520px;
-  margin: 0 auto 36px;
+  max-width: 480px;
+  margin: 0 0 36px;
   opacity: 0.8;
 }
 
 .hero-stat-strip {
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
   gap: 24px;
   margin-bottom: 36px;
   flex-wrap: wrap;
 }
 
-.hero-stat { text-align: center; }
+.hero-stat { text-align: left; }
 
 .hero-stat-num {
   font-family: var(--font-display);
@@ -356,12 +395,13 @@ section {
   height: 40px;
   background: var(--navy);
   opacity: 0.2;
+  flex-shrink: 0;
 }
 
 .hero-buttons {
   display: flex;
   gap: 12px;
-  justify-content: center;
+  justify-content: flex-start;
   margin-bottom: 32px;
   flex-wrap: wrap;
 }
@@ -369,7 +409,7 @@ section {
 .competency-chips {
   display: flex;
   gap: 8px;
-  justify-content: center;
+  justify-content: flex-start;
   flex-wrap: wrap;
 }
 
@@ -846,17 +886,6 @@ section {
   padding-top: 20px;
 }
 
-.hero-headshot {
-  width: 80px;
-  height: 80px;
-  border-radius: 50%;
-  object-fit: cover;
-  object-position: center top;
-  border: 3px solid var(--navy);
-  box-shadow: 6px 7px 0 rgba(0,0,0,0.18);
-  margin: 0 auto 20px;
-  display: block;
-}
 
 .surf-photo {
   width: 100%;
