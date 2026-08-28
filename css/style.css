@@ -200,9 +200,7 @@ section {
 
 /* ── Workshop Exterior / Hero ── */
 .workshop-exterior {
-  min-height: 100vh;
-  display: grid;
-  grid-template-rows: 1fr;
+  min-height: 150vh;
   position: relative;
   overflow: hidden;
 }
