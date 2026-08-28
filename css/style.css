@@ -203,103 +203,74 @@ section {
   }
   .hero-photo { aspect-ratio: 4 / 3; }
   .hero-headline { font-size: clamp(36px, 10vw, 56px); }
-  .workshop-exterior { min-height: 280vh; }
 }
 
 /* ── Workshop Exterior / Hero ── */
 .workshop-exterior {
-  min-height: 200vh;
+  min-height: 100vh;
   position: relative;
   overflow: hidden;
-}
-
-.workshop-facade {
-  position: absolute;
-  inset: 0;
-  display: flex;
-  flex-direction: column;
-}
-
-.workshop-sky {
-  flex: 1;
   background: linear-gradient(180deg, #b8d4f0 0%, #daeaff 60%, #f0f0f0 100%);
 }
 
-.workshop-building {
-  height: 55vh;
-  background: #e8e2d8;
-  border-top: 3px solid var(--navy);
+/* ── Workshop Entrance (pinned door sequence) ── */
+.workshop-entrance {
+  position: relative;
+  min-height: 100vh;
+  overflow: hidden;
+}
+
+.entrance-interior {
+  min-height: 100vh;
+  padding: 100px 60px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  position: relative;
-  padding-top: 24px;
 }
 
-.workshop-sign {
-  background: var(--navy);
-  color: #fff;
-  padding: 12px 32px;
-  border-radius: 4px;
-  text-align: center;
-  margin-bottom: 20px;
-  box-shadow: 4px 5px 0 rgba(0,0,0,0.25);
-}
-
-.sign-text {
-  font-family: var(--font-display);
-  font-weight: 700;
-  font-size: clamp(18px, 2.5vw, 28px);
-  letter-spacing: 0.04em;
-  display: block;
-}
-
-.sign-sub {
-  font-family: var(--font-body);
-  font-size: 11px;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: rgba(255,255,255,0.65);
-  display: block;
-  margin-top: 4px;
-}
-
-.door-frame {
-  position: relative;
-  width: 200px;
-  height: 280px;
-  border: 3px solid var(--navy);
-  border-bottom: none;
-  overflow: hidden;
-  border-radius: 4px 4px 0 0;
-}
-
-.door-interior {
-  position: absolute;
-  inset: 0;
-  z-index: 0;
-}
-
-.door-panel {
+.entrance-door-left,
+.entrance-door-right {
   position: absolute;
   top: 0;
   bottom: 0;
   width: 50%;
-  background: #c8b89a;
-  border: 1px solid rgba(0,0,0,0.15);
-  z-index: 1;
+  background: #2c2416;
+  z-index: 10;
 }
 
-.door-left { left: 0; transform-origin: left center; }
-.door-right { right: 0; transform-origin: right center; }
+.entrance-door-left { left: 0; }
+.entrance-door-right { right: 0; }
 
-/* Door panel details */
-.door-panel::before {
-  content: '';
+.entrance-sign {
   position: absolute;
-  inset: 12px;
-  border: 1.5px solid rgba(0,0,0,0.2);
-  border-radius: 2px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 20;
+  text-align: center;
+  pointer-events: none;
+  width: 100%;
+}
+
+.entrance-sign-text {
+  display: block;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(28px, 5vw, 72px);
+  color: #fff;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  line-height: 1;
+  margin-bottom: 12px;
+}
+
+.entrance-sign-sub {
+  display: block;
+  font-family: var(--font-body);
+  font-size: 13px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.55);
 }
 
 /* Hero content — Vox editorial two-column */

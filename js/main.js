@@ -6,55 +6,40 @@ lenis.on('scroll', ScrollTrigger.update);
 gsap.ticker.add((time) => lenis.raf(time * 1000));
 gsap.ticker.lagSmoothing(0);
 
-// Door opening parallax — panels slide apart as user scrolls down from hero
-gsap.to('.door-left', {
-  xPercent: -100,
-  ease: 'none',
+// ── Workshop Entrance: pinned door sequence ──
+// Page stays fixed while sign rises, then door panels slide apart, revealing toolkit.
+const entranceTl = gsap.timeline({
   scrollTrigger: {
-    trigger: '.workshop-exterior',
+    trigger: '.workshop-entrance',
     start: 'top top',
-    end: 'center top',
+    end: '+=250%',
+    pin: true,
     scrub: 1.5,
+    anticipatePin: 1,
   }
 });
 
-gsap.to('.door-right', {
-  xPercent: 100,
-  ease: 'none',
-  scrollTrigger: {
-    trigger: '.workshop-exterior',
-    start: 'top top',
-    end: 'center top',
-    scrub: 1.5,
-  }
-});
+entranceTl
+  // Phase 1: sign slides up and fades (0 → 1)
+  .to('.entrance-sign', {
+    yPercent: -160,
+    autoAlpha: 0,
+    duration: 1,
+    ease: 'power2.in',
+  })
+  // Phase 2: door panels slide apart simultaneously (1.2 → 2.5)
+  .to('.entrance-door-left', {
+    xPercent: -100,
+    duration: 1.5,
+    ease: 'power2.inOut',
+  }, '+=0.2')
+  .to('.entrance-door-right', {
+    xPercent: 100,
+    duration: 1.5,
+    ease: 'power2.inOut',
+  }, '<');
 
-// Workshop sky parallax — sky moves slower than foreground
-gsap.to('.workshop-sky', {
-  yPercent: 30,
-  ease: 'none',
-  scrollTrigger: {
-    trigger: '.workshop-exterior',
-    start: 'top top',
-    end: 'bottom top',
-    scrub: true,
-  }
-});
-
-// Workshop building parallax — slightly faster than sky
-gsap.to('.workshop-building', {
-  yPercent: 15,
-  ease: 'none',
-  scrollTrigger: {
-    trigger: '.workshop-exterior',
-    start: 'top top',
-    end: 'bottom top',
-    scrub: true,
-  }
-});
-
-// Skill badges — scale in from slightly below on first scroll into view
-// Staggered by their natural DOM order
+// ── Skill badges — staggered entrance ──
 gsap.from('.skill-badge', {
   scale: 0.85,
   y: 30,
@@ -69,7 +54,7 @@ gsap.from('.skill-badge', {
   }
 });
 
-// Project cards — scale in from slightly below, staggered
+// ── Project cards ──
 gsap.from('.project-card', {
   scale: 0.95,
   y: 24,
@@ -82,7 +67,7 @@ gsap.from('.project-card', {
   }
 });
 
-// Stats numbers — subtle scale punch
+// ── Stats numbers ──
 gsap.from('.impact-num', {
   scale: 0.9,
   stagger: 0.08,
@@ -93,22 +78,3 @@ gsap.from('.impact-num', {
     once: true,
   }
 });
-
-// Toolkit portal effect — pegboard section emerges from door opening.
-// Clip-path starts matching the door width (200px, centered) and expands
-// to full screen. Door is fully open exactly when pegboard enters the
-// viewport bottom (200vh exterior, door opens to center = 100vh of scroll,
-// pegboard enters at 200-100 = 100vh scroll — perfect sync).
-if (window.innerWidth > 768) {
-  const doorPct = ((window.innerWidth - 200) / (2 * window.innerWidth) * 100).toFixed(2);
-  gsap.from('.pegboard-section', {
-    clipPath: `inset(0% ${doorPct}% 0% ${doorPct}% round 6px 6px 0px 0px)`,
-    ease: 'none',
-    scrollTrigger: {
-      trigger: '.pegboard-section',
-      start: 'top bottom',
-      end: 'top 15%',
-      scrub: 2,
-    }
-  });
-}
