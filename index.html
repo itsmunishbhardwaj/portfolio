@@ -4,14 +4,14 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex, nofollow">
-<title>Munish Bhardwaj — AI Engineer (Founding), ZenSpace</title>
+<title>Munish Bhardwaj — DevOps Engineer → AI Engineer</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
 /* ============================================================
-   PALETTE — sampled from zenspace.io screenshots, Sept 2026.
-   Swap these four to retarget this page at another company.
+   PALETTE — default site palette. Company-tailored variants
+   live on company/<slug> branches; see repo CLAUDE.md.
    ============================================================ */
 :root{
   --navy:#0D1E45;        /* base dark surface */
@@ -77,7 +77,7 @@ section{padding:96px 0;position:relative;overflow:hidden}
 .dark a{color:var(--sky)}
 :focus-visible{outline:3px solid var(--sky);outline-offset:3px;border-radius:4px}
 
-/* eyebrow — ZenSpace's own device: small, uppercase, letterspaced */
+/* eyebrow — small, uppercase, letterspaced section label */
 .eyebrow{font-family:'IBM Plex Mono',monospace;font-size:11px;font-weight:500;letter-spacing:.2em;
   text-transform:uppercase;color:var(--signal-ink);margin:0 0 16px}
 .dark .eyebrow{color:var(--signal)}
@@ -97,7 +97,7 @@ section{padding:96px 0;position:relative;overflow:hidden}
   radial-gradient(1100px 620px at 74% 18%, #1B3A80 0%, rgba(27,58,128,0) 62%),
   linear-gradient(168deg,var(--navy) 0%, var(--navy-deep) 100%);
   color:#fff;padding:78px 0 76px}
-/* decorative line motifs — ZenSpace's own vocabulary: agent graph, floor plan, activation path */
+/* decorative line motifs — abstract gradient-stroke shapes used throughout */
 .motifs{position:absolute;inset:0;pointer-events:none;overflow:hidden}
 .motifs svg{position:absolute;display:block}
 .m-net{top:-170px;right:-190px;width:700px;opacity:.34}
@@ -126,7 +126,7 @@ section{padding:96px 0;position:relative;overflow:hidden}
 .btn-dark{background:var(--navy);color:#fff}
 .btn-outline{border-color:var(--line);color:var(--ink);background:#fff}
 
-/* control panel — echoes their "ZenSpace Control" live tile */
+/* control panel — resume readout tile */
 .panel{background:rgba(8,18,42,.72);border:1px solid var(--line-dark);border-radius:16px;overflow:hidden}
 .panel-top{display:flex;align-items:center;justify-content:space-between;padding:13px 16px;
   border-bottom:1px solid var(--line-dark);font-family:'IBM Plex Mono',monospace;font-size:12px;color:#A7B8DA}
@@ -468,48 +468,12 @@ document.querySelectorAll('.case-head').forEach(function(btn,i){
 
 <!-- ==================== HERO ==================== -->
 <section class="hero">
-  <div class="motifs" aria-hidden="true">
-    <!-- agent network: four agents around a hub -->
-    <svg class="m-net" viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg" fill="none">
-      <g stroke="url(#gC)" stroke-width="4" stroke-linecap="round">
-        <path d="M200 200 L200 78 M200 200 L322 200 M200 200 L200 322 M200 200 L78 200"/>
-        <path d="M200 78 L322 200 L200 322 L78 200 Z" stroke-dasharray="10 14" stroke-width="3"/>
-      </g>
-      <circle cx="200" cy="200" r="30" fill="none" stroke="url(#gB)" stroke-width="6"/>
-      <circle cx="200" cy="78" r="20" fill="none" stroke="url(#gC)" stroke-width="6"/>
-      <circle cx="322" cy="200" r="20" fill="none" stroke="url(#gC)" stroke-width="6"/>
-      <circle cx="200" cy="322" r="20" fill="none" stroke="url(#gC)" stroke-width="6"/>
-      <circle cx="78" cy="200" r="20" fill="none" stroke="url(#gC)" stroke-width="6"/>
-    </svg>
-    <!-- floor plan: rooms, pods, one occupied -->
-    <svg class="m-plan" viewBox="0 0 320 240" xmlns="http://www.w3.org/2000/svg" fill="none">
-      <g stroke="url(#gC)" stroke-width="5" stroke-linejoin="round">
-        <rect x="14" y="14" width="130" height="96" rx="8"/>
-        <rect x="14" y="130" width="130" height="96" rx="8"/>
-        <rect x="166" y="14" width="140" height="212" rx="8"/>
-      </g>
-      <g stroke="url(#gB)" stroke-width="5" stroke-linecap="round">
-        <rect x="196" y="52" width="80" height="60" rx="6"/>
-        <path d="M196 150 L276 150 M196 178 L246 178"/>
-      </g>
-      <circle cx="79" cy="62" r="13" fill="none" stroke="url(#gC)" stroke-width="5"/>
-    </svg>
-    <!-- activation path: recommend to permission to automate -->
-    <svg class="m-path" viewBox="0 0 340 190" xmlns="http://www.w3.org/2000/svg" fill="none">
-      <path d="M20 160 C20 96, 108 96, 108 132 C108 168, 200 168, 200 100 C200 48, 266 48, 318 48"
-            stroke="url(#gC)" stroke-width="8" stroke-linecap="round"/>
-      <path d="M294 26 L320 48 L294 70" stroke="url(#gC)" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
-      <circle cx="108" cy="114" r="15" fill="none" stroke="url(#gB)" stroke-width="7"/>
-      <circle cx="200" cy="132" r="13" fill="none" stroke="url(#gC)" stroke-width="7"/>
-    </svg>
-  </div>
   <div class="wrap hero-grid">
     <div>
-      <p class="eyebrow">Applying — AI Engineer (Founding) · ZenSpace</p>
       <p class="idline">Munish Bhardwaj &nbsp;·&nbsp; <span>DevOps Engineer &#8594; AI Engineer</span></p>
       <h1>Six years making systems safe enough for a bank.
-        <span class="grad">The same job ZenAI now needs done.</span></h1>
-      <p class="lede">ZenAI ships recommend-first, permissioned, and audited on every action — because agents that price rooms and unlock doors have to earn the right to act. I've spent six years building that layer for TD Bank, CBA and Snowflake, and the last year building agents the same way: deterministic where it matters, model-written only where it's safe.</p>
+        <span class="grad">Now building the same discipline into AI agents.</span></h1>
+      <p class="lede">I've spent six years building the infrastructure, identity and evaluation layers that make automated systems safe to trust — for TD Bank, CBA and Snowflake. The last year, I've been building agents the same way: deterministic where it matters, model-written only where it's safe.</p>
 
       <ul class="chips">
         <li>Remote from India</li>
@@ -517,7 +481,7 @@ document.querySelectorAll('.case-head').forEach(function(btn,i){
         <li>Full-time</li>
         <li>Available on notice</li>
       </ul>
-      <p class="roles"><b>Target roles:</b> AI Engineer (Founding) · AI Infrastructure Engineer · Agent Platform Engineer · Senior Platform / DevOps Engineer</p>
+      <p class="roles"><b>Target roles:</b> AI Engineer · AI Infrastructure Engineer · Agent Platform Engineer · Senior Platform / DevOps Engineer</p>
 
       <div class="cta-row">
         <a class="btn btn-lime" href="#ask">See the specific ask</a>
@@ -548,10 +512,10 @@ document.querySelectorAll('.case-head').forEach(function(btn,i){
       </div>
       <div class="rec">
         <div class="lbl">Recommendation · guardrail: you approve</div>
-        <p>Talk to this candidate about ZenAI's reliability layer before it goes near a property.</p>
+        <p>Talk to this candidate about how they'd build your reliability layer before an agent touches production.</p>
       </div>
     </div>
-    <p class="cue"><b>&#8595;</b> Six disciplines, mapped twice — keep going</p>
+    <p class="cue"><b>&#8595;</b> Real work, mapped to real disciplines — keep going</p>
     </div>
   </div>
 </section>
@@ -681,166 +645,6 @@ document.querySelectorAll('.case-head').forEach(function(btn,i){
   </div>
 </section>
 
-<!-- ==================== CASE STUDIES ==================== -->
-<section class="dark cases">
-  <div class="wrap">
-    <p class="eyebrow">The mapping</p>
-    <h2 class="sec-title">Five things the role is really testing.<span class="grad">Answered twice — once in banking, once in ZenAI.</span></h2>
-    <p class="sec-lede">Left side is real, verifiable work from six years at H2O.ai and the agentic systems I've shipped. Right side is the equivalent problem inside ZenSpace, as described on your own product pages. Nothing on the right is claimed as experience — it's where the same discipline lands.</p>
-    <p class="hint"><span aria-hidden="true">&#9662;</span> Click any row for the full Challenge / Approach / Result on both sides</p>
-
-    <!-- 1 -->
-    <div class="case">
-      <div class="rail"><span class="num">01</span></div>
-      <div class="card">
-      <button class="case-head" aria-expanded="false" type="button"><span class="case-toggle">[+]</span><h3>Credentials for systems that act on someone else's behalf</h3>
-        <p class="case-sum">Azure Workload Identity across 24 federated credentials, mapped onto agents acting on the company's behalf.</p></button>
-      <div class="pair">
-        <svg class="conn" viewBox="0 0 96 56" aria-hidden="true"><path d="M2 14 C34 14, 48 42, 92 42"/><circle cx="92" cy="42" r="4"/></svg>
-        <div class="side">
-          <div class="tag">What I actually did — H2O.ai / TD Bank</div>
-          <div class="car"><div class="l">Challenge</div><p>Banking workloads were authenticating with static secrets scattered across namespaces. Every credential was a standing liability and an audit finding waiting to happen.</p></div>
-          <div class="car"><div class="l">Approach</div><p>Implemented Azure Workload Identity end to end — 24 federated credentials across 11 namespaces, 13 managed identities per environment, scoped per workload rather than shared.</p></div>
-          <div class="car"><div class="l">Result</div><p>Passwordless PostgreSQL and storage auth with zero static secrets, and a credential model a bank's security team signed off on.</p></div>
-        </div>
-        <div class="side">
-          <div class="tag">The same problem at ZenSpace</div>
-          <div class="car"><div class="l">Challenge</div><p>Agents that write to Mews, Opera, LiquidSpace, Stripe and Salto need credentials scoped per integration, per property, revocable in seconds — not one shared key with the run of the estate.</p></div>
-          <div class="car"><div class="l">Approach</div><p>Per-agent, per-tenant identity with least-privilege scopes; secrets that rotate without a redeploy; every credential attributable to the action it authorized.</p></div>
-          <div class="car"><div class="l">Result</div><p>An agent's permissions become a thing an operator can inspect and revoke, not a thing they have to trust.</p></div>
-          <div class="sowhat">So what: the first time an agent sends something on the company's behalf, the only question that matters is what it was allowed to do — and who can prove it.</div>
-        </div>
-      </div>
-      </div>
-    </div>
-
-    <!-- 2 -->
-    <div class="case">
-      <div class="rail"><span class="num">02</span></div>
-      <div class="card">
-      <button class="case-head" aria-expanded="false" type="button"><span class="case-toggle">[+]</span><h3>Proving reliability before anything touches a customer</h3>
-        <p class="case-sum">1,600 test functions and 198 Playwright specs, mapped onto proving an agent is reliable before it touches a customer.</p></button>
-      <div class="pair">
-        <svg class="conn" viewBox="0 0 96 56" aria-hidden="true"><path d="M2 14 C34 14, 48 42, 92 42"/><circle cx="92" cy="42" r="4"/></svg>
-        <div class="side">
-          <div class="tag">What I actually did — H2O.ai</div>
-          <div class="car"><div class="l">Challenge</div><p>Enterprise ML releases were going to Fortune 500 banks with no automated way to prove the whole surface still worked, including the auth flows nobody wanted to test by hand.</p></div>
-          <div class="car"><div class="l">Approach</div><p>Wrote a custom pytest plugin handling Keycloak, Okta and OTP for UI automation; built 198 Playwright specs and contributed 187 commits to a suite of 1,600 test functions across 18 modules, running on every PR.</p></div>
-          <div class="car"><div class="l">Result</div><p>Every app and connector covered, every pull request gated. Reliability stopped being an opinion.</p></div>
-        </div>
-        <div class="side">
-          <div class="tag">The same problem at ZenSpace</div>
-          <div class="car"><div class="l">Challenge</div><p>"Measurably reliable before they touch customers" is the JD's phrase — and an agent that drafts a guest email or moves a rate is far harder to assert about than a deterministic API.</p></div>
-          <div class="car"><div class="l">Approach</div><p>Eval sets per agent behavior with golden cases and regression suites; adversarial cases for the expensive failures (double-booking, rate outside bounds, unlock without a paid session); CI gates before promotion from recommend to act.</p></div>
-          <div class="car"><div class="l">Result</div><p>A pass rate an operator can read, and a trust threshold that's a number rather than a feeling.</p></div>
-          <div class="sowhat">So what: the trust ladder from recommend-only to automation only moves if something is measuring it. That measuring apparatus is the thing I've built before.</div>
-        </div>
-      </div>
-      </div>
-    </div>
-
-    <!-- 3 -->
-    <div class="case">
-      <div class="rail"><span class="num">03</span></div>
-      <div class="card">
-      <button class="case-head" aria-expanded="false" type="button"><span class="case-toggle">[+]</span><h3>Running many environments without many people</h3>
-        <p class="case-sum">Ten production environments across three clouds, mapped onto 30+ properties each with their own guardrails.</p></button>
-      <div class="pair">
-        <svg class="conn" viewBox="0 0 96 56" aria-hidden="true"><path d="M2 14 C34 14, 48 42, 92 42"/><circle cx="92" cy="42" r="4"/></svg>
-        <div class="side">
-          <div class="tag">What I actually did — H2O.ai</div>
-          <div class="car"><div class="l">Challenge</div><p>Ten separate production environments across three clouds and two Kubernetes distributions, each with its own client, network posture and compliance expectations.</p></div>
-          <div class="car"><div class="l">Approach</div><p>25 Terraform resource types covering clusters, networking, IAM, storage, secrets and managed identities — the same definitions parameterized per environment rather than ten hand-built snowflakes.</p></div>
-          <div class="car"><div class="l">Result</div><p>Ten environments run by a small team, reproducibly, with a private-network ROSA design chosen after evaluating four isolation approaches.</p></div>
-        </div>
-        <div class="side">
-          <div class="tag">The same problem at ZenSpace</div>
-          <div class="car"><div class="l">Challenge</div><p>30+ live properties today, each with different PMS integrations, hardware, pricing bounds and guardrails — and a roadmap that scales to portfolios, not properties.</p></div>
-          <div class="car"><div class="l">Approach</div><p>Tenant configuration as code rather than per-property console work: agent guardrails, price bands and channel whitelists versioned, diffable and rolled out the same way everywhere.</p></div>
-          <div class="car"><div class="l">Result</div><p>Onboarding property 31 costs roughly what property 30 cost, instead of accumulating.</p></div>
-          <div class="sowhat">So what: at 30 properties this is a fleet problem, not a feature problem — and fleets are what I've spent six years on.</div>
-        </div>
-      </div>
-      </div>
-    </div>
-
-    <!-- 4 -->
-    <div class="case">
-      <div class="rail"><span class="num">04</span></div>
-      <div class="card">
-      <button class="case-head" aria-expanded="false" type="button"><span class="case-toggle">[+]</span><h3>Work that runs on a schedule and survives failure</h3>
-        <p class="case-sum">Serverless scheduled autoscaling, mapped onto durable long-running agent jobs that have to survive failure.</p></button>
-      <div class="pair">
-        <svg class="conn" viewBox="0 0 96 56" aria-hidden="true"><path d="M2 14 C34 14, 48 42, 92 42"/><circle cx="92" cy="42" r="4"/></svg>
-        <div class="side">
-          <div class="tag">What I actually did — H2O.ai</div>
-          <div class="car"><div class="l">Challenge</div><p>Expensive clusters sitting idle outside working hours across multiple environments, with scaling done by hand when someone remembered.</p></div>
-          <div class="car"><div class="l">Approach</div><p>Built serverless autoscaling on AWS Lambda + EventBridge, scaling ROSA machine pools on schedule, with the state of each pool tracked rather than assumed.</p></div>
-          <div class="car"><div class="l">Result</div><p>Idle compute cost cut, no human in the loop, and no surprise when a scheduled run failed — because failures were visible.</p></div>
-        </div>
-        <div class="side">
-          <div class="tag">The same problem at ZenSpace</div>
-          <div class="car"><div class="l">Challenge</div><p>The Ops Agent's brief lands at 08:00. Distribution re-syncs continuously. Pricing acts inside a demand window. All of it is scheduled, long-running, and worthless if it silently doesn't run.</p></div>
-          <div class="car"><div class="l">Approach</div><p>Durable workflow execution with checkpointing, interrupts and resume; idempotent steps so a retry doesn't double-post a rate change; dead-letter visibility instead of quiet drops.</p></div>
-          <div class="car"><div class="l">Result</div><p>Agents that fail loudly and recover, rather than the far worse alternative.</p></div>
-          <div class="sowhat">So what: "durable long-running jobs" is in your JD by name. Event-driven scheduled work with real recovery is already what my day looks like.</div>
-        </div>
-      </div>
-      </div>
-    </div>
-
-    <!-- 5 -->
-    <div class="case">
-      <div class="rail"><span class="num">05</span></div>
-      <div class="card">
-      <button class="case-head" aria-expanded="false" type="button"><span class="case-toggle">[+]</span><h3>Reversibility, and leaving a paper trail behind</h3>
-        <p class="case-sum">A Postgres upgrade with a rehearsed rollback, mapped onto ZenAI's promise that every action is reversible.</p></button>
-      <div class="pair">
-        <svg class="conn" viewBox="0 0 96 56" aria-hidden="true"><path d="M2 14 C34 14, 48 42, 92 42"/><circle cx="92" cy="42" r="4"/></svg>
-        <div class="side">
-          <div class="tag">What I actually did — H2O.ai</div>
-          <div class="car"><div class="l">Challenge</div><p>A PostgreSQL 15→18 upgrade across production environments holding banking client data, where an unrecoverable mistake would have been exactly that.</p></div>
-          <div class="car"><div class="l">Approach</div><p>Full pg_dumpall backup and restore path, rehearsed, with a documented rollback checklist written before the change — plus 34 technical documents and an 812-line debugging guide published for the wider team.</p></div>
-          <div class="car"><div class="l">Result</div><p>Zero data loss, and a team that could run the system and debug it without me in the room.</p></div>
-        </div>
-        <div class="side">
-          <div class="tag">The same problem at ZenSpace</div>
-          <div class="car"><div class="l">Challenge</div><p>ZenAI promises operators that every agent action is timestamped, attributable and reversible. That's a real engineering commitment, not a marketing line — and it has to hold on the day something goes wrong at a property.</p></div>
-          <div class="car"><div class="l">Approach</div><p>Immutable action log with the inputs, the model, the prompt version and the approval attached; a defined undo path per action class; runbooks written for the ops team, not for the person who built it.</p></div>
-          <div class="car"><div class="l">Result</div><p>A GM can ask "why did the rate move?" and get an answer in one query, with a way to put it back.</p></div>
-          <div class="sowhat">So what: a small distributed team can only run what's been documented. Writing that down is a habit I already have, not a thing I'd get to later.</div>
-        </div>
-      </div>
-      </div>
-    </div>
-
-    <!-- 6 -->
-    <div class="case">
-      <div class="rail"><span class="num">06</span></div>
-      <div class="card">
-      <button class="case-head" aria-expanded="false" type="button"><span class="case-toggle">[+]</span><h3>Deciding what the model is allowed to decide</h3>
-        <p class="case-sum">Gauge's deterministic verdicts with LLM narrative only, mapped onto deciding what a pricing agent is allowed to decide.</p></button>
-      <div class="pair">
-        <svg class="conn" viewBox="0 0 96 56" aria-hidden="true"><path d="M2 14 C34 14, 48 42, 92 42"/><circle cx="92" cy="42" r="4"/></svg>
-        <div class="side">
-          <div class="tag">What I actually did — Gauge, deployed</div>
-          <div class="car"><div class="l">Challenge</div><p>An assessment tool where the same answer had to produce the same diagnosis every time. Letting the model classify meant the verdict drifted between runs — unusable for anything anyone relies on.</p></div>
-          <div class="car"><div class="l">Approach</div><p>Took classification away from the model. Headline scores and gap type are computed deterministically in Python from locked thresholds; the LLM only writes the narrative around a verdict the code has already fixed. Six calls split across two models by job — a 70B at low temperature for structured generation, a 120B where the output is prose — plus a JSON-repair layer that strips fences and retries, because malformed JSON from a free tier is a production incident, not a quirk.</p></div>
-          <div class="car"><div class="l">Result</div><p>1,652 lines behind 8 REST endpoints, live on Render, deterministic diagnosis, running inside a free API tier on a documented token budget.</p></div>
-        </div>
-        <div class="side">
-          <div class="tag">The same problem at ZenSpace</div>
-          <div class="car"><div class="l">Challenge</div><p>A Pricing Agent that moves a rate and a Distribution Agent that syncs inventory cannot be non-deterministic about the decision itself. An operator will accept an agent that explains a rate change; they will not accept one that gives two different answers to the same day.</p></div>
-          <div class="car"><div class="l">Approach</div><p>Draw the line explicitly: the yield logic, the bounds check and the eligibility rules are code; the model writes the explanation and handles the messy natural-language edges. Model routed by job rather than one model everywhere, with cost per decision tracked from day one.</p></div>
-          <div class="car"><div class="l">Result</div><p>Agent behaviour an operator can audit and reproduce, and an LLM bill that scales with properties instead of surprising you.</p></div>
-          <div class="sowhat">So what: your JD asks for product judgment about when an agent should act, ask, or not exist. I arrived at that line the hard way, on a deployed system, before reading your job description.</div>
-        </div>
-      </div>
-      </div>
-    </div>
-  </div>
-</section>
-
 <!-- ==================== OBJECTION ==================== -->
 <section class="wash alt">
   <svg class="deco light" style="bottom:-110px;left:-100px;width:440px" viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg" fill="none" aria-hidden="true"><g stroke="url(#gA)" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"><path pathLength="1" d="M96 96 a44 44 0 1 1 60 42 v26"/><path pathLength="1" d="M156 200 v6"/></g><circle cx="156" cy="128" r="86" stroke="url(#gC)" stroke-width="8" stroke-dasharray="12 16"/></svg>
@@ -849,70 +653,7 @@ document.querySelectorAll('.case-head').forEach(function(btn,i){
       <p class="eyebrow">The obvious question</p>
       <h3>"Has he actually shipped LLM systems in production?"</h3>
       <p><strong>Yes — but let me be precise about the size of it, because the precise version is more useful to you than the flattering one.</strong> At H2O.ai I shipped an LLM-powered test report generator into the CI pipeline (773 lines, merged, every generated claim cited back to the real test run) and built 17+ Claude Code skills that make the entire Driverless AI QA lifecycle executable by natural language with a human in the loop. Outside work I've deployed Gauge — live, publicly reachable, 8 endpoints, two-model routing — and built six more agentic systems documented commit by commit.</p>
-      <p style="margin-bottom:0">What I have <em>not</em> done is own a company's whole AI stack — the memory layer, the integration surface, the eval regime and the product features — as one system with my name on it. <strong>That's the actual gap, and it's an ownership gap, not a knowledge one.</strong> Everything underneath it — multi-cloud production ownership, identity, evals, durable scheduled work, rollback discipline — is six years of my day job. This role is the first time those two halves would be the same job.</p>
-    </div>
-  </div>
-</section>
-
-<!-- ==================== FRAMEWORK ==================== -->
-<section class="dark">
-  <svg class="deco onink" style="top:-90px;right:-120px;width:520px" viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg" fill="none" aria-hidden="true"><g stroke="url(#gC)" stroke-width="8" stroke-linecap="round"><path pathLength="1" d="M40 250 V120 M40 120 h80 M120 120 V250"/><path pathLength="1" d="M110 250 V80 M110 80 h80 M190 80 V250"/></g><g stroke="url(#gB)" stroke-width="8" stroke-linecap="round"><path pathLength="1" d="M180 250 V40 M180 40 h80 M260 40 V250"/></g></svg>
-  <div class="wrap">
-    <p class="eyebrow">First 90 days</p>
-    <h2 class="sec-title" style="color:#fff">Recommend → Permission → Automate<span class="grad">Your trust ladder, with a delivery plan attached.</span></h2>
-    <p class="sec-lede">ZenAI's own three rules are recommendation mode by default, permissioned actions, and an audit log on everything. That's not just a product principle — it's a build order. Here's how I'd run it.</p>
-
-    <div class="phases">
-      <div class="phase">
-        <div class="step">PHASE 01 · DAYS 1—30</div>
-        <h3>Recommend</h3>
-        <div class="win">Make every agent observable before it's clever</div>
-        <h4>Objective</h4>
-        <p>Get all four agents producing recommendations against real property data, with every suggestion logged, scored and reviewable — and nothing acting yet.</p>
-        <h4>Key activities</h4>
-        <ul>
-          <li>Instrument the agent loop end to end: inputs, retrieved context, prompt version, output, latency, cost.</li>
-          <li>Stand up the eval harness with golden cases per agent, drawn from real property history.</li>
-          <li>Map every write path an agent could eventually take, and gate it behind a flag.</li>
-        </ul>
-        <h4>Deliverable</h4>
-        <p>Agent observability dashboard plus a versioned eval suite running in CI.</p>
-        <div class="metric">Success: 100% of agent recommendations traceable to their inputs, with a weekly accuracy number an operator can read.</div>
-      </div>
-
-      <div class="phase">
-        <div class="step">PHASE 02 · DAYS 31—60</div>
-        <h3>Permission</h3>
-        <div class="win">Draw the box before anything moves inside it</div>
-        <h4>Objective</h4>
-        <p>Ship the guardrail layer — scoped credentials, price bounds, channel whitelists, approval queues — so the first automated action happens inside limits an operator set themselves.</p>
-        <h4>Key activities</h4>
-        <ul>
-          <li>Per-agent, per-tenant identity with least-privilege scopes across PMS, channels, payments and locks.</li>
-          <li>Human-in-the-loop approval flow with durable state, so a pending action survives a restart.</li>
-          <li>Immutable audit log with a defined undo path per action class.</li>
-        </ul>
-        <h4>Deliverable</h4>
-        <p>Guardrail configuration as code, per property, diffable and reviewable.</p>
-        <div class="metric">Success: zero agent actions outside operator-defined bounds, and every action reversible in one step.</div>
-      </div>
-
-      <div class="phase">
-        <div class="step">PHASE 03 · DAYS 61—90</div>
-        <h3>Automate</h3>
-        <div class="win">Promote on evidence, one behavior at a time</div>
-        <h4>Objective</h4>
-        <p>Move the first agent behaviors from recommend to act at launch-partner properties, using the eval pass rate as the promotion criterion — not the calendar.</p>
-        <h4>Key activities</h4>
-        <ul>
-          <li>Define the trust threshold per behavior and promote only what clears it.</li>
-          <li>Harden the retrieval and memory layer so agents answer from what the business actually knows.</li>
-          <li>Write the runbooks and hand the controls to the ops team.</li>
-        </ul>
-        <h4>Deliverable</h4>
-        <p>Launch-partner properties running automated behaviors with monitoring and rollback in place.</p>
-        <div class="metric">Success: measured lift on the promoted behaviors, no unattributed agent action, and a documented path for the next one.</div>
-      </div>
+      <p style="margin-bottom:0">What I have <em>not</em> done is own a company's whole AI stack — the memory layer, the integration surface, the eval regime and the product features — as one system with my name on it. <strong>That's the actual gap, and it's an ownership gap, not a knowledge one.</strong> Everything underneath it — multi-cloud production ownership, identity, evals, durable scheduled work, rollback discipline — is six years of my day job. A founding AI role is the first time those two halves would be the same job.</p>
     </div>
   </div>
 </section>
@@ -994,7 +735,7 @@ document.querySelectorAll('.case-head').forEach(function(btn,i){
     <div class="g2" style="margin-top:22px">
       <div class="box">
         <h3>Claude Certified Architect — Foundations <span class="wip">In progress, 2026</span></h3>
-        <p style="margin-bottom:10px">Anthropic's first technical certification, through the Claude Partner Network: agentic architecture, Claude Code workflows, prompt engineering, MCP integration and context management. It maps almost line for line onto the ZenAI stack — particularly MCP, which your JD names as the integration standard worth betting on.</p>
+        <p style="margin-bottom:10px">Anthropic's first technical certification, through the Claude Partner Network: agentic architecture, Claude Code workflows, prompt engineering, MCP integration and context management — the same integration standard showing up in most serious agent stacks right now.</p>
         <ul class="tags"><li class="soft">agentic architecture</li><li class="soft">MCP integration</li><li class="soft">context management</li><li class="soft">prompt engineering</li></ul>
       </div>
       <div class="box">
@@ -1050,39 +791,6 @@ document.querySelectorAll('.case-head').forEach(function(btn,i){
         <p>Python is the daily driver; the rest are what the job needed at the time.</p>
         <ul class="tags"><li>Python</li><li>Bash</li><li>SQL</li><li>Groovy</li></ul>
       </div>
-    </div>
-  </div>
-</section>
-
-<!-- ==================== HONEST STORY ==================== -->
-<section class="wash">
-  <svg class="deco light" style="top:10px;right:-140px;width:520px" viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg" fill="none" aria-hidden="true"><path pathLength="1" d="M14 200 C70 200, 70 108, 140 108 C214 108, 214 226, 288 226" stroke="url(#gA)" stroke-width="10" stroke-linecap="round"/><path pathLength="1" d="M40 236 C96 236, 96 152, 166 152 C236 152, 236 258, 296 258" stroke="url(#gC)" stroke-width="9" stroke-linecap="round"/><circle cx="140" cy="108" r="13" stroke="url(#gB)" stroke-width="8"/></svg>
-  <div class="wrap">
-    <p class="eyebrow">The honest version</p>
-    <h2 class="sec-title">Why an infrastructure engineer<span class="grad">is applying for a founding AI role.</span></h2>
-
-    <div class="g2">
-      <div>
-        <p>The short version: I've spent six years on the least glamorous part of software, and the agent industry is about to discover it needs that part badly.</p>
-        <p>Most of what I read about agents is about capability — longer context, better tools, cleverer planning. Almost none of it is about the question an operator actually asks before switching one on: what happens when it's wrong, who finds out, and how fast can we undo it. That question is my entire professional background. I've answered it for TD Bank, for CBA, for Snowflake, in environments where the answer had to survive an audit.</p>
-        <p>So I started building, and then I started shipping. An LLM test report generator into H2O.ai's CI, with every generated claim cited back to a real test run. Seventeen-plus skills that made our QA lifecycle executable in plain English. Gauge, deployed and public, where I learned the lesson that shows up everywhere on this page: take the decision away from the model, let it write the explanation, and the system becomes something an operator can actually trust.</p>
-        <p style="margin-bottom:0">What I haven't done is own the whole stack at once — memory layer, integrations, evals and product features as a single system with my name on it. That's an ownership gap rather than a knowledge gap, and it's the specific thing this role offers. Everything underneath it, I've been doing for six years: distributed, stateful systems acting on real infrastructure, expensive when wrong. My job has been to make that boring, which in this line of work is the highest compliment available.</p>
-      </div>
-      <div class="box">
-        <h3>What I bring on day one</h3>
-        <ul style="margin:0;padding-left:18px;color:#33456B">
-          <li style="margin-bottom:10px">Six years of production ownership across AWS, Azure and GCP, for clients who audit everything.</li>
-          <li style="margin-bottom:10px">A testing and evaluation instinct built on 1,600 test functions and 198 specs, not on theory.</li>
-          <li style="margin-bottom:10px">Identity and secrets done properly — the difference between an agent that's permissioned and one that's merely convenient.</li>
-          <li style="margin-bottom:10px">Documentation as a reflex: 34 technical docs including an 812-line debugging guide, so a small team isn't dependent on me.</li>
-          <li style="margin-bottom:10px">Comfort at small-company pace — I scope, build, ship and then maintain the thing I shipped.</li>
-          <li>LLM tooling already shipped inside an engineering org, plus a deployed public app — and no interest in overstating any of it.</li>
-        </ul>
-      </div>
-    </div>
-
-    <div class="conviction">
-      <p>The hard part of agents was never making them capable. It's making them accountable — permissioned, measured, and reversible — and that's an infrastructure problem the industry hasn't finished solving yet.</p>
     </div>
   </div>
 </section>
@@ -1157,8 +865,8 @@ document.querySelectorAll('.case-head').forEach(function(btn,i){
         <circle cx="80" cy="138" r="14" fill="none" stroke="#BDFB6E" stroke-width="8"/>
       </svg>
       <p class="eyebrow">One specific ask</p>
-      <h2>Twenty minutes, and I'll bring the first 30 days.</h2>
-      <p>Not a general chat. Give me twenty minutes and I'll walk you through how I'd instrument all four ZenAI agents for observability and evals before a single one is allowed to act — the Phase 01 plan above, against your actual stack. If it's useful, we keep talking. If it isn't, you've lost twenty minutes and gained a build plan.</p>
+      <h2>Let's talk about what you're building.</h2>
+      <p>Not a general chat. Give me twenty minutes and I'll walk you through how I think about making an agent trustworthy — deterministic where it matters, evaluated before it ships, and reversible when it's wrong — against your actual stack. If it's useful, we keep talking.</p>
       <div class="cta-row" style="margin-top:26px">
         <button class="btn btn-lime" id="mailBtn">Email me — itsbhardwaj@icloud.com</button>
         <a class="btn btn-ghost" href="https://www.linkedin.com/in/itsmunishbhardwaj" target="_blank" rel="noopener">Message on LinkedIn</a>
@@ -1251,7 +959,7 @@ var EMAIL='itsbhardwaj@icloud.com';
 document.getElementById('mailBtn').addEventListener('click',function(){
   var done=function(ok){
     toast(ok?'Email copied — opening your mail app…':'Email address: '+EMAIL);
-    location.href='mailto:'+EMAIL+'?subject='+encodeURIComponent('ZenSpace — AI Engineer (Founding)');
+    location.href='mailto:'+EMAIL+'?subject='+encodeURIComponent('Hello from your portfolio');
   };
   try{
     if(navigator.clipboard&&navigator.clipboard.writeText){
