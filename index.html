@@ -1,360 +1,1164 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Munish Bhardwaj — DevOps Engineer</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/style.css">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Munish Bhardwaj — AI Engineer (Founding), ZenSpace</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+/* ============================================================
+   PALETTE — sampled from zenspace.io screenshots, Sept 2026.
+   Swap these four to retarget this page at another company.
+   ============================================================ */
+:root{
+  --navy:#0D1E45;        /* base dark surface */
+  --navy-lift:#15306F;   /* gradient bloom / dark cards */
+  --navy-deep:#081537;   /* deepest wells */
+  --lime:#BDFB6E;        /* primary CTA — navy only, fails on white */
+  --lime-deep:#A8E85B;
+  --sky:#67AEF4;         /* headline gradient start */
+  --mint:#7CB8B7;        /* headline gradient end */
+  --signal:#6EC384;      /* eyebrows on dark */
+  --signal-ink:#2E7D52;  /* eyebrows on light — contrast-safe */
+  --paper:#FBFCFF;
+  --card:#FFFFFF;
+  --ink:#0B1834;
+  --grey:#5A6B8C;
+  --grey-soft:#8494B2;
+  --line:#D9DDE5;
+  --line-dark:#22386E;
+  --maxw:1140px;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important;animation:none!important}}
+body{
+  margin:0;background:var(--paper);color:var(--ink);
+  font-family:'Plus Jakarta Sans',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+  font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased;
+}
+h1,h2,h3,h4{margin:0;font-weight:800;letter-spacing:-0.03em;line-height:1.08}
+p{margin:0 0 16px}
+a{color:#1B5FA8}
+.wrap{max-width:var(--maxw);margin:0 auto;padding:0 26px}
+section{padding:96px 0;position:relative;overflow:hidden}
+.wrap{position:relative;z-index:1}
+.deco{position:absolute;pointer-events:none;z-index:0;display:block;
+  will-change:transform;transition:transform .1s linear}
+.deco.light{opacity:.30}
+.deco.onink{opacity:.40}
+.deco path,.deco rect,.deco circle{stroke-linecap:round;stroke-linejoin:round}
+.deco [pathLength]{stroke-dasharray:1;stroke-dashoffset:1;transition:stroke-dashoffset 1.5s cubic-bezier(.22,.9,.3,1)}
+.deco circle:not([pathLength]),.deco rect:not([pathLength]){opacity:0;transform-origin:center;
+  transition:opacity .7s ease .5s}
+.deco.in [pathLength]{stroke-dashoffset:0}
+.deco.in circle:not([pathLength]),.deco.in rect:not([pathLength]){opacity:1}
+@media (prefers-reduced-motion:reduce){
+  .deco [pathLength]{stroke-dashoffset:0}
+  .deco circle,.deco rect{opacity:1}
+  .deco{transition:none;transform:none!important}
+}
+
+/* colour wash behind light sections so nothing reads as flat white */
+.wash::before{content:"";position:absolute;inset:0;z-index:0;pointer-events:none;
+  background:
+    radial-gradient(760px 460px at 88% 8%, rgba(103,174,244,.13), transparent 66%),
+    radial-gradient(620px 420px at 4% 92%, rgba(124,184,183,.15), transparent 68%)}
+.wash.alt::before{
+  background:
+    radial-gradient(720px 440px at 6% 6%, rgba(189,251,110,.16), transparent 64%),
+    radial-gradient(680px 460px at 94% 90%, rgba(103,174,244,.12), transparent 68%)}
+
+@media (max-width:1100px){.deco{display:none}}
+.dark{background:var(--navy);color:#fff}
+.dark a{color:var(--sky)}
+:focus-visible{outline:3px solid var(--sky);outline-offset:3px;border-radius:4px}
+
+/* eyebrow — ZenSpace's own device: small, uppercase, letterspaced */
+.eyebrow{font-family:'IBM Plex Mono',monospace;font-size:11px;font-weight:500;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--signal-ink);margin:0 0 16px}
+.dark .eyebrow{color:var(--signal)}
+
+/* two-tone headline — their signature: line 1 solid, line 2 gradient */
+.sec-title{font-size:clamp(30px,4.4vw,44px);margin-bottom:16px}
+.grad{background:linear-gradient(96deg,var(--sky),var(--mint));
+  -webkit-background-clip:text;background-clip:text;color:transparent;display:block}
+.sec-lede{color:var(--grey);max-width:66ch;font-size:17px;margin:0 0 44px}
+.dark .sec-lede{color:#B9C7E4}
+
+/* progress bar */
+#bar{position:fixed;top:0;left:0;height:3px;width:0;background:var(--lime);z-index:99}
+
+/* ---------------- HERO ---------------- */
+.hero{position:relative;overflow:hidden;background:
+  radial-gradient(1100px 620px at 74% 18%, #1B3A80 0%, rgba(27,58,128,0) 62%),
+  linear-gradient(168deg,var(--navy) 0%, var(--navy-deep) 100%);
+  color:#fff;padding:78px 0 76px}
+/* decorative line motifs — ZenSpace's own vocabulary: agent graph, floor plan, activation path */
+.motifs{position:absolute;inset:0;pointer-events:none;overflow:hidden}
+.motifs svg{position:absolute;display:block}
+.m-net{top:-170px;right:-190px;width:700px;opacity:.34}
+.m-plan{bottom:-70px;right:230px;width:400px;opacity:.26}
+.m-path{bottom:-130px;left:-190px;width:540px;opacity:.22}
+@media (max-width:940px){.m-plan,.m-path{display:none}.m-net{width:320px;right:-90px;top:-30px;opacity:.18}}
+.hero-grid{position:relative;display:grid;grid-template-columns:1.15fr .9fr;gap:52px;align-items:start}
+.hero h1{font-size:clamp(36px,5.4vw,58px);line-height:1.02;margin-bottom:24px}
+.hero .lede{color:#C3D0EC;font-size:18px;max-width:52ch}
+.idline{font-size:17px;font-weight:700;color:#fff;margin:0 0 22px;letter-spacing:-.01em}
+.idline span{font-family:'IBM Plex Mono',monospace;font-size:12.5px;font-weight:400;
+  color:var(--signal);letter-spacing:.06em}
+
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin:26px 0 12px;padding:0;list-style:none}
+.chips li{font-size:13px;padding:7px 13px;border-radius:999px;border:1px solid var(--line-dark);
+  background:rgba(255,255,255,.05);color:#D5DFF5}
+.roles{font-size:14px;color:#9FB3D9;margin:6px 0 26px}
+.roles b{color:#fff;font-weight:600}
+.cta-row{display:flex;flex-wrap:wrap;gap:12px;margin-top:6px}
+.btn{display:inline-block;padding:13px 22px;border-radius:999px;font-weight:700;font-size:15px;
+  text-decoration:none;border:1px solid transparent;cursor:pointer;font-family:inherit}
+.btn-lime{background:var(--lime);color:var(--navy)}
+.btn-lime:hover{background:var(--lime-deep)}
+.btn-ghost{border-color:rgba(255,255,255,.45);color:#fff;background:transparent}
+.btn-ghost:hover{background:rgba(255,255,255,.08)}
+.btn-dark{background:var(--navy);color:#fff}
+.btn-outline{border-color:var(--line);color:var(--ink);background:#fff}
+
+/* control panel — echoes their "ZenSpace Control" live tile */
+.panel{background:rgba(8,18,42,.72);border:1px solid var(--line-dark);border-radius:16px;overflow:hidden}
+.panel-top{display:flex;align-items:center;justify-content:space-between;padding:13px 16px;
+  border-bottom:1px solid var(--line-dark);font-family:'IBM Plex Mono',monospace;font-size:12px;color:#A7B8DA}
+.dot{display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--signal);margin-right:8px}
+.tiles{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:var(--line-dark)}
+.tile{background:#0B1C41;padding:16px}
+.tile .k{font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:#8FA3CC}
+.tile .v{font-size:27px;font-weight:800;margin-top:5px;letter-spacing:-.03em}
+.tile .n{font-size:12px;color:#93A6CE;margin-top:2px}
+.tile .v.zero{color:var(--sky)}
+.feed{padding:14px 16px;border-top:1px solid var(--line-dark)}
+.feed h4{font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.14em;text-transform:uppercase;
+  color:#8FA3CC;font-weight:500;margin-bottom:10px}
+.feed ul{list-style:none;margin:0;padding:0}
+.feed li{display:flex;gap:10px;font-size:13px;color:#D2DDF3;padding:6px 0;border-bottom:1px solid rgba(255,255,255,.05)}
+.feed li:last-child{border-bottom:none}
+.feed .ts{font-family:'IBM Plex Mono',monospace;color:var(--signal);flex:0 0 46px;font-size:12px}
+.rec{margin:14px 16px 16px;padding:13px 14px;border-radius:12px;background:rgba(189,251,110,.09);
+  border:1px solid rgba(189,251,110,.3)}
+.rec .lbl{font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--lime)}
+.rec p{margin:6px 0 0;font-size:13.5px;color:#E6F1FF}
+
+/* scroll cue */
+.cue{display:flex;align-items:center;gap:9px;margin:44px 0 0;font-family:'IBM Plex Mono',monospace;
+  font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;color:#8FA3CC}
+.cue b{display:inline-block;width:26px;height:26px;border:1px solid var(--line-dark);border-radius:50%;
+  text-align:center;line-height:24px;color:var(--signal);font-weight:400}
+
+/* now marker */
+.now{display:inline-block;font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.12em;
+  text-transform:uppercase;background:#E7F6EC;color:var(--signal-ink);border:1px solid #B9D9C4;
+  border-radius:999px;padding:3px 9px;margin-left:9px;vertical-align:middle}
+.added{font-size:14px;color:var(--signal-ink);font-weight:600;margin:0 0 12px}
+
+/* scale chart */
+.scale{border:1px solid var(--line);border-radius:18px;background:var(--card);padding:28px}
+.srow{display:grid;grid-template-columns:210px 1fr 92px;align-items:center;gap:16px;padding:9px 0}
+.srow+.srow{border-top:1px solid #EEF2F8}
+.slabel{font-size:14.2px;color:#25355A}
+.slabel i{display:block;font-style:normal;font-size:12px;color:var(--grey-soft);margin-top:2px}
+.sbar{height:15px;border-radius:999px;background:linear-gradient(90deg,var(--navy),#3E6BC4)}
+.sbar.alt{background:linear-gradient(90deg,#2E7D52,#8FD46A)}
+.sval{font-family:'IBM Plex Mono',monospace;font-size:15px;font-weight:500;color:var(--navy);text-align:right}
+.note{font-size:13.5px;color:var(--grey);margin:18px 0 0;padding-top:16px;border-top:1px dashed var(--line)}
+@media (max-width:640px){.srow{grid-template-columns:1fr 68px;gap:8px}.sbar{grid-column:1/-1;order:3}}
+
+/* portrait block */
+.portrait{display:grid;grid-template-columns:340px 1fr;gap:38px;align-items:center;
+  margin:-46px 0 56px;padding:0;border:1px solid var(--line);border-radius:22px;background:var(--card);
+  box-shadow:0 22px 60px rgba(13,30,69,.13);overflow:hidden}
+.portrait img{width:100%;height:400px;object-fit:cover;object-position:center 22%;
+  filter:grayscale(1) contrast(1.06);display:block}
+.portrait .cap{font-size:16.5px;color:var(--grey);line-height:1.62;padding:34px 38px 34px 0}
+.portrait .cap b{display:block;font-size:30px;color:var(--ink);margin-bottom:4px;letter-spacing:-.03em;
+  font-weight:800;line-height:1.1}
+.portrait .cap .kicker{display:block;font-family:'IBM Plex Mono',monospace;font-size:11.5px;
+  letter-spacing:.16em;text-transform:uppercase;color:var(--signal-ink);margin-bottom:16px}
+@media (max-width:900px){.portrait{grid-template-columns:1fr}
+  .portrait img{height:340px;object-position:center 20%}
+  .portrait .cap{padding:26px 24px 30px}
+  .portrait .cap b{font-size:25px}}
+
+/* collapsible case rows */
+.case-head{cursor:pointer;display:block;width:100%;text-align:left;font-family:inherit;border:none;border-bottom:1px solid var(--line)}
+.case-head:hover{background:#EDF3FC}
+.case-sum{font-size:14.5px;color:var(--grey);margin-top:8px;max-width:74ch}
+.case-toggle{float:right;font-family:'IBM Plex Mono',monospace;font-size:13px;color:var(--grey-soft)}
+.pair{display:none}
+.case.open .pair{display:grid}
+
+/* ---------------- TIMELINE ---------------- */
+.hint{display:inline-flex;align-items:center;gap:9px;background:#EAF2FE;color:var(--ink);
+  border:1px solid #C3D8F4;border-radius:999px;padding:9px 17px;font-size:13.5px;font-weight:600;margin:0 0 26px}
+.hint span{color:var(--signal-ink)}
+.tl{border-left:2px solid var(--line);margin-left:8px}
+.tl-item{position:relative;padding:0 0 6px 26px}
+.tl-btn{width:100%;text-align:left;background:none;border:none;padding:16px 12px 16px 0;cursor:pointer;
+  font-family:inherit;display:flex;justify-content:space-between;gap:18px;align-items:baseline;border-radius:8px}
+.tl-btn:hover{background:#F1F5FC}
+.tl-btn h3{font-size:19px}
+.tl-btn .co{color:var(--grey);font-size:14.5px;margin-top:3px}
+.tl-btn .dt{font-family:'IBM Plex Mono',monospace;font-size:12.5px;color:var(--grey-soft);white-space:nowrap}
+.tl-item::before{content:"";position:absolute;left:-7px;top:26px;width:12px;height:12px;border-radius:50%;
+  background:var(--navy);border:2px solid var(--paper)}
+.tl-body{display:none;padding:2px 12px 20px 0}
+.tl-body.open{display:block}
+.tl-body ul{margin:0;padding-left:18px;color:#33456B}
+.tl-body li{margin-bottom:9px;font-size:15px}
+.tl-btn .caret{color:var(--grey-soft);font-size:13px;font-family:'IBM Plex Mono',monospace}
+
+/* ---------------- CASE STUDIES ---------------- */
+.cases .hint{background:rgba(124,184,183,.12);border-color:#2E5A6E;color:#DCE9FF}
+.cases .hint span{color:var(--lime)}
+
+/* numbered rail + card */
+.case{display:grid;grid-template-columns:66px 1fr;gap:0;margin-bottom:22px}
+.rail{position:relative;display:flex;justify-content:center;padding-top:26px}
+.rail .num{font-family:'IBM Plex Mono',monospace;font-size:22px;font-weight:500;color:var(--mint);
+  letter-spacing:-.02em;position:relative;z-index:1;background:var(--navy);padding:0 0 8px}
+.rail::before{content:"";position:absolute;top:0;bottom:-22px;left:50%;width:2px;margin-left:-1px;
+  background:linear-gradient(180deg,rgba(124,184,183,.55),rgba(124,184,183,.12))}
+.case:last-of-type .rail::before{bottom:34px}
+.case.open .rail .num{color:var(--lime)}
+
+.card{border:1px solid var(--line-dark);border-radius:18px;background:#0B1C41;overflow:hidden}
+.case.open .card{border-color:#33538F}
+
+.case-head{cursor:pointer;display:block;width:100%;text-align:left;font-family:inherit;
+  border:none;background:transparent;color:#fff;padding:22px 24px}
+.case-head:hover{background:rgba(103,174,244,.07)}
+.case-head .n{display:none}
+.case-head h3{font-size:20.5px;color:#fff;padding-right:34px}
+.case-sum{font-size:14.4px;color:#A9BCE0;margin:9px 0 0;max-width:74ch}
+.case-toggle{float:right;font-family:'IBM Plex Mono',monospace;font-size:14px;color:var(--mint)}
+
+/* two-tone comparison */
+.pair{display:none;position:relative;grid-template-columns:1fr 1fr;border-top:1px solid var(--line-dark)}
+.case.open .pair{display:grid}
+.side{padding:24px}
+.side{background:#FFFFFF}
+.side+.side{background:#0F2249;border-left:1px solid var(--line-dark)}
+.side .tag{font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--grey-soft);margin-bottom:16px}
+.side+.side .tag{color:var(--mint)}
+.car{margin-bottom:14px}
+.car .l{font-size:11.5px;font-weight:700;letter-spacing:.05em;color:var(--grey-soft);text-transform:uppercase}
+.car p{margin:3px 0 0;font-size:14.7px;color:#25355A;line-height:1.55}
+.side+.side .car .l{color:#8FA3CC}
+.side+.side .car p{color:#D7E2F7}
+.sowhat{margin-top:18px;padding:13px 15px;border-radius:11px;background:rgba(189,251,110,.1);
+  border:1px solid rgba(189,251,110,.3);font-size:14px;color:#EAF7DA;font-weight:600}
+
+/* 4. connector — draws left to right when a row opens */
+.conn{position:absolute;left:50%;top:0;width:96px;height:56px;margin-left:-48px;pointer-events:none;z-index:2}
+.conn path{stroke:var(--lime);stroke-width:2.5;fill:none;stroke-linecap:round;
+  stroke-dasharray:92;stroke-dashoffset:92}
+.conn circle{fill:var(--lime);opacity:0}
+.case.open .conn path{animation:draw .6s ease-out .12s forwards}
+.case.open .conn circle{animation:pop .3s ease-out .62s forwards}
+@keyframes draw{to{stroke-dashoffset:0}}
+@keyframes pop{to{opacity:1}}
+@media (prefers-reduced-motion:reduce){
+  .conn path{stroke-dashoffset:0}.conn circle{opacity:1}
+  .case.open .conn path,.case.open .conn circle{animation:none}
+}
+
+@media (max-width:940px){
+  .case{grid-template-columns:44px 1fr}
+  .rail .num{font-size:17px}
+  .pair{grid-template-columns:1fr}
+  .side+.side{border-left:none;border-top:1px solid var(--line-dark)}
+  .conn{display:none}
+}
+@media (max-width:640px){
+  .case{grid-template-columns:1fr;gap:0}
+  .rail{display:none}
+  .case-head,.side{padding:18px}
+  .case-head h3{font-size:18px}
+}
+
+/* ---------------- OBJECTION ---------------- */
+.obj{background:var(--navy-deep);border-radius:20px;padding:40px;color:#fff}
+.obj h3{font-size:26px;margin-bottom:16px}
+.obj p{color:#C3D0EC;max-width:74ch;font-size:16.5px}
+.obj strong{color:#fff}
+
+/* ---------------- FRAMEWORK ---------------- */
+.phases{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.phase{background:#0B1C41;border:1px solid var(--line-dark);border-radius:16px;padding:24px;position:relative}
+.phase .step{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.16em;color:var(--signal)}
+.phase h3{font-size:22px;margin:8px 0 4px}
+.phase .win{font-size:13px;color:#96A9D2;font-family:'IBM Plex Mono',monospace;margin-bottom:16px}
+.phase h4{font-size:11px;letter-spacing:.13em;text-transform:uppercase;color:#8FA3CC;
+  font-family:'IBM Plex Mono',monospace;font-weight:500;margin:16px 0 7px}
+.phase p,.phase li{font-size:14.3px;color:#D2DDF3;line-height:1.55}
+.phase ul{margin:0;padding-left:17px}
+.phase li{margin-bottom:6px}
+.metric{margin-top:16px;padding:11px 13px;border-radius:10px;background:rgba(189,251,110,.09);
+  border:1px solid rgba(189,251,110,.28);font-size:13.5px;color:#EAF7DA}
+
+/* ---------------- GRIDS ---------------- */
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:22px}
+.g3{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+.box{border:1px solid var(--line);border-radius:16px;background:var(--card);padding:24px}
+.box h3{font-size:18px;margin-bottom:8px}
+.box p{font-size:14.8px;color:var(--grey);margin-bottom:12px}
+.tags{display:flex;flex-wrap:wrap;gap:7px;list-style:none;margin:0;padding:0}
+.tags li{font-size:12.6px;padding:5px 11px;border-radius:999px;background:#EEF3FB;color:#2B3F6B;
+  font-family:'IBM Plex Mono',monospace}
+.tags li.soft{background:#F2F6E9;color:#3C5A22}
+.wip{display:inline-block;font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:.1em;
+  text-transform:uppercase;color:var(--signal-ink);border:1px solid #B9D9C4;border-radius:999px;padding:3px 9px;margin-left:8px;vertical-align:middle}
+
+/* conviction callout */
+.conviction{border-left:4px solid var(--lime-deep);background:#F6FBEE;padding:24px 28px;border-radius:0 14px 14px 0;margin-top:34px}
+.conviction p{font-size:19px;font-weight:600;color:var(--ink);margin:0;line-height:1.45;letter-spacing:-.01em}
+
+/* testimonials */
+
+/* CTA */
+.cta-card{position:relative;overflow:hidden;background:linear-gradient(150deg,var(--navy) 0%,var(--navy-deep) 100%);
+  border-radius:22px;padding:48px;color:#fff;text-align:left}
+.cta-watermark{position:absolute;right:-50px;bottom:-60px;width:400px;opacity:.30;pointer-events:none}
+@media (max-width:640px){.cta-watermark{width:180px;right:-40px;bottom:-30px;opacity:.13}}
+.cta-card > *{position:relative;z-index:1}
+.cta-card h2{font-size:clamp(28px,4vw,38px);margin-bottom:14px}
+.cta-card p{color:#C3D0EC;max-width:60ch;font-size:17px}
+footer{background:var(--navy-deep);color:#93A6CE;padding:34px 0;font-size:14px}
+footer a{color:#C3D0EC}
+.foot{display:flex;flex-wrap:wrap;gap:10px 26px;align-items:center;justify-content:space-between}
+
+/* motifs: draw in when they enter view, then drift gently on scroll */
+var decos=[].slice.call(document.querySelectorAll('.deco'));
+if('IntersectionObserver' in window){
+  var io=new IntersectionObserver(function(es){
+    es.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
+  },{rootMargin:'0px 0px -12% 0px'});
+  decos.forEach(function(d){io.observe(d)});
+}else{ decos.forEach(function(d){d.classList.add('in')}); }
+
+var reduce=window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches;
+if(!reduce&&innerWidth>1100){
+  var ticking=false;
+  addEventListener('scroll',function(){
+    if(ticking)return; ticking=true;
+    requestAnimationFrame(function(){
+      var vh=innerHeight;
+      decos.forEach(function(d,i){
+        var r=d.getBoundingClientRect();
+        if(r.bottom<-200||r.top>vh+200)return;
+        var p=(r.top+r.height/2-vh/2)/vh;
+        d.style.transform='translate3d(0,'+(p*(i%2?-34:26)).toFixed(1)+'px,0)';
+      });
+      ticking=false;
+    });
+  },{passive:true});
+}
+
+/* case study rows expand */
+document.querySelectorAll('.case-head').forEach(function(btn,i){
+  var card=btn.closest('.case');
+  if(i===0){card.classList.add('open');btn.setAttribute('aria-expanded','true');btn.querySelector('.case-toggle').textContent='[–]';}
+  btn.addEventListener('click',function(){
+    var open=card.classList.toggle('open');
+    btn.setAttribute('aria-expanded',open?'true':'false');
+    btn.querySelector('.case-toggle').textContent=open?'[–]':'[+]';
+  });
+});
+
+/* toast */
+#toast{position:fixed;left:50%;bottom:26px;transform:translateX(-50%) translateY(140%);
+  background:var(--navy);color:#fff;padding:13px 20px;border-radius:999px;font-size:14px;
+  box-shadow:0 10px 30px rgba(8,18,42,.35);transition:transform .28s ease;z-index:120;max-width:90vw;text-align:center}
+#toast.show{transform:translateX(-50%) translateY(0)}
+
+/* ---------------- BREAKPOINTS ---------------- */
+@media (max-width:940px){
+  .hero-grid{grid-template-columns:1fr;gap:36px}
+  .pair{grid-template-columns:1fr}
+  .side+.side{border-left:none;border-top:1px solid var(--line)}
+  .phases{grid-template-columns:1fr}
+  .g3{grid-template-columns:1fr 1fr}
+}
+@media (max-width:640px){
+  section{padding:58px 0}
+  .wrap{padding:0 18px}
+  .g2,.g3{grid-template-columns:1fr}
+  .tiles{grid-template-columns:1fr 1fr}
+  .obj,.cta-card{padding:28px 22px}
+  .case-head,.side{padding:18px}
+  .tl-btn{flex-direction:column;gap:4px}
+  .tl-btn .dt{white-space:normal}
+  .btn{width:100%;text-align:center}
+  .cta-row{flex-direction:column}
+  .conviction{padding:20px}
+  .conviction p{font-size:17px}
+}
+</style>
 </head>
 <body>
-  <nav class="nav">
-    <span class="nav-logo">MB</span>
-    <div class="nav-links">
-      <a href="#work">Case Studies</a>
-      <a href="#contact">Contact</a>
-    </div>
-  </nav>
+<div id="bar"></div>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <linearGradient id="gA" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0D1E45"/><stop offset="55%" stop-color="#3E6BC4"/><stop offset="100%" stop-color="#7CB8B7"/>
+    </linearGradient>
+    <linearGradient id="gB" x1="0" y1="1" x2="1" y2="0">
+      <stop offset="0%" stop-color="#2E7D52"/><stop offset="60%" stop-color="#7CB8B7"/><stop offset="100%" stop-color="#BDFB6E"/>
+    </linearGradient>
+    <linearGradient id="gC" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#7CB8B7"/><stop offset="50%" stop-color="#67AEF4"/><stop offset="100%" stop-color="#BDFB6E"/>
+    </linearGradient>
+  </defs>
+</svg>
 
-  <section class="workshop-exterior" id="hero">
 
-    <div class="hero-content">
-      <div class="hero-photo-col">
-        <img src="assets/IMG_7463.jpg" alt="Munish Bhardwaj" class="hero-photo">
-      </div>
-      <div class="hero-text-col">
-        <p class="section-label">DevOps Engineer</p>
-        <h1 class="hero-headline">Building infrastructure<br>that scales.</h1>
-        <p class="hero-sub">I build systems that let banking-scale teams ship without holding their breath. Multi-cloud infrastructure, zero-trust identity, CI/CD that actually gates releases.</p>
+<!-- ==================== HERO ==================== -->
+<section class="hero">
+  <div class="motifs" aria-hidden="true">
+    <!-- agent network: four agents around a hub -->
+    <svg class="m-net" viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg" fill="none">
+      <g stroke="url(#gC)" stroke-width="4" stroke-linecap="round">
+        <path d="M200 200 L200 78 M200 200 L322 200 M200 200 L200 322 M200 200 L78 200"/>
+        <path d="M200 78 L322 200 L200 322 L78 200 Z" stroke-dasharray="10 14" stroke-width="3"/>
+      </g>
+      <circle cx="200" cy="200" r="30" fill="none" stroke="url(#gB)" stroke-width="6"/>
+      <circle cx="200" cy="78" r="20" fill="none" stroke="url(#gC)" stroke-width="6"/>
+      <circle cx="322" cy="200" r="20" fill="none" stroke="url(#gC)" stroke-width="6"/>
+      <circle cx="200" cy="322" r="20" fill="none" stroke="url(#gC)" stroke-width="6"/>
+      <circle cx="78" cy="200" r="20" fill="none" stroke="url(#gC)" stroke-width="6"/>
+    </svg>
+    <!-- floor plan: rooms, pods, one occupied -->
+    <svg class="m-plan" viewBox="0 0 320 240" xmlns="http://www.w3.org/2000/svg" fill="none">
+      <g stroke="url(#gC)" stroke-width="5" stroke-linejoin="round">
+        <rect x="14" y="14" width="130" height="96" rx="8"/>
+        <rect x="14" y="130" width="130" height="96" rx="8"/>
+        <rect x="166" y="14" width="140" height="212" rx="8"/>
+      </g>
+      <g stroke="url(#gB)" stroke-width="5" stroke-linecap="round">
+        <rect x="196" y="52" width="80" height="60" rx="6"/>
+        <path d="M196 150 L276 150 M196 178 L246 178"/>
+      </g>
+      <circle cx="79" cy="62" r="13" fill="none" stroke="url(#gC)" stroke-width="5"/>
+    </svg>
+    <!-- activation path: recommend to permission to automate -->
+    <svg class="m-path" viewBox="0 0 340 190" xmlns="http://www.w3.org/2000/svg" fill="none">
+      <path d="M20 160 C20 96, 108 96, 108 132 C108 168, 200 168, 200 100 C200 48, 266 48, 318 48"
+            stroke="url(#gC)" stroke-width="8" stroke-linecap="round"/>
+      <path d="M294 26 L320 48 L294 70" stroke="url(#gC)" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+      <circle cx="108" cy="114" r="15" fill="none" stroke="url(#gB)" stroke-width="7"/>
+      <circle cx="200" cy="132" r="13" fill="none" stroke="url(#gC)" stroke-width="7"/>
+    </svg>
+  </div>
+  <div class="wrap hero-grid">
+    <div>
+      <p class="eyebrow">Applying — AI Engineer (Founding) · ZenSpace</p>
+      <p class="idline">Munish Bhardwaj &nbsp;·&nbsp; <span>DevOps Engineer &#8594; AI Engineer</span></p>
+      <h1>Six years making systems safe enough for a bank.
+        <span class="grad">The same job ZenAI now needs done.</span></h1>
+      <p class="lede">ZenAI ships recommend-first, permissioned, and audited on every action — because agents that price rooms and unlock doors have to earn the right to act. I've spent six years building that layer for TD Bank, CBA and Snowflake, and the last year building agents the same way: deterministic where it matters, model-written only where it's safe.</p>
 
-        <div class="hero-stat-strip">
-          <div class="hero-stat">
-            <span class="hero-stat-num">3+</span>
-            <span class="hero-stat-label">Years</span>
-          </div>
-          <div class="hero-stat-divider"></div>
-          <div class="hero-stat">
-            <span class="hero-stat-num">24</span>
-            <span class="hero-stat-label">Incidents resolved</span>
-          </div>
-          <div class="hero-stat-divider"></div>
-          <div class="hero-stat">
-            <span class="hero-stat-num">0</span>
-            <span class="hero-stat-label">Static secrets remaining</span>
-          </div>
-        </div>
-
-        <div class="hero-buttons">
-          <a href="#work" class="btn">View Work</a>
-          <a href="#contact" class="btn btn-ghost">Get in Touch</a>
-        </div>
-
-        <div class="competency-chips">
-          <span class="chip">Multi-Cloud</span>
-          <span class="chip">Zero-Trust Identity</span>
-          <span class="chip">Infrastructure as Code</span>
-          <span class="chip">Incident Response</span>
-          <span class="chip">CI/CD</span>
-          <span class="chip">Cross-Team Delivery</span>
-        </div>
-      </div>
-    </div>
-
-    <div class="scroll-hint">Scroll to enter ↓</div>
-  </section>
-
-  <section class="workshop-entrance" id="skills">
-    <div class="entrance-interior pegboard-bg">
-      <div class="inside-header">
-        <span class="section-label">Inside the Workshop</span>
-        <h2 class="inside-title">The Toolkit</h2>
-        <p class="inside-sub">Tools I reach for every day — and a few I reach for when things break.</p>
-      </div>
-
-      <div class="badges-grid">
-        <div class="skill-badge" style="--tilt: -8deg">
-          <span class="badge-name">AWS</span>
-          <span class="badge-tag">Daily driver · 3+ yrs</span>
-        </div>
-        <div class="skill-badge" style="--tilt: 5deg">
-          <span class="badge-name">Azure</span>
-          <span class="badge-tag">Daily driver · 3+ yrs</span>
-        </div>
-        <div class="skill-badge" style="--tilt: -4deg">
-          <span class="badge-name">Kubernetes</span>
-          <span class="badge-tag">EKS · AKS · ROSA</span>
-        </div>
-        <div class="skill-badge" style="--tilt: 11deg">
-          <span class="badge-name">Terraform</span>
-          <span class="badge-tag">25+ resource types</span>
-        </div>
-        <div class="skill-badge" style="--tilt: -14deg">
-          <span class="badge-name">GCP</span>
-          <span class="badge-tag">Multi-cloud</span>
-        </div>
-        <div class="skill-badge" style="--tilt: 7deg">
-          <span class="badge-name">Python</span>
-          <span class="badge-tag">Automation · scripting</span>
-        </div>
-        <div class="skill-badge" style="--tilt: -6deg">
-          <span class="badge-name">GitHub Actions</span>
-          <span class="badge-tag">10 workflows built</span>
-        </div>
-        <div class="skill-badge" style="--tilt: 16deg">
-          <span class="badge-name">Playwright</span>
-          <span class="badge-tag">198 specs authored</span>
-        </div>
-        <div class="skill-badge" style="--tilt: -10deg">
-          <span class="badge-name">Helm</span>
-          <span class="badge-tag">K8s packaging</span>
-        </div>
-        <div class="skill-badge" style="--tilt: 4deg">
-          <span class="badge-name">Jenkins</span>
-          <span class="badge-tag">CI/CD pipelines</span>
-        </div>
-        <div class="skill-badge" style="--tilt: -18deg">
-          <span class="badge-name">PostgreSQL</span>
-          <span class="badge-tag">Major-version upgrades</span>
-        </div>
-        <div class="skill-badge" style="--tilt: 9deg">
-          <span class="badge-name">Bash</span>
-          <span class="badge-tag">Every incident, first tool</span>
-        </div>
-      </div>
-
-      <div class="philosophy-block">
-        <p class="philosophy-text">"If a human has to rotate it, it's a future incident. Automate the credential, not just the fix."</p>
-      </div>
-    </div>
-
-    <div class="entrance-door-left"></div>
-    <div class="entrance-door-right"></div>
-    <div class="entrance-sign">
-      <span class="entrance-sign-text">MUNISH'S WORKSHOP</span>
-      <span class="entrance-sign-sub">DevOps · Infrastructure · Cloud</span>
-    </div>
-  </section>
-
-  <section class="stats-strip-section">
-    <div class="stats-strip-inner">
-      <span class="section-label">Impact at a glance</span>
-      <div class="stats-strip">
-        <div class="impact-block">
-          <span class="impact-num">10+</span>
-          <span class="impact-label">Production environments built &amp; operated</span>
-        </div>
-        <div class="impact-block">
-          <span class="impact-num">24</span>
-          <span class="impact-label">Documented incidents resolved</span>
-        </div>
-        <div class="impact-block">
-          <span class="impact-num">1,632</span>
-          <span class="impact-label">Tests gating every release</span>
-        </div>
-        <div class="impact-block">
-          <span class="impact-num">0</span>
-          <span class="impact-label">Static secrets across banking environment</span>
-        </div>
-        <div class="impact-block">
-          <span class="impact-num">34+</span>
-          <span class="impact-label">Technical docs authored</span>
-        </div>
-        <div class="impact-block">
-          <span class="impact-num">5</span>
-          <span class="impact-label">Countries collaborated across on releases</span>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section class="catalog-section" id="work">
-    <div class="catalog-header-card card">
-      <div class="catalog-header-left">
-        <span class="section-label">Selected Work</span>
-        <h2 class="catalog-title">Case Studies</h2>
-        <p class="catalog-sub">Four flagship engineering stories from production banking infrastructure.</p>
-      </div>
-      <ul class="catalog-toc">
-        <li><a href="case-study-1.html">Zero Static Secrets</a></li>
-        <li><a href="case-study-2.html">Cluster Isolation</a></li>
-        <li><a href="case-study-3.html">The Outage Runbook</a></li>
-        <li><a href="case-study-4.html">Test Suite</a></li>
+      <ul class="chips">
+        <li>Remote from India</li>
+        <li>6+ hrs overlap with US Pacific, standups included</li>
+        <li>Full-time</li>
+        <li>Available on notice</li>
       </ul>
+      <p class="roles"><b>Target roles:</b> AI Engineer (Founding) · AI Infrastructure Engineer · Agent Platform Engineer · Senior Platform / DevOps Engineer</p>
+
+      <div class="cta-row">
+        <a class="btn btn-lime" href="#ask">See the specific ask</a>
+        <a class="btn btn-ghost" href="https://www.linkedin.com/in/itsmunishbhardwaj" target="_blank" rel="noopener">View LinkedIn</a>
+        <a class="btn btn-ghost" href="assets/munish-bhardwaj-resume.pdf" download>Download resume (PDF)</a>
+      </div>
     </div>
 
-    <div class="projects-pegboard pegboard-bg">
-      <div class="project-card card">
-        <div class="project-meta">
-          <span class="project-tag">IDENTITY &amp; SECURITY · AZURE</span>
-          <span class="new-badge">Latest</span>
-        </div>
-        <h3 class="project-title">Zero Static Secrets, One Banking Cluster</h3>
-        <p class="project-blurb">Eliminating every static secret from a Fortune 500 banking environment — passwordless, by design, at scale.</p>
-        <div class="project-stats-row">
-          <span class="project-stat"><strong>24</strong> Federated credentials</span>
-          <span class="project-stat"><strong>0</strong> Static secrets remaining</span>
-        </div>
-        <a href="case-study-1.html" class="btn">View Case Study</a>
+    <div>
+    <div class="panel">
+      <div class="panel-top"><span><span class="dot"></span>Candidate readout · verified against resume</span><span>Live</span></div>
+      <div class="tiles">
+        <div class="tile"><div class="k">Engineering</div><div class="v">6 yrs</div><div class="n">H2O.ai, 2020 — present</div></div>
+        <div class="tile"><div class="k">Prod environments</div><div class="v">10</div><div class="n">AWS · Azure · GCP · ROSA</div></div>
+        <div class="tile"><div class="k">LLM tooling shipped at work</div><div class="v zero">2</div><div class="n">Test report generator · 17+ QA skills</div></div>
+        <div class="tile"><div class="k">LLM apps deployed</div><div class="v">1 live</div><div class="n">Gauge · plus 6 in build</div></div>
       </div>
-
-      <div class="project-card card">
-        <div class="project-meta">
-          <span class="project-tag">INFRASTRUCTURE STRATEGY · ROSA / AWS</span>
-        </div>
-        <h3 class="project-title">Four Options, One Decision: Isolating a Production Cluster</h3>
-        <p class="project-blurb">Airgapping a production OpenShift cluster — and choosing the boring option on purpose.</p>
-        <div class="project-stats-row">
-          <span class="project-stat"><strong>4</strong> Approaches evaluated</span>
-          <span class="project-stat"><strong>0</strong> New shared dependencies</span>
-        </div>
-        <a href="case-study-2.html" class="btn">View Case Study</a>
+      <div class="feed">
+        <h4>Selected signals</h4>
+        <ul>
+          <li><span class="ts">IDENT</span><span>24 federated credentials, 11 namespaces, zero static secrets</span></li>
+          <li><span class="ts">EVALS</span><span>1,600 test functions · 198 Playwright specs · every PR</span></li>
+          <li><span class="ts">IAC</span><span>25 Terraform resource types across 10 environments</span></li>
+          <li><span class="ts">ROLLBK</span><span>PostgreSQL 15→18 upgrade, documented rollback, zero data loss</span></li>
+          <li><span class="ts">AGENT</span><span>Deterministic scoring, LLM narrative only — Gauge, live on Render</span></li>
+          <li><span class="ts">CERT</span><span>Claude Certified Architect — Foundations, in progress</span></li>
+        </ul>
       </div>
-
-      <div class="project-card card">
-        <div class="project-meta">
-          <span class="project-tag">INCIDENT RESPONSE · KUBERNETES</span>
-        </div>
-        <h3 class="project-title">The Outage That Became a Runbook</h3>
-        <p class="project-blurb">A full-cluster outage, root-caused, fixed across 9 namespaces, and turned into a script so it can't happen the same way twice.</p>
-        <div class="project-stats-row">
-          <span class="project-stat"><strong>33+</strong> Pods recovered</span>
-          <span class="project-stat"><strong>9/9</strong> Namespaces</span>
-        </div>
-        <a href="case-study-3.html" class="btn">View Case Study</a>
-      </div>
-
-      <div class="project-card card">
-        <div class="project-meta">
-          <span class="project-tag">CI/CD · TEST INFRASTRUCTURE</span>
-        </div>
-        <h3 class="project-title">A Test Suite That Gates Every Release</h3>
-        <p class="project-blurb">Building the automated test platform every release runs through before it ships — from zero to 1,600+ tests, one auth provider at a time.</p>
-        <div class="project-stats-row">
-          <span class="project-stat"><strong>1,632</strong> Test functions</span>
-          <span class="project-stat"><strong>198</strong> Playwright specs</span>
-        </div>
-        <a href="case-study-4.html" class="btn">View Case Study</a>
+      <div class="rec">
+        <div class="lbl">Recommendation · guardrail: you approve</div>
+        <p>Talk to this candidate about ZenAI's reliability layer before it goes near a property.</p>
       </div>
     </div>
-  </section>
+    <p class="cue"><b>&#8595;</b> Six disciplines, mapped twice — keep going</p>
+    </div>
+  </div>
+</section>
 
-  <section class="beyond-section">
-    <div class="beyond-inner">
-      <div class="inside-header">
-        <span class="section-label">Beyond the Terminal</span>
-        <h2 class="inside-title">The Human Side</h2>
-        <p class="inside-sub">Thanks for stopping by. I'm Munish — the engineer. Kabir's the one with better work-life balance.</p>
+<!-- ==================== TIMELINE ==================== -->
+<section class="wash">
+  <svg class="deco light" style="top:10px;right:-120px;width:480px" viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg" fill="none" aria-hidden="true"><g stroke="url(#gA)" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"><rect x="86" y="132" width="128" height="104" rx="14"/><path pathLength="1" d="M114 132 V104 a36 36 0 0 1 72 0 V132"/><path pathLength="1" d="M150 168 V200"/></g><g stroke="url(#gC)" stroke-width="8" stroke-linecap="round"><path pathLength="1" d="M236 76 a92 92 0 0 1 0 60"/><path pathLength="1" d="M262 58 a132 132 0 0 1 0 96"/></g></svg>
+  <div class="wrap">
+    <div class="portrait">
+      <img src="assets/munish-portrait.jpg" alt="Portrait of Munish Bhardwaj">
+      <div class="cap"><span class="kicker">DevOps Engineer &#8594; AI Engineer</span><b>Munish Bhardwaj</b>
+      Six years at H2O.ai, building production infrastructure for banks that audit everything. Working from India on US Pacific hours, six-plus hours of overlap, standups included. Reachable at itsbhardwaj@icloud.com, and quicker than you'd expect.</div>
+    </div>
+
+    <p class="eyebrow">Career</p>
+    <h2 class="sec-title">One company, six years.<span class="grad">Three quite different jobs inside it.</span></h2>
+    <p class="sec-lede">Started as the most junior engineer on the team and left a framework behind that's still in use.</p>
+    <p class="hint"><span aria-hidden="true">&#9662;</span> Click any role to expand what it actually involved</p>
+
+    <div class="tl">
+      <div class="tl-item">
+        <button class="tl-btn" aria-expanded="false" aria-controls="r1">
+          <span><h3>DevOps Engineer — QA &amp; Certification <span class="now">Current</span></h3><div class="co">H2O.ai</div></span>
+          <span class="dt">Oct 2023 — present <span class="caret">[+]</span></span>
+        </button>
+        <div class="tl-body" id="r1">
+          <p class="added">What it added: owning reliability for banking clients — identity, evals and infrastructure as one job.</p>
+          <ul>
+            <li>Built and run 10 production environments across AWS, Azure and GCP for Fortune 500 banking clients including TD Bank — spanning AWS EKS, OpenShift ROSA and Azure AKS.</li>
+            <li>Authored 25 Terraform resource types provisioning full stacks: ROSA HCP clusters, Lambda autoscaling, IAM roles, S3, Secrets Manager, plus Azure AKS, networking, PostgreSQL and 13 managed identities per environment.</li>
+            <li>Built serverless cluster autoscaling on AWS Lambda + EventBridge, scaling ROSA machine pools on schedule and cutting idle compute cost.</li>
+            <li>Implemented Azure Workload Identity end to end: 24 federated credentials across 11 namespaces, enabling passwordless PostgreSQL and storage auth with zero static secrets.</li>
+            <li>Built CI/CD pipelines running E2E and connector tests on every PR across Jenkins and GitHub Actions with AWS OIDC; authored 187 commits to a Python test suite of 1,600 test functions across 18 modules.</li>
+            <li>Wrote a custom pytest plugin (hac-playwright) handling Keycloak, Okta and OTP auth for UI automation; built 198 Playwright specs covering every app and connector.</li>
+            <li>Authored 34 technical documents including an 812-line H2O AI Cloud debugging guide, published to Confluence for the wider team.</li>
+          </ul>
+        </div>
       </div>
-      <div class="beyond-grid">
-        <div class="beyond-card card">
-          <span class="beyond-card-icon">🏄</span>
-          <h3 class="beyond-card-title">Part-time surfer</h3>
-          <p class="beyond-card-body">Certified in Varkala. Chasing the next wave whenever the terminal can wait.</p>
+      <div class="tl-item">
+        <button class="tl-btn" aria-expanded="false" aria-controls="r2">
+          <span><h3>Software Engineer — ML Platform &amp; Release</h3><div class="co">H2O.ai</div></span>
+          <span class="dt">Mar 2021 — Oct 2023 <span class="caret">[+]</span></span>
+        </button>
+        <div class="tl-body" id="r2">
+          <p class="added">What it added: release discipline across five countries, and observability as a habit rather than a ticket.</p>
+          <ul>
+            <li>Designed CI/CD and release pipelines for microservices-based ML applications serving CBA, TD Bank and Snowflake, increasing release velocity by 30%.</li>
+            <li>Built monitoring and observability using Grafana and SQL across AWS, Azure and GCP, achieving 100% uptime through proactive alerting.</li>
+            <li>Delivered 15 production releases across distributed teams in 5 countries (Japan, Prague, Slovakia, USA, India) with full documentation and runbooks.</li>
+          </ul>
         </div>
-        <div class="beyond-card card">
-          <span class="beyond-card-icon">🎬</span>
-          <h3 class="beyond-card-title">Certified cinephile</h3>
-          <p class="beyond-card-body">Tell me your mood, I'll find the film. Every genre, every era.</p>
-        </div>
-        <div class="beyond-card card">
-          <span class="beyond-card-icon">✍️</span>
-          <h3 class="beyond-card-title">#0to100xEngineers</h3>
-          <p class="beyond-card-body">Publishing AI and engineering content. Building in public, one post at a time.</p>
-        </div>
-        <div class="beyond-card card">
-          <span class="beyond-card-icon">🏎️</span>
-          <h3 class="beyond-card-title">Competitive at everything</h3>
-          <p class="beyond-card-body">Go-karting. Apparently also at karaoke. No regrets.</p>
+      </div>
+      <div class="tl-item">
+        <button class="tl-btn" aria-expanded="false" aria-controls="r3">
+          <span><h3>Full Stack &amp; DevOps Engineer</h3><div class="co">H2O.ai</div></span>
+          <span class="dt">Mar 2020 — Mar 2021 <span class="caret">[+]</span></span>
+        </button>
+        <div class="tl-body" id="r3">
+          <p class="added">What it added: the first framework I built that outlived me on the team.</p>
+          <ul>
+            <li>Automated CI/CD frameworks for ML model deployment using Jenkins, Docker and Kubernetes.</li>
+            <li>Delivered integration workflows for 3 enterprise applications within a 3-week deadline, building a reusable framework still in use today.</li>
+            <li>Improved deployment efficiency by 50%. Started as the most junior engineer on the team.</li>
+          </ul>
         </div>
       </div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <section class="testimonials-section">
-    <div class="testimonials-inner">
-      <span class="section-label">What People Say</span>
-      <blockquote class="testimonial-card card">
-        <p class="testimonial-text">"You've really been through the trenches to know all the nuances of this process."</p>
-        <cite class="testimonial-cite">
-          <strong>Jeffrey Canisius</strong><br>
-          Feb 2026 · after resolving a telemetry server issue on ROSA
-        </cite>
-      </blockquote>
-      <blockquote class="testimonial-card card">
-        <p class="testimonial-text">"Debugging is where I learned the most."</p>
-        <cite class="testimonial-cite">
-          <strong>Abhishek Lale</strong><br>
-          Dec 2024 · on learning HAIC Azure deployments together
-        </cite>
-      </blockquote>
-    </div>
-  </section>
 
-  <section class="skills-section" id="skills-full">
-    <div class="skills-inner">
-      <div class="skills-block">
-        <span class="section-label">Cloud &amp; Kubernetes</span>
-        <p class="skills-list">AWS (EKS, EC2, S3, Lambda, IAM, Secrets Manager) · Microsoft Azure (AKS, Key Vault, Workload Identity) · Google Cloud Platform · Red Hat OpenShift (ROSA/ARO) · Helm · CRDs · RBAC</p>
+<!-- ==================== SCALE ==================== -->
+<section class="wash alt" style="background:#F4F7FC">
+  <svg class="deco light" style="bottom:-90px;left:-110px;width:500px" viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg" fill="none" aria-hidden="true"><g stroke="url(#gA)" stroke-width="9" stroke-linecap="round"><path pathLength="1" d="M30 240 V180 M78 240 V132 M126 240 V196 M174 240 V96 M222 240 V150 M270 240 V60"/></g><path pathLength="1" d="M18 40 C60 40, 60 96, 102 96 S144 40, 186 40 S228 96, 270 96" stroke="url(#gC)" stroke-width="8" stroke-linecap="round"/></svg>
+  <div class="wrap">
+    <p class="eyebrow">The receipts</p>
+    <h2 class="sec-title">Nine numbers, every one of them<span class="grad">read off a repo or an environment.</span></h2>
+    <p class="sec-lede">Bars are drawn on a logarithmic scale, because the honest range here spans three orders of magnitude and a linear chart would render most of it invisible. Green bars are personal projects; navy is work at H2O.ai.</p>
+    <div class="scale">
+      <div class="srow">
+        <div class="slabel">Test functions in the H2O.ai suite<i>Python, across 18 modules</i></div>
+        <div><div class="sbar" style="width:100.0%"></div></div>
+        <div class="sval">1,600</div>
       </div>
-      <div class="skills-block">
-        <span class="section-label">Infrastructure as Code</span>
-        <p class="skills-list">Terraform — 25+ resource types authored, multi-cloud</p>
+      <div class="srow">
+        <div class="slabel">Playwright specs authored<i>every app and connector covered</i></div>
+        <div><div class="sbar" style="width:71.7%"></div></div>
+        <div class="sval">198</div>
       </div>
-      <div class="skills-block">
-        <span class="section-label">CI/CD</span>
-        <p class="skills-list">Jenkins · GitHub Actions · GitHub OIDC · Playwright · Allure · TestRail</p>
+      <div class="srow">
+        <div class="slabel">Commits on Becoming<i>PRs numbered to #25</i></div>
+        <div><div class="sbar alt" style="width:62.8%"></div></div>
+        <div class="sval">103</div>
       </div>
-      <div class="skills-block">
-        <span class="section-label">Security &amp; Identity</span>
-        <p class="skills-list">AWS IAM · OIDC · Azure Workload Identity · Federated credentials · Trivy vulnerability scanning</p>
+      <div class="srow">
+        <div class="slabel">Production components deployed<i>across 8 Helm chart versions</i></div>
+        <div><div class="sbar" style="width:50.7%"></div></div>
+        <div class="sval">42</div>
       </div>
-      <div class="skills-block">
-        <span class="section-label">Languages</span>
-        <p class="skills-list">Python · Bash · SQL · Groovy</p>
+      <div class="srow">
+        <div class="slabel">Terraform resource types authored<i>clusters, IAM, networking, identities</i></div>
+        <div><div class="sbar" style="width:43.6%"></div></div>
+        <div class="sval">25</div>
       </div>
-      <div class="skills-block">
-        <span class="section-label">Data &amp; Messaging</span>
-        <p class="skills-list">PostgreSQL · Kafka · Snowflake · Databricks · Redis · MinIO</p>
+      <div class="srow">
+        <div class="slabel">Federated credentials, zero static secrets<i>11 namespaces, Azure Workload Identity</i></div>
+        <div><div class="sbar" style="width:43.1%"></div></div>
+        <div class="sval">24</div>
       </div>
-      <div class="skills-block">
-        <span class="section-label">Certifications</span>
-        <p class="skills-list">Claude Certified Architect — Foundations (CCA-F), Anthropic <em>in progress, 2026</em> · B.Tech, IIIT Pune (2016–2020)</p>
+      <div class="srow">
+        <div class="slabel">Technical documents published<i>including an 812-line debugging guide</i></div>
+        <div><div class="sbar" style="width:47.8%"></div></div>
+        <div class="sval">34</div>
       </div>
+      <div class="srow">
+        <div class="slabel">Production environments run<i>AWS · Azure · GCP · ROSA</i></div>
+        <div><div class="sbar" style="width:31.2%"></div></div>
+        <div class="sval">10</div>
+      </div>
+      <div class="srow">
+        <div class="slabel">Live REST endpoints on Gauge<i>deployed and publicly reachable</i></div>
+        <div><div class="sbar alt" style="width:28.2%"></div></div>
+        <div class="sval">8</div>
+      </div>
+      <p class="note">Verified against the repositories and environments on 2 September 2026 — line and test counts via <code>wc -l</code> excluding vendored directories, commit counts via <code>git shortlog</code>. There is not one user metric on this chart, because the personal products don't have users yet, and inventing one would be the fastest way to lose the room.</p>
     </div>
-  </section>
+  </div>
+</section>
 
-  <footer class="workshop-footer" id="contact">
-    <div class="footer-top">
-      <div class="footer-close-door">
-        <div class="footer-door-panel footer-door-left"></div>
-        <div class="footer-door-panel footer-door-right"></div>
-      </div>
-    </div>
-    <div class="footer-content">
-      <p class="footer-headline">Let's build something reliable together.</p>
-      <p class="footer-sub">Open to DevOps / Platform / SRE roles and conversations.</p>
-      <div class="footer-links">
-        <div class="footer-group">
-          <span class="section-label">Work</span>
-          <a href="#work">Case Studies</a>
-          <a href="#hero">About</a>
+<!-- ==================== CASE STUDIES ==================== -->
+<section class="dark cases">
+  <div class="wrap">
+    <p class="eyebrow">The mapping</p>
+    <h2 class="sec-title">Five things the role is really testing.<span class="grad">Answered twice — once in banking, once in ZenAI.</span></h2>
+    <p class="sec-lede">Left side is real, verifiable work from six years at H2O.ai and the agentic systems I've shipped. Right side is the equivalent problem inside ZenSpace, as described on your own product pages. Nothing on the right is claimed as experience — it's where the same discipline lands.</p>
+    <p class="hint"><span aria-hidden="true">&#9662;</span> Click any row for the full Challenge / Approach / Result on both sides</p>
+
+    <!-- 1 -->
+    <div class="case">
+      <div class="rail"><span class="num">01</span></div>
+      <div class="card">
+      <button class="case-head" aria-expanded="false" type="button"><span class="case-toggle">[+]</span><h3>Credentials for systems that act on someone else's behalf</h3>
+        <p class="case-sum">Azure Workload Identity across 24 federated credentials, mapped onto agents acting on the company's behalf.</p></button>
+      <div class="pair">
+        <svg class="conn" viewBox="0 0 96 56" aria-hidden="true"><path d="M2 14 C34 14, 48 42, 92 42"/><circle cx="92" cy="42" r="4"/></svg>
+        <div class="side">
+          <div class="tag">What I actually did — H2O.ai / TD Bank</div>
+          <div class="car"><div class="l">Challenge</div><p>Banking workloads were authenticating with static secrets scattered across namespaces. Every credential was a standing liability and an audit finding waiting to happen.</p></div>
+          <div class="car"><div class="l">Approach</div><p>Implemented Azure Workload Identity end to end — 24 federated credentials across 11 namespaces, 13 managed identities per environment, scoped per workload rather than shared.</p></div>
+          <div class="car"><div class="l">Result</div><p>Passwordless PostgreSQL and storage auth with zero static secrets, and a credential model a bank's security team signed off on.</p></div>
         </div>
-        <div class="footer-group">
-          <span class="section-label">Connect</span>
-          <a href="mailto:itsbhardwaj@icloud.com">Email Me</a>
-          <a href="https://linkedin.com/in/itsmunishbhardwaj" target="_blank" rel="noopener">LinkedIn</a>
-          <a href="https://github.com/itsmunishbhardwaj" target="_blank" rel="noopener">GitHub</a>
+        <div class="side">
+          <div class="tag">The same problem at ZenSpace</div>
+          <div class="car"><div class="l">Challenge</div><p>Agents that write to Mews, Opera, LiquidSpace, Stripe and Salto need credentials scoped per integration, per property, revocable in seconds — not one shared key with the run of the estate.</p></div>
+          <div class="car"><div class="l">Approach</div><p>Per-agent, per-tenant identity with least-privilege scopes; secrets that rotate without a redeploy; every credential attributable to the action it authorized.</p></div>
+          <div class="car"><div class="l">Result</div><p>An agent's permissions become a thing an operator can inspect and revoke, not a thing they have to trust.</p></div>
+          <div class="sowhat">So what: the first time an agent sends something on the company's behalf, the only question that matters is what it was allowed to do — and who can prove it.</div>
         </div>
       </div>
-      <p class="footer-credit">+91 8356869703</p>
+      </div>
     </div>
-  </footer>
 
-  <script src="https://unpkg.com/lenis@1.1.14/dist/lenis.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
-  <script src="js/main.js"></script>
+    <!-- 2 -->
+    <div class="case">
+      <div class="rail"><span class="num">02</span></div>
+      <div class="card">
+      <button class="case-head" aria-expanded="false" type="button"><span class="case-toggle">[+]</span><h3>Proving reliability before anything touches a customer</h3>
+        <p class="case-sum">1,600 test functions and 198 Playwright specs, mapped onto proving an agent is reliable before it touches a customer.</p></button>
+      <div class="pair">
+        <svg class="conn" viewBox="0 0 96 56" aria-hidden="true"><path d="M2 14 C34 14, 48 42, 92 42"/><circle cx="92" cy="42" r="4"/></svg>
+        <div class="side">
+          <div class="tag">What I actually did — H2O.ai</div>
+          <div class="car"><div class="l">Challenge</div><p>Enterprise ML releases were going to Fortune 500 banks with no automated way to prove the whole surface still worked, including the auth flows nobody wanted to test by hand.</p></div>
+          <div class="car"><div class="l">Approach</div><p>Wrote a custom pytest plugin handling Keycloak, Okta and OTP for UI automation; built 198 Playwright specs and contributed 187 commits to a suite of 1,600 test functions across 18 modules, running on every PR.</p></div>
+          <div class="car"><div class="l">Result</div><p>Every app and connector covered, every pull request gated. Reliability stopped being an opinion.</p></div>
+        </div>
+        <div class="side">
+          <div class="tag">The same problem at ZenSpace</div>
+          <div class="car"><div class="l">Challenge</div><p>"Measurably reliable before they touch customers" is the JD's phrase — and an agent that drafts a guest email or moves a rate is far harder to assert about than a deterministic API.</p></div>
+          <div class="car"><div class="l">Approach</div><p>Eval sets per agent behavior with golden cases and regression suites; adversarial cases for the expensive failures (double-booking, rate outside bounds, unlock without a paid session); CI gates before promotion from recommend to act.</p></div>
+          <div class="car"><div class="l">Result</div><p>A pass rate an operator can read, and a trust threshold that's a number rather than a feeling.</p></div>
+          <div class="sowhat">So what: the trust ladder from recommend-only to automation only moves if something is measuring it. That measuring apparatus is the thing I've built before.</div>
+        </div>
+      </div>
+      </div>
+    </div>
+
+    <!-- 3 -->
+    <div class="case">
+      <div class="rail"><span class="num">03</span></div>
+      <div class="card">
+      <button class="case-head" aria-expanded="false" type="button"><span class="case-toggle">[+]</span><h3>Running many environments without many people</h3>
+        <p class="case-sum">Ten production environments across three clouds, mapped onto 30+ properties each with their own guardrails.</p></button>
+      <div class="pair">
+        <svg class="conn" viewBox="0 0 96 56" aria-hidden="true"><path d="M2 14 C34 14, 48 42, 92 42"/><circle cx="92" cy="42" r="4"/></svg>
+        <div class="side">
+          <div class="tag">What I actually did — H2O.ai</div>
+          <div class="car"><div class="l">Challenge</div><p>Ten separate production environments across three clouds and two Kubernetes distributions, each with its own client, network posture and compliance expectations.</p></div>
+          <div class="car"><div class="l">Approach</div><p>25 Terraform resource types covering clusters, networking, IAM, storage, secrets and managed identities — the same definitions parameterized per environment rather than ten hand-built snowflakes.</p></div>
+          <div class="car"><div class="l">Result</div><p>Ten environments run by a small team, reproducibly, with a private-network ROSA design chosen after evaluating four isolation approaches.</p></div>
+        </div>
+        <div class="side">
+          <div class="tag">The same problem at ZenSpace</div>
+          <div class="car"><div class="l">Challenge</div><p>30+ live properties today, each with different PMS integrations, hardware, pricing bounds and guardrails — and a roadmap that scales to portfolios, not properties.</p></div>
+          <div class="car"><div class="l">Approach</div><p>Tenant configuration as code rather than per-property console work: agent guardrails, price bands and channel whitelists versioned, diffable and rolled out the same way everywhere.</p></div>
+          <div class="car"><div class="l">Result</div><p>Onboarding property 31 costs roughly what property 30 cost, instead of accumulating.</p></div>
+          <div class="sowhat">So what: at 30 properties this is a fleet problem, not a feature problem — and fleets are what I've spent six years on.</div>
+        </div>
+      </div>
+      </div>
+    </div>
+
+    <!-- 4 -->
+    <div class="case">
+      <div class="rail"><span class="num">04</span></div>
+      <div class="card">
+      <button class="case-head" aria-expanded="false" type="button"><span class="case-toggle">[+]</span><h3>Work that runs on a schedule and survives failure</h3>
+        <p class="case-sum">Serverless scheduled autoscaling, mapped onto durable long-running agent jobs that have to survive failure.</p></button>
+      <div class="pair">
+        <svg class="conn" viewBox="0 0 96 56" aria-hidden="true"><path d="M2 14 C34 14, 48 42, 92 42"/><circle cx="92" cy="42" r="4"/></svg>
+        <div class="side">
+          <div class="tag">What I actually did — H2O.ai</div>
+          <div class="car"><div class="l">Challenge</div><p>Expensive clusters sitting idle outside working hours across multiple environments, with scaling done by hand when someone remembered.</p></div>
+          <div class="car"><div class="l">Approach</div><p>Built serverless autoscaling on AWS Lambda + EventBridge, scaling ROSA machine pools on schedule, with the state of each pool tracked rather than assumed.</p></div>
+          <div class="car"><div class="l">Result</div><p>Idle compute cost cut, no human in the loop, and no surprise when a scheduled run failed — because failures were visible.</p></div>
+        </div>
+        <div class="side">
+          <div class="tag">The same problem at ZenSpace</div>
+          <div class="car"><div class="l">Challenge</div><p>The Ops Agent's brief lands at 08:00. Distribution re-syncs continuously. Pricing acts inside a demand window. All of it is scheduled, long-running, and worthless if it silently doesn't run.</p></div>
+          <div class="car"><div class="l">Approach</div><p>Durable workflow execution with checkpointing, interrupts and resume; idempotent steps so a retry doesn't double-post a rate change; dead-letter visibility instead of quiet drops.</p></div>
+          <div class="car"><div class="l">Result</div><p>Agents that fail loudly and recover, rather than the far worse alternative.</p></div>
+          <div class="sowhat">So what: "durable long-running jobs" is in your JD by name. Event-driven scheduled work with real recovery is already what my day looks like.</div>
+        </div>
+      </div>
+      </div>
+    </div>
+
+    <!-- 5 -->
+    <div class="case">
+      <div class="rail"><span class="num">05</span></div>
+      <div class="card">
+      <button class="case-head" aria-expanded="false" type="button"><span class="case-toggle">[+]</span><h3>Reversibility, and leaving a paper trail behind</h3>
+        <p class="case-sum">A Postgres upgrade with a rehearsed rollback, mapped onto ZenAI's promise that every action is reversible.</p></button>
+      <div class="pair">
+        <svg class="conn" viewBox="0 0 96 56" aria-hidden="true"><path d="M2 14 C34 14, 48 42, 92 42"/><circle cx="92" cy="42" r="4"/></svg>
+        <div class="side">
+          <div class="tag">What I actually did — H2O.ai</div>
+          <div class="car"><div class="l">Challenge</div><p>A PostgreSQL 15→18 upgrade across production environments holding banking client data, where an unrecoverable mistake would have been exactly that.</p></div>
+          <div class="car"><div class="l">Approach</div><p>Full pg_dumpall backup and restore path, rehearsed, with a documented rollback checklist written before the change — plus 34 technical documents and an 812-line debugging guide published for the wider team.</p></div>
+          <div class="car"><div class="l">Result</div><p>Zero data loss, and a team that could run the system and debug it without me in the room.</p></div>
+        </div>
+        <div class="side">
+          <div class="tag">The same problem at ZenSpace</div>
+          <div class="car"><div class="l">Challenge</div><p>ZenAI promises operators that every agent action is timestamped, attributable and reversible. That's a real engineering commitment, not a marketing line — and it has to hold on the day something goes wrong at a property.</p></div>
+          <div class="car"><div class="l">Approach</div><p>Immutable action log with the inputs, the model, the prompt version and the approval attached; a defined undo path per action class; runbooks written for the ops team, not for the person who built it.</p></div>
+          <div class="car"><div class="l">Result</div><p>A GM can ask "why did the rate move?" and get an answer in one query, with a way to put it back.</p></div>
+          <div class="sowhat">So what: a small distributed team can only run what's been documented. Writing that down is a habit I already have, not a thing I'd get to later.</div>
+        </div>
+      </div>
+      </div>
+    </div>
+
+    <!-- 6 -->
+    <div class="case">
+      <div class="rail"><span class="num">06</span></div>
+      <div class="card">
+      <button class="case-head" aria-expanded="false" type="button"><span class="case-toggle">[+]</span><h3>Deciding what the model is allowed to decide</h3>
+        <p class="case-sum">Gauge's deterministic verdicts with LLM narrative only, mapped onto deciding what a pricing agent is allowed to decide.</p></button>
+      <div class="pair">
+        <svg class="conn" viewBox="0 0 96 56" aria-hidden="true"><path d="M2 14 C34 14, 48 42, 92 42"/><circle cx="92" cy="42" r="4"/></svg>
+        <div class="side">
+          <div class="tag">What I actually did — Gauge, deployed</div>
+          <div class="car"><div class="l">Challenge</div><p>An assessment tool where the same answer had to produce the same diagnosis every time. Letting the model classify meant the verdict drifted between runs — unusable for anything anyone relies on.</p></div>
+          <div class="car"><div class="l">Approach</div><p>Took classification away from the model. Headline scores and gap type are computed deterministically in Python from locked thresholds; the LLM only writes the narrative around a verdict the code has already fixed. Six calls split across two models by job — a 70B at low temperature for structured generation, a 120B where the output is prose — plus a JSON-repair layer that strips fences and retries, because malformed JSON from a free tier is a production incident, not a quirk.</p></div>
+          <div class="car"><div class="l">Result</div><p>1,652 lines behind 8 REST endpoints, live on Render, deterministic diagnosis, running inside a free API tier on a documented token budget.</p></div>
+        </div>
+        <div class="side">
+          <div class="tag">The same problem at ZenSpace</div>
+          <div class="car"><div class="l">Challenge</div><p>A Pricing Agent that moves a rate and a Distribution Agent that syncs inventory cannot be non-deterministic about the decision itself. An operator will accept an agent that explains a rate change; they will not accept one that gives two different answers to the same day.</p></div>
+          <div class="car"><div class="l">Approach</div><p>Draw the line explicitly: the yield logic, the bounds check and the eligibility rules are code; the model writes the explanation and handles the messy natural-language edges. Model routed by job rather than one model everywhere, with cost per decision tracked from day one.</p></div>
+          <div class="car"><div class="l">Result</div><p>Agent behaviour an operator can audit and reproduce, and an LLM bill that scales with properties instead of surprising you.</p></div>
+          <div class="sowhat">So what: your JD asks for product judgment about when an agent should act, ask, or not exist. I arrived at that line the hard way, on a deployed system, before reading your job description.</div>
+        </div>
+      </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== OBJECTION ==================== -->
+<section class="wash alt">
+  <svg class="deco light" style="bottom:-110px;left:-100px;width:440px" viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg" fill="none" aria-hidden="true"><g stroke="url(#gA)" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"><path pathLength="1" d="M96 96 a44 44 0 1 1 60 42 v26"/><path pathLength="1" d="M156 200 v6"/></g><circle cx="156" cy="128" r="86" stroke="url(#gC)" stroke-width="8" stroke-dasharray="12 16"/></svg>
+  <div class="wrap">
+    <div class="obj">
+      <p class="eyebrow">The obvious question</p>
+      <h3>"Has he actually shipped LLM systems in production?"</h3>
+      <p><strong>Yes — but let me be precise about the size of it, because the precise version is more useful to you than the flattering one.</strong> At H2O.ai I shipped an LLM-powered test report generator into the CI pipeline (773 lines, merged, every generated claim cited back to the real test run) and built 17+ Claude Code skills that make the entire Driverless AI QA lifecycle executable by natural language with a human in the loop. Outside work I've deployed Gauge — live, publicly reachable, 8 endpoints, two-model routing — and built six more agentic systems documented commit by commit.</p>
+      <p style="margin-bottom:0">What I have <em>not</em> done is own a company's whole AI stack — the memory layer, the integration surface, the eval regime and the product features — as one system with my name on it. <strong>That's the actual gap, and it's an ownership gap, not a knowledge one.</strong> Everything underneath it — multi-cloud production ownership, identity, evals, durable scheduled work, rollback discipline — is six years of my day job. This role is the first time those two halves would be the same job.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== FRAMEWORK ==================== -->
+<section class="dark">
+  <svg class="deco onink" style="top:-90px;right:-120px;width:520px" viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg" fill="none" aria-hidden="true"><g stroke="url(#gC)" stroke-width="8" stroke-linecap="round"><path pathLength="1" d="M40 250 V120 M40 120 h80 M120 120 V250"/><path pathLength="1" d="M110 250 V80 M110 80 h80 M190 80 V250"/></g><g stroke="url(#gB)" stroke-width="8" stroke-linecap="round"><path pathLength="1" d="M180 250 V40 M180 40 h80 M260 40 V250"/></g></svg>
+  <div class="wrap">
+    <p class="eyebrow">First 90 days</p>
+    <h2 class="sec-title" style="color:#fff">Recommend → Permission → Automate<span class="grad">Your trust ladder, with a delivery plan attached.</span></h2>
+    <p class="sec-lede">ZenAI's own three rules are recommendation mode by default, permissioned actions, and an audit log on everything. That's not just a product principle — it's a build order. Here's how I'd run it.</p>
+
+    <div class="phases">
+      <div class="phase">
+        <div class="step">PHASE 01 · DAYS 1—30</div>
+        <h3>Recommend</h3>
+        <div class="win">Make every agent observable before it's clever</div>
+        <h4>Objective</h4>
+        <p>Get all four agents producing recommendations against real property data, with every suggestion logged, scored and reviewable — and nothing acting yet.</p>
+        <h4>Key activities</h4>
+        <ul>
+          <li>Instrument the agent loop end to end: inputs, retrieved context, prompt version, output, latency, cost.</li>
+          <li>Stand up the eval harness with golden cases per agent, drawn from real property history.</li>
+          <li>Map every write path an agent could eventually take, and gate it behind a flag.</li>
+        </ul>
+        <h4>Deliverable</h4>
+        <p>Agent observability dashboard plus a versioned eval suite running in CI.</p>
+        <div class="metric">Success: 100% of agent recommendations traceable to their inputs, with a weekly accuracy number an operator can read.</div>
+      </div>
+
+      <div class="phase">
+        <div class="step">PHASE 02 · DAYS 31—60</div>
+        <h3>Permission</h3>
+        <div class="win">Draw the box before anything moves inside it</div>
+        <h4>Objective</h4>
+        <p>Ship the guardrail layer — scoped credentials, price bounds, channel whitelists, approval queues — so the first automated action happens inside limits an operator set themselves.</p>
+        <h4>Key activities</h4>
+        <ul>
+          <li>Per-agent, per-tenant identity with least-privilege scopes across PMS, channels, payments and locks.</li>
+          <li>Human-in-the-loop approval flow with durable state, so a pending action survives a restart.</li>
+          <li>Immutable audit log with a defined undo path per action class.</li>
+        </ul>
+        <h4>Deliverable</h4>
+        <p>Guardrail configuration as code, per property, diffable and reviewable.</p>
+        <div class="metric">Success: zero agent actions outside operator-defined bounds, and every action reversible in one step.</div>
+      </div>
+
+      <div class="phase">
+        <div class="step">PHASE 03 · DAYS 61—90</div>
+        <h3>Automate</h3>
+        <div class="win">Promote on evidence, one behavior at a time</div>
+        <h4>Objective</h4>
+        <p>Move the first agent behaviors from recommend to act at launch-partner properties, using the eval pass rate as the promotion criterion — not the calendar.</p>
+        <h4>Key activities</h4>
+        <ul>
+          <li>Define the trust threshold per behavior and promote only what clears it.</li>
+          <li>Harden the retrieval and memory layer so agents answer from what the business actually knows.</li>
+          <li>Write the runbooks and hand the controls to the ops team.</li>
+        </ul>
+        <h4>Deliverable</h4>
+        <p>Launch-partner properties running automated behaviors with monitoring and rollback in place.</p>
+        <div class="metric">Success: measured lift on the promoted behaviors, no unattributed agent action, and a documented path for the next one.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== AI WORK ==================== -->
+<section class="wash alt">
+  <svg class="deco light" style="top:20px;left:-140px;width:480px" viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg" fill="none" aria-hidden="true"><g stroke="url(#gC)" stroke-width="7" stroke-dasharray="8 12"><path pathLength="1" d="M60 60 L190 110 L110 220 L60 60 M190 110 L250 210"/></g><circle cx="60" cy="60" r="16" stroke="url(#gA)" stroke-width="8"/><circle cx="190" cy="110" r="20" stroke="url(#gB)" stroke-width="8"/><circle cx="110" cy="220" r="14" stroke="url(#gA)" stroke-width="8"/><circle cx="250" cy="210" r="12" stroke="url(#gC)" stroke-width="8"/></svg>
+  <div class="wrap">
+    <p class="eyebrow">Shipped, deployed, and in build</p>
+    <h2 class="sec-title">The AI work, with the receipts attached.<span class="grad">Every number read off a repo, not a résumé.</span></h2>
+    <p class="sec-lede">Two of these shipped inside my job at H2O.ai. One is live and publicly reachable. The rest are documented commit by commit. No user metrics appear anywhere on this page, because these products don't have users yet and inventing a number is the fastest way to lose a room.</p>
+
+    <div class="g2">
+      <div class="box">
+        <h3>Gauge <span class="wip">Live · deployed</span></h3>
+        <p><b>An assessment engine that diagnoses the type of understanding gap, not a score.</b> Three scoring axes grounded in learning-science research rather than invented at the prompt. The design decision that matters: classification was taken away from the model — headline scores and gap type are computed deterministically in Python from locked thresholds, and the LLM only writes the narrative around a verdict the code has already fixed. Six calls split across two models by job. A JSON-repair layer that strips fences and retries, because malformed JSON from a free tier is an incident, not a quirk.</p>
+        <p style="margin-bottom:10px"><b>Result:</b> 1,652 lines of Python behind 8 REST endpoints, live on Render, built and deployed in one hackathon cycle inside a documented free-tier budget.</p>
+        <ul class="tags"><li>Groq (70B + 120B routing)</li><li>FastAPI</li><li>Supabase</li><li>Gradio</li><li>deterministic scoring</li><li>golden test cases</li></ul>
+      </div>
+
+      <div class="box">
+        <h3>LLM test report generator <span class="wip">Shipped at H2O.ai</span></h3>
+        <p><b>Merged into the CI pipeline as a reusable GitHub Actions workflow.</b> JUnit XML tells you what failed but never what happened. This parses the XML, sends structured test data to H2OGPTE, and renders a standalone HTML report with a PASS / CONDITIONAL PASS / FAIL verdict and a root-cause classification per failure — product bug, infrastructure, flaky, or config.</p>
+        <p style="margin-bottom:10px"><b>The part that matters here:</b> every LLM-generated claim is threaded back to real evidence — the CI run URL, the source XML file and the specific test name are carried in the prompt context and rendered in the output, so the narrative stays grounded rather than plausible. Graceful fallback to a data-only report when the model is unavailable. 773 lines, any pipeline can call it.</p>
+        <p style="margin-bottom:10px;font-size:13.5px;color:#5A6B8C"><b>Internal repository</b> — not linkable, but happy to walk through the design and the merged pull request in a conversation.</p>
+        <ul class="tags"><li>Python</li><li>H2OGPTE</li><li>citation grounding</li><li>GitHub Actions</li><li>graceful degradation</li></ul>
+      </div>
+
+      <div class="box">
+        <h3>17+ Claude Code skills for QA <span class="wip">Shipped at H2O.ai</span></h3>
+        <p><b>The Driverless AI QA lifecycle, made executable by natural language.</b> A 12-step multi-RC-aware QA cycle with human-in-the-loop; a skill that auto-filters release commits and tests each one via Playwright or API and posts structured verification comments; three scoring-pipeline verification skills; connector deployment across HAIC environments including credentials, Kubernetes infrastructure and config generation; GPU allocation and node-selector patching through the AIEM API.</p>
+        <p style="margin-bottom:10px"><b>Result:</b> deploy, test, verify, score and report, all invocable in plain English — and the skills survive environment wipes and work across multiple environments.</p>
+        <p style="margin-bottom:10px;font-size:13.5px;color:#5A6B8C"><b>Internal repository</b> — not linkable, but happy to walk through the skill design in a conversation.</p>
+        <ul class="tags"><li>agent skill framework</li><li>Playwright</li><li>Kubernetes APIs</li><li>human-in-the-loop</li></ul>
+      </div>
+
+      <div class="box">
+        <h3>Needle <span class="wip">Running daily</span></h3>
+        <p><b>A mobile agent that turns photos, voice notes and screenshots into a weekly plan written straight into my calendar.</b> Built first as a Gemini Gem; calendar writes failed <i>silently</i>, so it was migrated wholesale to a Claude Project with first-party Drive and Calendar connectors — the framework survived the move because the logic lived in the prompt design, not the vendor. Google Drive is the state store: five templated files the agent reads and writes, including a learnings file updated on weekly review so prioritisation adapts instead of resetting.</p>
+        <p style="margin-bottom:10px"><b>The design choice you'll recognise:</b> listen-only is the default. Most input is captured and routed silently; the agent acts only on one of seven explicit commands. Recommend-first, arrived at by watching a tool call fail rather than by reading a best-practice post.</p>
+        <ul class="tags"><li>agent orchestration</li><li>tool calling</li><li>durable state</li><li>calendar &amp; drive integration</li></ul>
+      </div>
+
+      <div class="box">
+        <h3>Second Brain <span class="wip">In use</span></h3>
+        <p><b>A wiki an LLM maintains — the personal version of an organizational memory layer.</b> Karpathy's LLM-Wiki pattern crossed with an Obsidian structure of sources, entities, concepts, analyses and comparisons, so the output stays navigable by a human and not just by the agent. The operating contract is explicit: raw sources immutable, three named workflows, mandatory index and log updates after every action.</p>
+        <p style="margin-bottom:10px"><b>The rule that makes it work:</b> an answer is filed as a page, not returned as chat — the difference between a knowledge base that compounds and a chat history that doesn't. Ingested a 15-source certification corpus into 8 structured domain files and 9 concept syntheses.</p>
+        <ul class="tags"><li>knowledge layer</li><li>ingestion</li><li>retrieval</li><li>agent operating contract</li></ul>
+      </div>
+
+      <div class="box">
+        <h3>Caveman <span class="wip">Open source</span></h3>
+        <p><b>A Claude Code plugin that cuts token usage by roughly 65% without losing technical accuracy.</b> Four compression levels, a hook system integrating with the plugin architecture, companion skills extending compression into code review and commits, and a multi-agent dispatch skill.</p>
+        <p style="margin-bottom:10px"><b>Why it belongs on this page:</b> it ships with an evaluation framework that measures the token savings rather than asserting them. Publicly installable, marketplace-supported.</p>
+        <ul class="tags"><li>evals</li><li>plugin architecture</li><li>cost engineering</li><li>JavaScript · Python</li></ul>
+      </div>
+    </div>
+
+    <div class="g2" style="margin-top:22px">
+      <div class="box">
+        <h3>Yaadein <span class="wip">In build</span></h3>
+        <p>A prompted audio and video memory app. You text someone a meaningful question — a parent, a friend, a colleague — they tap the link and record a video answer straight in the browser. No app, no account, no login. Each reply lands automatically in a private playlist built around that person, so their stories, voice and face accumulate in one place instead of scattering across a chat thread. One-to-one for a life story; one-to-many for gathering messages before a birthday, a wedding or a retirement.</p>
+        <p style="margin-bottom:10px"><b>Relevance:</b> this is a memory and retrieval product. RAG, MCP servers and agent orchestration, on content where surfacing the wrong thing isn't a bad search result — it's someone's grandmother's story, missed.</p>
+        <ul class="tags"><li>RAG</li><li>MCP</li><li>agent orchestration</li><li>in progress</li></ul>
+      </div>
+      <div class="box">
+        <h3>Becoming <span class="wip">In build · daily use</span></h3>
+        <p>A goal system built on the observation that every tracker flattens life into one list of checkboxes, when the things being tracked behave differently — finite projects that end, timestamped activities with effort, and binary daily habits. Goals are modelled as a graph with three deliberately distinct child types, so a single log ("gym, 55 minutes") resolves upward to a project and a goal without manual tagging while also satisfying a habit.</p>
+        <p style="margin-bottom:10px"><b>Result:</b> 8,141 lines across 9 screens and 11 components, covered by 24 test files. 103 commits, PRs numbered to #25, shipped as an installable PWA and in daily use. Not an LLM product — a data-modelling and testing one, and it's on this page because tests written alongside the model is the habit, not the exception.</p>
+        <ul class="tags"><li>React 18 · Vite</li><li>Vitest</li><li>Supabase</li><li>PWA</li><li>graph data model</li></ul>
+      </div>
+    </div>
+
+    <div class="box" style="margin-top:22px">
+      <h3>Also shipped</h3>
+      <p style="margin-bottom:12px"><b>Wisdo</b> — a portable, attested knowledge-pack format for agents: JSON Schema manifest, a 375-line dependency-free validator under 31 unit tests, valid and deliberately invalid fixtures so the failure path is demonstrable, and a risk register that argues against the idea on legal, epistemic and economic grounds. Published pre-alpha and labelled as such. &nbsp;·&nbsp; <b>Agentify</b> — a skill that assesses any codebase for agent operability and returns a file-specific, severity-classified transformation plan. &nbsp;·&nbsp; <b>Slack CatchUp bot</b> — one slash command summarizes a channel and surfaces your own mentions and assigned tasks, delivered as ephemeral messages so nothing leaks into the channel. &nbsp;·&nbsp; <b>Aces</b> — production systems for a feature documentary following ~34 people across six countries, made by a five-person mostly non-technical team: git as source of truth, an explicit tool-boundary table, and three structured issue templates so a contributor fills in a form instead of learning to write a ticket.</p>
+    </div>
+
+    <div class="g2" style="margin-top:22px">
+      <div class="box">
+        <h3>Claude Certified Architect — Foundations <span class="wip">In progress, 2026</span></h3>
+        <p style="margin-bottom:10px">Anthropic's first technical certification, through the Claude Partner Network: agentic architecture, Claude Code workflows, prompt engineering, MCP integration and context management. It maps almost line for line onto the ZenAI stack — particularly MCP, which your JD names as the integration standard worth betting on.</p>
+        <ul class="tags"><li class="soft">agentic architecture</li><li class="soft">MCP integration</li><li class="soft">context management</li><li class="soft">prompt engineering</li></ul>
+      </div>
+      <div class="box">
+        <h3>Kabir</h3>
+        <p style="margin-bottom:10px">My cat, and the subject of the only research project on this page with a tail. Text-to-image models will draw a cat; they will not draw <i>my</i> cat twice in a row, and subject drift is the same failure that makes generative video unusable for narrative work. So I trained an SDXL LoRA on 18 uncurated photos from my own library — real lighting, real angles — to 1,800 steps, kept the intermediate checkpoint next to the final weights so the two could be compared rather than assumed, and hand-built 14 ComfyUI graphs for depth ControlNet conditioning, style transfer and mask-based inpainting. He also has a YouTube channel documenting life from his point of view. I work for him, and I've made peace with it.</p>
+        <ul class="tags"><li class="soft">SDXL LoRA</li><li class="soft">ComfyUI</li><li class="soft">ControlNet</li><li class="soft">surfing</li><li class="soft">film</li><li class="soft">very competitive at karaoke</li></ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== EDUCATION & SKILLS ==================== -->
+<section class="wash" style="background:#F4F7FC">
+  <svg class="deco light" style="bottom:-110px;right:-120px;width:520px" viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg" fill="none" aria-hidden="true"><g stroke="url(#gA)" stroke-width="8" stroke-linejoin="round"><rect x="30" y="30" width="110" height="82" rx="10"/><rect x="164" y="30" width="110" height="82" rx="10"/><rect x="30" y="140" width="110" height="82" rx="10"/></g><g stroke="url(#gC)" stroke-width="8" stroke-linejoin="round"><rect x="164" y="140" width="110" height="82" rx="10"/><path pathLength="1" d="M190 181 h58"/></g></svg>
+  <div class="wrap">
+    <p class="eyebrow">The quick scan</p>
+    <h2 class="sec-title">Education, and how I think<span class="grad">about my own skill set.</span></h2>
+    <p class="sec-lede">Grouped the way I actually use them, rather than as one long list of nouns.</p>
+
+    <div class="box" style="margin-bottom:24px">
+      <h3>Indian Institute of Information Technology, Pune</h3>
+      <p style="margin:0">Bachelor of Technology (B.Tech), 2016 — 2020</p>
+    </div>
+
+    <div class="g2">
+      <div class="box">
+        <h3>Agentic systems &amp; LLM engineering</h3>
+        <p>Two tools shipped inside my job at H2O.ai, one app deployed publicly, six more built and documented. Where most of my build time now goes.</p>
+        <ul class="tags"><li>agent orchestration</li><li>tool / function calling</li><li>RAG</li><li>embeddings &amp; vector search</li><li>memory &amp; knowledge layers</li><li>MCP servers</li><li>evals &amp; golden cases</li><li>model routing</li><li>deterministic scoring</li><li>human-in-the-loop</li><li>Groq</li><li>H2OGPTE</li><li>Gemini</li><li>FastAPI</li></ul>
+      </div>
+      <div class="box">
+        <h3>Cloud, Kubernetes &amp; infrastructure as code</h3>
+        <p>Ten production environments across three clouds and two Kubernetes distributions, defined in code rather than assembled by hand.</p>
+        <ul class="tags"><li>AWS EKS</li><li>AWS ROSA</li><li>Azure AKS</li><li>GCP</li><li>OpenShift</li><li>Terraform</li><li>Helm</li><li>CRDs</li><li>RBAC</li><li>Lambda</li><li>EventBridge</li><li>Docker</li></ul>
+      </div>
+      <div class="box">
+        <h3>Identity, security &amp; guardrails</h3>
+        <p>The part that decides whether a system is allowed to act, and whether anyone can prove what it did.</p>
+        <ul class="tags"><li>Azure Workload Identity</li><li>AWS IAM</li><li>OIDC</li><li>federated credentials</li><li>Key Vault</li><li>Secrets Manager</li><li>network isolation</li><li>audit logging</li></ul>
+      </div>
+      <div class="box">
+        <h3>Testing, release &amp; observability</h3>
+        <p>Proving a thing works before a customer finds out it doesn't — and being able to put it back if it doesn't.</p>
+        <ul class="tags"><li>Playwright</li><li>pytest</li><li>Jenkins</li><li>GitHub Actions</li><li>Allure</li><li>Grafana</li><li>runbooks</li><li>rollback design</li></ul>
+      </div>
+      <div class="box">
+        <h3>Data &amp; pipelines</h3>
+        <p>Where the state lives, and how it moves between systems that were never designed to talk to each other.</p>
+        <ul class="tags"><li>PostgreSQL</li><li>Kafka</li><li>Snowflake</li><li>Databricks</li><li>Redis</li><li>MinIO</li><li>SQL</li></ul>
+      </div>
+      <div class="box">
+        <h3>Languages</h3>
+        <p>Python is the daily driver; the rest are what the job needed at the time.</p>
+        <ul class="tags"><li>Python</li><li>Bash</li><li>SQL</li><li>Groovy</li></ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== HONEST STORY ==================== -->
+<section class="wash">
+  <svg class="deco light" style="top:10px;right:-140px;width:520px" viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg" fill="none" aria-hidden="true"><path pathLength="1" d="M14 200 C70 200, 70 108, 140 108 C214 108, 214 226, 288 226" stroke="url(#gA)" stroke-width="10" stroke-linecap="round"/><path pathLength="1" d="M40 236 C96 236, 96 152, 166 152 C236 152, 236 258, 296 258" stroke="url(#gC)" stroke-width="9" stroke-linecap="round"/><circle cx="140" cy="108" r="13" stroke="url(#gB)" stroke-width="8"/></svg>
+  <div class="wrap">
+    <p class="eyebrow">The honest version</p>
+    <h2 class="sec-title">Why an infrastructure engineer<span class="grad">is applying for a founding AI role.</span></h2>
+
+    <div class="g2">
+      <div>
+        <p>The short version: I've spent six years on the least glamorous part of software, and the agent industry is about to discover it needs that part badly.</p>
+        <p>Most of what I read about agents is about capability — longer context, better tools, cleverer planning. Almost none of it is about the question an operator actually asks before switching one on: what happens when it's wrong, who finds out, and how fast can we undo it. That question is my entire professional background. I've answered it for TD Bank, for CBA, for Snowflake, in environments where the answer had to survive an audit.</p>
+        <p>So I started building, and then I started shipping. An LLM test report generator into H2O.ai's CI, with every generated claim cited back to a real test run. Seventeen-plus skills that made our QA lifecycle executable in plain English. Gauge, deployed and public, where I learned the lesson that shows up everywhere on this page: take the decision away from the model, let it write the explanation, and the system becomes something an operator can actually trust.</p>
+        <p style="margin-bottom:0">What I haven't done is own the whole stack at once — memory layer, integrations, evals and product features as a single system with my name on it. That's an ownership gap rather than a knowledge gap, and it's the specific thing this role offers. Everything underneath it, I've been doing for six years: distributed, stateful systems acting on real infrastructure, expensive when wrong. My job has been to make that boring, which in this line of work is the highest compliment available.</p>
+      </div>
+      <div class="box">
+        <h3>What I bring on day one</h3>
+        <ul style="margin:0;padding-left:18px;color:#33456B">
+          <li style="margin-bottom:10px">Six years of production ownership across AWS, Azure and GCP, for clients who audit everything.</li>
+          <li style="margin-bottom:10px">A testing and evaluation instinct built on 1,600 test functions and 198 specs, not on theory.</li>
+          <li style="margin-bottom:10px">Identity and secrets done properly — the difference between an agent that's permissioned and one that's merely convenient.</li>
+          <li style="margin-bottom:10px">Documentation as a reflex: 34 technical docs including an 812-line debugging guide, so a small team isn't dependent on me.</li>
+          <li style="margin-bottom:10px">Comfort at small-company pace — I scope, build, ship and then maintain the thing I shipped.</li>
+          <li>LLM tooling already shipped inside an engineering org, plus a deployed public app — and no interest in overstating any of it.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="conviction">
+      <p>The hard part of agents was never making them capable. It's making them accountable — permissioned, measured, and reversible — and that's an infrastructure problem the industry hasn't finished solving yet.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== CTA ==================== -->
+<section id="ask">
+  <div class="wrap">
+    <div class="cta-card">
+      <svg class="cta-watermark" viewBox="0 0 260 220" xmlns="http://www.w3.org/2000/svg" fill="none" aria-hidden="true">
+        <g stroke-linecap="round" stroke-linejoin="round" stroke-width="9">
+          <path d="M20 190 L80 190 L80 138 L140 138 L140 82 L206 82 L206 40" stroke="#7CB8B7"/>
+          <path d="M184 62 L206 40 L228 62" stroke="#7CB8B7"/>
+          <path d="M44 198 L104 198 L104 156 L164 156 L164 100 L232 100 L232 58" stroke="#BDFB6E"/>
+        </g>
+        <circle cx="80" cy="138" r="14" fill="none" stroke="#BDFB6E" stroke-width="8"/>
+      </svg>
+      <p class="eyebrow">One specific ask</p>
+      <h2>Twenty minutes, and I'll bring the first 30 days.</h2>
+      <p>Not a general chat. Give me twenty minutes and I'll walk you through how I'd instrument all four ZenAI agents for observability and evals before a single one is allowed to act — the Phase 01 plan above, against your actual stack. If it's useful, we keep talking. If it isn't, you've lost twenty minutes and gained a build plan.</p>
+      <div class="cta-row" style="margin-top:26px">
+        <button class="btn btn-lime" id="mailBtn">Email me — itsbhardwaj@icloud.com</button>
+        <a class="btn btn-ghost" href="https://www.linkedin.com/in/itsmunishbhardwaj" target="_blank" rel="noopener">Message on LinkedIn</a>
+        <a class="btn btn-ghost" href="https://github.com/itsmunishbhardwaj" target="_blank" rel="noopener">See the code</a>
+        <a class="btn btn-ghost" href="tel:+918356869703">Call +91 8356 869703</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap foot">
+    <div><b style="color:#fff">Munish Bhardwaj</b> — DevOps Engineer, H2O.ai</div>
+    <div>
+      <a href="mailto:itsbhardwaj@icloud.com">itsbhardwaj@icloud.com</a> ·
+      +91 8356869703 ·
+      <a href="https://www.linkedin.com/in/itsmunishbhardwaj" target="_blank" rel="noopener">LinkedIn</a> ·
+      <a href="https://github.com/itsmunishbhardwaj" target="_blank" rel="noopener">GitHub</a>
+    </div>
+  </div>
+</footer>
+
+<div id="toast" role="status" aria-live="polite"></div>
+
+<script>
+/* scroll progress */
+var bar=document.getElementById('bar');
+addEventListener('scroll',function(){
+  var h=document.documentElement.scrollHeight-innerHeight;
+  bar.style.width=(h>0?(scrollY/h)*100:0)+'%';
+},{passive:true});
+
+/* timeline expand — click and keyboard both work (native button) */
+document.querySelectorAll('.tl-btn').forEach(function(btn){
+  btn.addEventListener('click',function(){
+    var body=document.getElementById(btn.getAttribute('aria-controls'));
+    var open=body.classList.toggle('open');
+    btn.setAttribute('aria-expanded',open?'true':'false');
+    btn.querySelector('.caret').textContent=open?'[–]':'[+]';
+  });
+});
+
+/* motifs: draw in when they enter view, then drift gently on scroll */
+var decos=[].slice.call(document.querySelectorAll('.deco'));
+if('IntersectionObserver' in window){
+  var io=new IntersectionObserver(function(es){
+    es.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
+  },{rootMargin:'0px 0px -12% 0px'});
+  decos.forEach(function(d){io.observe(d)});
+}else{ decos.forEach(function(d){d.classList.add('in')}); }
+
+var reduce=window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches;
+if(!reduce&&innerWidth>1100){
+  var ticking=false;
+  addEventListener('scroll',function(){
+    if(ticking)return; ticking=true;
+    requestAnimationFrame(function(){
+      var vh=innerHeight;
+      decos.forEach(function(d,i){
+        var r=d.getBoundingClientRect();
+        if(r.bottom<-200||r.top>vh+200)return;
+        var p=(r.top+r.height/2-vh/2)/vh;
+        d.style.transform='translate3d(0,'+(p*(i%2?-34:26)).toFixed(1)+'px,0)';
+      });
+      ticking=false;
+    });
+  },{passive:true});
+}
+
+/* case study rows expand */
+document.querySelectorAll('.case-head').forEach(function(btn,i){
+  var card=btn.closest('.case');
+  if(i===0){card.classList.add('open');btn.setAttribute('aria-expanded','true');btn.querySelector('.case-toggle').textContent='[–]';}
+  btn.addEventListener('click',function(){
+    var open=card.classList.toggle('open');
+    btn.setAttribute('aria-expanded',open?'true':'false');
+    btn.querySelector('.case-toggle').textContent=open?'[–]':'[+]';
+  });
+});
+
+/* toast */
+var toastEl=document.getElementById('toast'),toastTimer;
+function toast(msg){
+  toastEl.textContent=msg;toastEl.classList.add('show');
+  clearTimeout(toastTimer);toastTimer=setTimeout(function(){toastEl.classList.remove('show')},4200);
+}
+
+/* email: copy to clipboard, then try the mail client */
+var EMAIL='itsbhardwaj@icloud.com';
+document.getElementById('mailBtn').addEventListener('click',function(){
+  var done=function(ok){
+    toast(ok?'Email copied — opening your mail app…':'Email address: '+EMAIL);
+    location.href='mailto:'+EMAIL+'?subject='+encodeURIComponent('ZenSpace — AI Engineer (Founding)');
+  };
+  try{
+    if(navigator.clipboard&&navigator.clipboard.writeText){
+      navigator.clipboard.writeText(EMAIL).then(function(){done(true)}).catch(function(){done(false)});
+    }else{done(false)}
+  }catch(e){done(false)}
+});
+</script>
 </body>
 </html>
