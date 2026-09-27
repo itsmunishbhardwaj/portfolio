@@ -406,6 +406,47 @@ document.querySelectorAll('.case-head').forEach(function(btn,i){
   .conviction{padding:20px}
   .conviction p{font-size:17px}
 }
+
+/* ---------------- "sets me apart" bento ---------------- */
+.bento{display:grid;grid-template-columns:1fr 1fr;gap:22px}
+.bento-col{display:flex;flex-direction:column;gap:22px}
+.bento-card{display:block;border:1px solid var(--line);border-radius:18px;background:var(--card);
+  padding:28px;text-decoration:none;color:inherit;position:relative;overflow:hidden;
+  box-shadow:0 10px 30px rgba(13,30,69,.06);transition:transform .18s ease,box-shadow .18s ease}
+.bento-card:hover{transform:translateY(-3px);box-shadow:0 18px 44px rgba(13,30,69,.12)}
+.bento-card h3{font-size:19px;margin:0 0 8px;color:var(--ink)}
+.bento-card p{font-size:14.5px;color:var(--grey);margin:0;line-height:1.55}
+.bento-learn{min-height:260px;display:flex;align-items:center;gap:22px}
+.bento-learn .txt{flex:1}
+.bento-learn .txt .kicker{display:block;font-family:'IBM Plex Mono',monospace;font-size:10.5px;
+  letter-spacing:.16em;text-transform:uppercase;color:var(--signal-ink);margin-bottom:10px}
+.bento-learn img{width:120px;height:150px;object-fit:cover;object-position:center 32%;
+  border-radius:12px;flex-shrink:0;box-shadow:0 10px 24px rgba(13,30,69,.18)}
+.bento-toolbox{min-height:180px}
+.tool-row{display:flex;gap:10px;margin-bottom:18px}
+.tool-tile{width:52px;height:52px;border-radius:13px;border:1.5px dashed var(--line);
+  background:#F6F8FC;display:flex;align-items:center;justify-content:center;
+  font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--grey-soft)}
+.bento-connections{min-height:260px}
+.conn-orbit{position:relative;height:96px;margin-bottom:18px}
+.conn-dot{position:absolute;width:44px;height:44px;border-radius:50%;border:1.5px dashed var(--line);
+  background:#F6F8FC;top:26px}
+.conn-dot.c1{left:0}
+.conn-dot.c2{left:64px;top:6px;width:52px;height:52px}
+.conn-dot.c3{left:130px;top:0;width:58px;height:58px;border-style:solid;border-color:var(--sky)}
+.conn-dot.c4{left:200px;top:10px;width:50px;height:50px}
+.conn-dot.c5{left:262px;top:30px}
+.bento-call{min-height:180px;display:flex;align-items:center;gap:22px;flex-wrap:wrap}
+.bento-call .txt{flex:1;min-width:180px}
+.call-visual{width:120px;border:1px solid var(--line);border-radius:12px;padding:10px;background:#F9FAFC;
+  font-family:'IBM Plex Mono',monospace;font-size:9px;color:var(--grey-soft)}
+.call-visual .dow{display:grid;grid-template-columns:repeat(7,1fr);gap:3px;text-align:center;margin-top:6px}
+.call-visual .dow span.hi{background:var(--lime);color:var(--navy);border-radius:3px;font-weight:700}
+@media (max-width:900px){
+  .bento{grid-template-columns:1fr}
+  .bento-learn{flex-direction:column;text-align:center}
+  .bento-learn img{width:100%;height:200px}
+}
 </style>
 </head>
 <body>
@@ -1042,6 +1083,63 @@ document.querySelectorAll('.case-head').forEach(function(btn,i){
 
     <div class="conviction">
       <p>The hard part of agents was never making them capable. It's making them accountable — permissioned, measured, and reversible — and that's an infrastructure problem the industry hasn't finished solving yet.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== SETS ME APART ==================== -->
+<section class="wash alt">
+  <svg class="deco light" style="top:-40px;left:-110px;width:440px" viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg" fill="none" aria-hidden="true"><g stroke="url(#gB)" stroke-width="8" stroke-linecap="round"><circle pathLength="1" cx="90" cy="150" r="54"/><circle pathLength="1" cx="176" cy="150" r="54"/></g></svg>
+  <div class="wrap">
+    <p class="eyebrow">Beyond the résumé</p>
+    <h2 class="sec-title">Here's what sets me apart<span class="grad">and makes me unique.</span></h2>
+
+    <div class="bento">
+      <div class="bento-col">
+        <a class="bento-card bento-learn" href="about.html">
+          <div class="txt">
+            <span class="kicker">Learn more about me</span>
+            <p>Good afternoon! I'm Munish, a DevOps engineer turned AI engineer. Here's the fuller story.</p>
+          </div>
+          <img src="assets/munish-portrait.png" alt="Portrait of Munish Bhardwaj">
+        </a>
+        <a class="bento-card bento-toolbox" href="toolbox.html">
+          <div class="tool-row">
+            <div class="tool-tile">+</div>
+            <div class="tool-tile">+</div>
+            <div class="tool-tile">+</div>
+            <div class="tool-tile">+</div>
+          </div>
+          <h3>Toolbox</h3>
+          <p>Check out my favorite tools and spots around the web.</p>
+        </a>
+      </div>
+      <div class="bento-col">
+        <a class="bento-card bento-connections" href="connections.html">
+          <div class="conn-orbit">
+            <div class="conn-dot c1"></div>
+            <div class="conn-dot c2"></div>
+            <div class="conn-dot c3"></div>
+            <div class="conn-dot c4"></div>
+            <div class="conn-dot c5"></div>
+          </div>
+          <h3>Connections</h3>
+          <p>An evolving list of people I've met and those I wish to meet.</p>
+        </a>
+        <a class="bento-card bento-call" href="https://calendly.com/iammunishbhardwaj/30min" target="_blank" rel="noopener">
+          <div class="txt">
+            <h3>Book a call with me</h3>
+            <p>I'd love to chat even if there's no agenda!</p>
+          </div>
+          <div class="call-visual">
+            <div>SEP 2026 · 30 min</div>
+            <div class="dow">
+              <span>S</span><span>M</span><span>T</span><span>W</span><span>T</span><span>F</span><span>S</span>
+              <span></span><span></span><span>1</span><span>2</span><span class="hi">3</span><span>4</span><span>5</span>
+            </div>
+          </div>
+        </a>
+      </div>
     </div>
   </div>
 </section>

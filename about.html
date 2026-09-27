@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>About — Munish Bhardwaj</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --navy:#0D1E45; --navy-lift:#15306F; --navy-deep:#081537;
+  --lime:#BDFB6E; --lime-deep:#A8E85B; --sky:#67AEF4; --mint:#7CB8B7;
+  --signal:#6EC384; --signal-ink:#2E7D52;
+  --paper:#FBFCFF; --card:#FFFFFF; --ink:#0B1834;
+  --grey:#5A6B8C; --grey-soft:#8494B2; --line:#D9DDE5; --line-dark:#22386E;
+  --maxw:1140px;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+body{margin:0;background:var(--paper);color:var(--ink);
+  font-family:'Plus Jakarta Sans',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif}
+.wrap{max-width:var(--maxw);margin:0 auto;padding:0 26px}
+section{padding:56px 0}
+p{line-height:1.65;color:var(--grey);font-size:16px}
+:focus-visible{outline:3px solid var(--sky);outline-offset:3px;border-radius:4px}
+.subnav{display:flex;align-items:center;justify-content:space-between;padding:24px 0}
+.sublogo{font-family:'IBM Plex Mono',monospace;font-weight:700;color:var(--ink);text-decoration:none;font-size:14px;letter-spacing:.05em}
+.subback{color:var(--grey);text-decoration:none;font-size:14px;font-weight:600}
+.subback:hover{color:var(--ink)}
+.eyebrow{font-family:'IBM Plex Mono',monospace;font-size:11px;font-weight:500;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--signal-ink);margin:0 0 16px}
+.sec-title{font-size:clamp(30px,4.4vw,44px);margin-bottom:16px;color:var(--ink)}
+.grad{background:linear-gradient(96deg,var(--sky),var(--mint));
+  -webkit-background-clip:text;background-clip:text;color:transparent;display:block}
+
+.hero-about{display:flex;align-items:center;gap:28px;flex-wrap:wrap}
+.hero-about img{width:120px;height:150px;object-fit:cover;object-position:center 32%;
+  border-radius:14px;box-shadow:0 14px 32px rgba(13,30,69,.16)}
+.hero-about .greet{font-size:15px;color:var(--grey-soft);margin-bottom:4px}
+.hero-about h1{font-size:clamp(28px,4vw,38px);margin:0 0 6px;color:var(--ink)}
+.hero-about .role{font-family:'IBM Plex Mono',monospace;font-size:12.5px;letter-spacing:.1em;
+  text-transform:uppercase;color:var(--signal-ink)}
+
+.origin h3{font-size:18px;color:var(--ink);margin:0 0 8px}
+.origin div+div{margin-top:26px}
+.origin p{margin:0}
+
+.tl{border-left:2px solid var(--line);margin-left:6px;padding-left:26px}
+.tl-row{position:relative;padding-bottom:28px}
+.tl-row:last-child{padding-bottom:0}
+.tl-row::before{content:'';position:absolute;left:-31px;top:4px;width:10px;height:10px;
+  border-radius:50%;background:var(--sky)}
+.tl-row h3{font-size:17px;margin:0 0 2px;color:var(--ink)}
+.tl-row .co{font-size:13.5px;color:var(--grey-soft);margin-bottom:4px}
+.tl-row .dt{font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--grey-soft);margin-bottom:8px}
+.tl-row p{margin:0;font-size:15px}
+
+.bento3{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.bento-card{display:block;border:1px solid var(--line);border-radius:16px;background:var(--card);
+  padding:22px;text-decoration:none;color:inherit;box-shadow:0 10px 26px rgba(13,30,69,.06);
+  transition:transform .18s ease,box-shadow .18s ease}
+.bento-card:hover{transform:translateY(-3px);box-shadow:0 16px 36px rgba(13,30,69,.12)}
+.bento-card h3{font-size:17px;margin:0 0 6px;color:var(--ink)}
+.bento-card p{font-size:14px;margin:0}
+
+footer{background:var(--navy-deep);color:#93A6CE;padding:34px 0;font-size:14px}
+footer a{color:#BFD3F5}
+.foot{display:flex;flex-wrap:wrap;gap:10px 26px;align-items:center;justify-content:space-between}
+@media (max-width:900px){.bento3{grid-template-columns:1fr}}
+@media (max-width:640px){
+  section{padding:40px 0}
+  .hero-about{flex-direction:column;text-align:center}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="subnav">
+    <a href="index.html" class="sublogo">MB</a>
+    <a href="index.html" class="subback">← Home</a>
+  </div>
+</div>
+
+<section style="padding-top:12px">
+  <div class="wrap hero-about">
+    <img src="assets/munish-portrait.png" alt="Portrait of Munish Bhardwaj">
+    <div>
+      <div class="greet">Good afternoon!</div>
+      <h1>I'm Munish, a DevOps engineer turned AI engineer.</h1>
+      <span class="role">DevOps Engineer → AI Engineer, H2O.ai</span>
+    </div>
+  </div>
+</section>
+
+<section style="padding-top:0">
+  <div class="wrap">
+    <p class="eyebrow">About</p>
+    <h2 class="sec-title">Here's a quick intro<span class="grad">about me and what I love to do.</span></h2>
+    <div class="origin">
+      <div>
+        <h3>Six years on the unglamorous part of software</h3>
+        <p>I've spent six years building production infrastructure for banks that audit everything — identity, evals, and environments where the answer to "what happens when it's wrong" has to survive an audit. That's been my entire professional background: distributed, stateful systems acting on real infrastructure, expensive when wrong.</p>
+      </div>
+      <div>
+        <h3>Finding my way to agents</h3>
+        <p>Most of what gets written about AI agents is about capability. Almost none of it is about the question an operator actually asks before switching one on. That question is the one I've been answering for six years, so I started building: an LLM test report generator shipped into H2O.ai's CI, seventeen-plus Claude Code skills that made our QA lifecycle executable in plain English, and Gauge — deployed and public — where the lesson showed up everywhere: take the decision away from the model, let it write the explanation, and the system becomes something an operator can trust.</p>
+      </div>
+      <div>
+        <h3>These days</h3>
+        <p>Currently a DevOps Engineer at H2O.ai working on QA & certification for Fortune 500 banking clients, from India on US Pacific hours. Looking to bring that same infrastructure discipline to a founding AI engineering role.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section style="padding-top:0">
+  <div class="wrap">
+    <p class="eyebrow">Experience</p>
+    <h2 class="sec-title" style="font-size:clamp(26px,3.6vw,34px)">My work history<span class="grad">and how it built up.</span></h2>
+    <div class="tl">
+      <div class="tl-row">
+        <h3>DevOps Engineer — QA &amp; Certification</h3>
+        <div class="co">H2O.ai</div>
+        <div class="dt">Oct 2023 — present</div>
+        <p>What it added: owning reliability for banking clients — identity, evals and infrastructure as one job.</p>
+      </div>
+      <div class="tl-row">
+        <h3>Software Engineer — ML Platform &amp; Release</h3>
+        <div class="co">H2O.ai</div>
+        <div class="dt">Mar 2021 — Oct 2023</div>
+        <p>What it added: release discipline across five countries, and observability as a habit rather than a ticket.</p>
+      </div>
+      <div class="tl-row">
+        <h3>Full Stack &amp; DevOps Engineer</h3>
+        <div class="co">H2O.ai</div>
+        <div class="dt">Mar 2020 — Mar 2021</div>
+        <p>What it added: the first framework I built that outlived me on the team.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section style="padding-top:0">
+  <div class="wrap">
+    <p class="eyebrow">More</p>
+    <h2 class="sec-title" style="font-size:clamp(26px,3.6vw,34px)">Here's what sets me apart<span class="grad">and makes me unique.</span></h2>
+    <div class="bento3">
+      <a class="bento-card" href="toolbox.html">
+        <h3>Toolbox</h3>
+        <p>Check out my favorite tools and spots around the web.</p>
+      </a>
+      <a class="bento-card" href="connections.html">
+        <h3>Connections</h3>
+        <p>An evolving list of people I've met and those I wish to meet.</p>
+      </a>
+      <a class="bento-card" href="https://calendly.com/iammunishbhardwaj/30min" target="_blank" rel="noopener">
+        <h3>Book a call with me</h3>
+        <p>I'd love to chat even if there's no agenda!</p>
+      </a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap foot">
+    <div><b style="color:#fff">Munish Bhardwaj</b> — DevOps Engineer, H2O.ai</div>
+    <div>
+      <a href="mailto:itsbhardwaj@icloud.com">itsbhardwaj@icloud.com</a> ·
+      <a href="https://www.linkedin.com/in/itsmunishbhardwaj" target="_blank" rel="noopener">LinkedIn</a> ·
+      <a href="https://github.com/itsmunishbhardwaj" target="_blank" rel="noopener">GitHub</a>
+    </div>
+  </div>
+</footer>
+</body>
+</html>
