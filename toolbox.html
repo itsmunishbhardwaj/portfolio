@@ -7,24 +7,24 @@
 <title>Toolbox — Munish Bhardwaj</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700;800&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
 :root{
-  --navy:#111827; --navy-lift:#1E293B; --navy-deep:#030712;
-  --lime:#FFFFFF; --lime-deep:#E2E8F0; --sky:#0F172A; --mint:#0F172A;
-  --signal:#818CF8; --signal-ink:#4F46E5;
-  --paper:#F7F7F8; --card:#FFFFFF; --ink:#0F172A;
-  --grey:#5E5F6E; --grey-soft:#A5AEB8; --line:#D6DADE; --line-dark:#334155;
+  --navy:#1E1E1E; --navy-lift:#2A2A2A; --navy-deep:#000000;
+  --lime:#5182EF; --lime-deep:#3D68D8; --sky:#000000; --mint:#000000;
+  --signal:#5182EF; --signal-ink:#5182EF;
+  --paper:#FFFFFF; --card:#FFFFFF; --ink:#1E1E1E;
+  --grey:#4A4A4A; --grey-soft:#8C8C8C; --line:#F5F5F5; --line-dark:#333333;
   --maxw:1140px;
 }
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
 @media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
 body{margin:0;background:var(--paper);color:var(--ink);
-  font-family:'Geist',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif}
+  font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif}
 .wrap{max-width:var(--maxw);margin:0 auto;padding:0 26px}
 section{padding:64px 0}
-:focus-visible{outline:3px solid #64748B;outline-offset:3px;border-radius:4px}
+:focus-visible{outline:3px solid #5182EF;outline-offset:3px;border-radius:4px}
 .subnav{display:flex;align-items:center;justify-content:space-between;padding:24px 0}
 .sublogo{font-family:'Geist Mono',monospace;font-weight:700;color:var(--ink);text-decoration:none;font-size:14px;letter-spacing:.05em}
 .subback{color:var(--grey);text-decoration:none;font-size:14px;font-weight:600}
@@ -45,12 +45,12 @@ section{padding:64px 0}
 .tile:hover{transform:translateY(-3px);box-shadow:0 14px 30px rgba(13,30,69,.1)}
 .tile svg{width:28px;height:28px}
 .cards{display:grid;grid-template-columns:1fr 1fr;gap:20px}
-.hcard{border:1.5px dashed var(--line);border-radius:16px;background:#F1F5F9;padding:22px}
+.hcard{border:1.5px dashed var(--line);border-radius:16px;background:#F5F5F5;padding:22px}
 .hcard h3{margin:0 0 8px;font-size:17px;color:var(--grey-soft)}
 .hcard p{margin:0 0 12px;font-size:14.5px;color:var(--grey-soft);line-height:1.55}
 .hcard .ph-link{font-size:13.5px;font-weight:700;color:var(--grey-soft)}
-footer{background:var(--navy-deep);color:#94A3B8;padding:34px 0;font-size:14px}
-footer a{color:#E2E8F0}
+footer{background:var(--navy-deep);color:#A6A6A6;padding:34px 0;font-size:14px}
+footer a{color:#D9D9D9}
 .foot{display:flex;flex-wrap:wrap;gap:10px 26px;align-items:center;justify-content:space-between}
 @media (max-width:640px){
   section{padding:44px 0}
