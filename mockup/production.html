@@ -69,7 +69,7 @@ main{position:relative;z-index:1}
 .wrap{max-width:var(--wrap);margin:0 auto;padding:0 32px}
 
 /* ---------- the slate: black board, white lines, colour-bar stick ---------- */
-.hero{min-height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center;padding:64px 20px 28px}
+.hero{min-height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center;padding:64px 20px 24px}
 .slate{width:min(800px,100%);filter:drop-shadow(0 34px 34px rgba(20,19,18,.28));color:var(--chalk)}
 .sticks{padding-top:clamp(44px,6vw,74px)}
 .stick{height:clamp(30px,4.6vw,48px);border:3px solid var(--slate);border-radius:4px;
@@ -83,25 +83,31 @@ main{position:relative;z-index:1}
 .cell.w3{grid-column:span 3}.cell.w2{grid-column:span 2}
 .hero h1{font-family:"Cabin Sketch",var(--hand);font-weight:700;font-size:clamp(42px,6vw,78px);line-height:1;letter-spacing:.005em;margin-top:6px;color:#F4F1EA;text-shadow:0 0 2px rgba(255,255,255,.35)}
 .hero h1 span{display:block}
-.calls{display:flex;flex-wrap:wrap;gap:14px;align-items:center;justify-content:center;margin-top:22px}
-.calls p:not(.hint){flex:0 0 100%;text-align:center;padding:0 max(0px,calc(50% - 30ch));margin:0 0 10px}
-.call{font:700 17px/1 var(--mono);padding:16px 22px 14px;border:2px solid var(--ink);color:var(--ink);background:transparent;text-decoration:none;cursor:pointer}
-.call.go{background:var(--red);border-color:var(--red);color:#fff}
-.call:hover,.call[aria-pressed="true"]{background:var(--ink);border-color:var(--ink);color:var(--chalk)}
 
 /* 3D slate and the clap gate */
-.stage3d{display:none;width:min(980px,100%);height:min(70vh,700px);cursor:grab;touch-action:pan-y}
+.stage3d{display:none;width:min(1100px,100%);height:calc(100vh - 170px);min-height:420px;margin-top:24px;cursor:grab;touch-action:pan-y}
 .stage3d.grabbing{cursor:grabbing}
 .stage3d canvas{display:block;width:100%!important;height:100%!important}
 .hero.has-3d .stage3d{display:block}
 .hero.has-3d .slate{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
-.hint{flex:0 0 100%;text-align:center;font-size:14px;margin:4px 0 0;opacity:.7}
+.stage3d:focus-visible{outline:3px solid var(--blue);outline-offset:-3px}
+.hint{display:flex;align-items:flex-end;gap:10px;margin:-6px 0 0;font-family:var(--hand);font-size:clamp(26px,2.4vw,32px);line-height:1;color:var(--graphite);transform:rotate(-2deg)}
+.hint svg{width:38px;height:46px;flex:none;margin-bottom:6px}
+.hint path{fill:none;stroke:var(--graphite);stroke-width:2.6;stroke-linecap:round;stroke-linejoin:round}
 .hint.nag{animation:nag .55s ease}
 @keyframes nag{0%,100%{transform:none;opacity:.7}25%{transform:translateX(-7px);opacity:1}50%{transform:translateX(6px)}75%{transform:translateX(-3px)}}
-main > section:not(.hero),.bar nav,.tc,.calls p:not(.hint){transition:opacity .9s ease}
+main > section:not(.hero),.bar nav,.tc{transition:opacity .9s ease}
 html.pre-clap{overflow:hidden}
 html.pre-clap main > section:not(.hero),html.pre-clap .bar nav,html.pre-clap .tc{opacity:0;visibility:hidden}
-html.pre-clap .calls p:not(.hint){display:none}
+
+/* the logline: the summary, at full volume */
+.logline{position:relative;background:var(--ink);color:var(--chalk);min-height:100vh;display:flex;flex-direction:column;justify-content:center;padding:120px max(32px,calc(50% - 640px))}
+.big{font-family:var(--display);font-weight:800;font-size:clamp(46px,7.4vw,124px);line-height:.98;letter-spacing:-.035em;max-width:14em;text-wrap:balance}
+.big + .big{margin-top:.45em;color:#bdb8ad}
+.big .w{display:inline-block;overflow:hidden;vertical-align:top;padding-bottom:.08em;margin-bottom:-.08em}
+.big .w > span{display:inline-block}
+.pipeline{list-style:none;display:flex;flex-wrap:wrap;gap:10px;margin:64px 0 0;padding:0;font-size:15px;font-weight:700}
+.pipeline li{background:var(--c);color:var(--ct);padding:7px 14px 5px}
 
 /* ---------- stages: each one carries its own colour, like strips on a production board ---------- */
 .stage{position:relative;padding:130px 0 150px;border-top:12px solid var(--c)}
@@ -229,6 +235,8 @@ html.pre-clap .calls p:not(.hint){display:none}
   body{font-size:16px}
   .bar{gap:12px;padding:12px 16px}.tc{display:none}.rec{margin-left:auto}
   .wrap{padding:0 20px}
+  .logline{padding:90px 20px}
+  .stage3d{height:calc(100vh - 190px)}
   .stage{padding:84px 0 96px}.stage-head{margin-bottom:48px}
   .cell{padding:9px 10px 10px}.cell.w2,.cell.w3{grid-column:span 6}
   .cut{padding:28px 22px 30px}
@@ -260,14 +268,14 @@ html.pre-clap .calls p:not(.hint){display:none}
     <a class="c-pink" href="#distribution">Distribution</a>
   </nav>
   <span class="tc" id="tc" aria-hidden="true">00:00:00:00</span>
-  <button class="rec" data-sound type="button" aria-pressed="false"><i></i><span>Sound off</span></button>
+  <button class="rec" data-sound type="button" aria-pressed="true"><i></i><span>Sound on</span></button>
 </header>
 
 <main id="top">
 
   <!-- THE SLATE -->
   <section class="hero">
-    <div class="stage3d" id="stage3d" aria-hidden="true"></div>
+    <div class="stage3d" id="stage3d" role="button" tabindex="0" aria-label="Clap the slate to begin"></div>
     <div class="slate" id="slate">
       <div class="sticks" aria-hidden="true">
         <div class="stick top" id="stick"></div>
@@ -285,12 +293,19 @@ html.pre-clap .calls p:not(.hint){display:none}
         <div class="cell w2"><small>Date</small><b>18 Nov 2026</b></div>
       </div>
     </div>
-    <div class="calls">
-      <p>Six years making systems safe enough for a bank. Now building AI agents with the same discipline, and running every build like a film: development, pre-production, production, post, distribution.</p>
-      <button class="call" data-sound type="button" aria-pressed="false">Roll sound</button>
-      <a class="call go" id="action" href="#development">Action</a>
-      <p class="hint" id="hint" aria-live="polite">Drag the slate to turn it. Click it, or press Action, to roll.</p>
-    </div>
+    <p class="hint" id="hint" aria-live="polite">
+      <svg viewBox="0 0 60 70" aria-hidden="true"><path d="M44 66 C 20 60, 8 40, 22 8 M10 20 L 22 6 L 33 19"/></svg>
+      <span id="hint-text">click the slate to clap it,<br>drag to spin it</span>
+    </p>
+  </section>
+
+  <!-- LOGLINE -->
+  <section class="logline" id="logline" aria-label="Summary">
+    <p class="big" data-words>Six years making systems safe enough for a bank.</p>
+    <p class="big" data-words>Now I build AI agents with the same discipline, and run every build like a film.</p>
+    <ol class="pipeline">
+      <li class="c-yellow">Development</li><li class="c-blue">Pre-production</li><li class="c-red">Production</li><li class="c-violet">Post</li><li class="c-pink">Distribution</li>
+    </ol>
   </section>
 
   <!-- 1. DEVELOPMENT -->
@@ -558,7 +573,13 @@ html.pre-clap .calls p:not(.hint){display:none}
   const $ = (s, r = document) => [...r.querySelectorAll(s)];
 
   /* ---------- sound: synthesized stand-ins until the real recordings exist ---------- */
-  const sound = { ctx: null, on: false, hiss: null };
+  const sound = { ctx: null, on: true };
+  function ready() {
+    if (!sound.on) return false;
+    if (!sound.ctx) { try { sound.ctx = new (window.AudioContext || window.webkitAudioContext)(); } catch (e) { return false; } }
+    if (sound.ctx.state === 'suspended') sound.ctx.resume();
+    return true;
+  }
   function noise(dur) {
     const b = sound.ctx.createBuffer(1, sound.ctx.sampleRate * dur, sound.ctx.sampleRate);
     const d = b.getChannelData(0);
@@ -579,31 +600,16 @@ html.pre-clap .calls p:not(.hint){display:none}
     o.connect(g).connect(c.destination); o.start(t); o.stop(t + dur + .02);
   }
   const sfx = {
-    clap()    { if (!sound.on) return; burst({ freq: 1800, q: .6, dur: .09, gain: .7 }); tone({ freq: 420, dur: .06, gain: .3, type: 'square' }); burst({ freq: 600, dur: .25, gain: .12, type: 'lowpass', at: .02 }); },
-    advance() { if (!sound.on) return; burst({ freq: 2600, dur: .018, gain: .22 }); tone({ freq: 130, dur: .05, gain: .16, type: 'triangle', at: .015 }); burst({ freq: 1500, dur: .02, gain: .14, at: .09 }); },
-    shutter() { if (!sound.on) return; burst({ freq: 3200, dur: .02, gain: .4 }); burst({ freq: 900, dur: .05, gain: .35, type: 'lowpass', at: .07 }); tone({ freq: 95, dur: .09, gain: .22, type: 'triangle', at: .07 }); burst({ freq: 700, dur: .9, gain: .05, type: 'lowpass', at: .16 }); },
-    clunk()   { burst({ freq: 500, dur: .05, gain: .4, type: 'lowpass' }); tone({ freq: 82, dur: .12, gain: .3, type: 'square' }); }
+    clap()    { if (!ready()) return; burst({ freq: 1800, q: .6, dur: .09, gain: .7 }); tone({ freq: 420, dur: .06, gain: .3, type: 'square' }); burst({ freq: 600, dur: .25, gain: .12, type: 'lowpass', at: .02 }); },
+    advance() { if (!ready()) return; burst({ freq: 2600, dur: .018, gain: .22 }); tone({ freq: 130, dur: .05, gain: .16, type: 'triangle', at: .015 }); burst({ freq: 1500, dur: .02, gain: .14, at: .09 }); },
+    shutter() { if (!ready()) return; burst({ freq: 3200, dur: .02, gain: .4 }); burst({ freq: 900, dur: .05, gain: .35, type: 'lowpass', at: .07 }); tone({ freq: 95, dur: .09, gain: .22, type: 'triangle', at: .07 }); burst({ freq: 700, dur: .9, gain: .05, type: 'lowpass', at: .16 }); }
   };
-  function tapeHiss(start) {
-    if (start) {
-      const c = sound.ctx, src = c.createBufferSource(); src.buffer = noise(2); src.loop = true;
-      const f = c.createBiquadFilter(); f.type = 'highpass'; f.frequency.value = 3800;
-      const g = c.createGain(); g.gain.value = .012;
-      src.connect(f).connect(g).connect(c.destination); src.start(); sound.hiss = src;
-    } else if (sound.hiss) { sound.hiss.stop(); sound.hiss = null; }
-  }
-  const soundButtons = $('[data-sound]');
-  soundButtons.forEach(btn => btn.addEventListener('click', () => {
-    sound.ctx = sound.ctx || new (window.AudioContext || window.webkitAudioContext)();
-    sound.ctx.resume();
+  const soundBtn = document.querySelector('[data-sound]');
+  soundBtn.addEventListener('click', () => {
     sound.on = !sound.on;
-    sfx.clunk(); tapeHiss(sound.on);
-    soundButtons.forEach(b => {
-      b.setAttribute('aria-pressed', sound.on);
-      const label = b.querySelector('span') || b;
-      label.textContent = b.classList.contains('rec') ? (sound.on ? 'Recording' : 'Sound off') : (sound.on ? 'Sound is rolling' : 'Roll sound');
-    });
-  }));
+    soundBtn.setAttribute('aria-pressed', sound.on);
+    soundBtn.querySelector('span').textContent = sound.on ? 'Sound on' : 'Muted';
+  });
 
   /* ---------- prints: a click retakes the photo ---------- */
   $('.print').forEach(p => p.addEventListener('click', () => {
@@ -628,8 +634,8 @@ html.pre-clap .calls p:not(.hint){display:none}
 
   /* ---------- clap gate: nothing past the slate shows until it claps ---------- */
   const root = document.documentElement, hero = document.querySelector('.hero');
-  const hint = document.getElementById('hint'), actionBtn = document.getElementById('action');
-  const development = document.getElementById('development');
+  const hint = document.getElementById('hint'), hintText = document.getElementById('hint-text');
+  const development = document.getElementById('logline');
   let goTo = t => t.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth' });
   let clapImpl = done => done(), lenisRef = null, three = null, clapped = false, busy = false, lastNudge = 0;
   if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
@@ -638,7 +644,7 @@ html.pre-clap .calls p:not(.hint){display:none}
   function reveal() {
     root.classList.remove('pre-clap');
     if (lenisRef) { lenisRef.start(); lenisRef.resize(); }
-    hint.textContent = 'Rolling. Drag the slate any time.';
+    hintText.innerHTML = 'rolling.<br>scroll on';
     if (window.ScrollTrigger) ScrollTrigger.refresh();
     setTimeout(() => goTo(development), reduce ? 0 : 700);
   }
@@ -658,13 +664,13 @@ html.pre-clap .calls p:not(.hint){display:none}
     if (three) three.nudge();
     hint.classList.remove('nag'); void hint.offsetWidth; hint.classList.add('nag');
   }
-  actionBtn.addEventListener('click', e => { e.preventDefault(); clapped ? goTo(development) : callAction(); });
+  document.getElementById('slate').addEventListener('click', callAction);
   addEventListener('wheel', () => { if (locked()) nudge(); }, { passive: true });
   addEventListener('scroll', () => { if (locked() && scrollY > 0) scrollTo(0, 0); }, { passive: true });
   addEventListener('touchmove', () => { if (locked()) nudge(); }, { passive: true });
   addEventListener('keydown', e => {
     if (!locked()) return;
-    const onControl = e.target.closest && e.target.closest('button, a, input');
+    const onControl = e.target.closest && e.target.closest('button:not(#stage3d), a, input');
     if ((e.key === ' ' || e.key === 'Enter') && !onControl) { e.preventDefault(); callAction(); }
     else if (['ArrowDown', 'ArrowUp', 'PageDown', 'PageUp', 'End', 'Home', ' '].includes(e.key)) { e.preventDefault(); nudge(); }
   });
@@ -788,7 +794,7 @@ html.pre-clap .calls p:not(.hint){display:none}
     const key = new THREE.DirectionalLight(0xffffff, .9); key.position.set(-3, 5, 7); scene.add(key);
     const rim = new THREE.DirectionalLight(0xffe9c9, .35); rim.position.set(5, -2, -4); scene.add(rim);
 
-    const W = 4, H = 3.1, D = .13, SH = .44, SD = .15, OPEN = .4;
+    const W = 4, H = 3.1, D = .13, SH = .44, SD = .15, OPEN = .32, Y0 = -.86;
     const aniso = renderer.capabilities.getMaxAnisotropy();
     const mat = (c, rough) => { const t = new THREE.CanvasTexture(c); t.encoding = THREE.sRGBEncoding; t.anisotropy = aniso;
       return new THREE.MeshStandardMaterial({ map: t, roughness: rough, metalness: 0 }); };
@@ -810,13 +816,13 @@ html.pre-clap .calls p:not(.hint){display:none}
       plate.position.set(-W / 2 + .13, H / 2 + SH / 2 + .14, z); slate.add(plate);
     });
     pivot.rotation.z = startClosed ? 0 : OPEN;
-    slate.position.y = -.42;
+    slate.position.y = Y0;
 
     function resize() {
       const w = host.clientWidth, h = host.clientHeight;
       renderer.setSize(w, h, false); camera.aspect = w / h;
       const t = Math.tan(THREE.MathUtils.degToRad(camera.fov / 2));
-      camera.position.z = Math.max(2.6 / t, 2.6 / (t * camera.aspect)) + .3;
+      camera.position.z = Math.max(2.9 / t, 2.45 / (t * camera.aspect)) + .25;
       camera.updateProjectionMatrix();
     }
     resize(); addEventListener('resize', resize);
@@ -851,7 +857,7 @@ html.pre-clap .calls p:not(.hint){display:none}
       ry += (ty + Math.sin(t * .5) * .16 * idle - ry) * .12;
       rx += (tx + Math.sin(t * .7) * .05 * idle - rx) * .12;
       slate.rotation.set(rx, ry, Math.sin(t * 60) * .012 * kick);
-      slate.position.y = -.42 + Math.sin(t * 1.1) * .04 * idle - kick * .05;
+      slate.position.y = Y0 + Math.sin(t * 1.1) * .04 * idle - kick * .05;
       kick *= .88;
       renderer.render(scene, camera);
     }
@@ -861,7 +867,7 @@ html.pre-clap .calls p:not(.hint){display:none}
       clap(done) {
         if (reduce || !window.gsap) { pivot.rotation.z = 0; sfx.clap(); done(); return; }
         gsap.timeline({ onComplete: done })
-          .to(pivot.rotation, { z: OPEN + .2, duration: .2, ease: 'power2.out' })
+          .to(pivot.rotation, { z: OPEN + .1, duration: .2, ease: 'power2.out' })
           .to(pivot.rotation, { z: 0, duration: .085, ease: 'power4.in', onComplete: () => { sfx.clap(); kick = 1; } })
           .to({}, { duration: .35 });
       },
@@ -930,6 +936,19 @@ html.pre-clap .calls p:not(.hint){display:none}
       ry((e.clientX / innerWidth - .5) * 7); rx(-(e.clientY / innerHeight - .5) * 5);
     });
   }
+
+  /* ---------- the logline lands word by word ---------- */
+  $('[data-words]').forEach(el => {
+    el.setAttribute('aria-label', el.textContent);
+    el.innerHTML = el.textContent.split(' ').map(w => `<span class="w" aria-hidden="true"><span>${w}</span></span>`).join(' ');
+  });
+  gsap.set('.big .w > span', { yPercent: 110 });
+  gsap.set('.pipeline li', { opacity: 0, y: 14 });
+  ScrollTrigger.create({ trigger: '#logline', start: 'top 60%', once: true, onEnter: () => {
+    gsap.timeline()
+      .to('.big .w > span', { yPercent: 0, duration: .8, ease: 'power4.out', stagger: .045 })
+      .to('.pipeline li', { opacity: 1, y: 0, duration: .4, stagger: .08, ease: 'power2.out' }, '-=.3');
+  } });
 
   /* ---------- the reel: scroll advances the film strip ---------- */
   const reel = document.getElementById('reel'), strip = document.getElementById('strip'), frameEl = document.getElementById('frame');
