@@ -85,7 +85,7 @@ main{position:relative;z-index:1}
 .hero h1 span{display:block}
 
 /* 3D slate and the clap gate */
-.stage3d{display:none;width:min(1100px,100%);height:calc(100vh - 170px);min-height:420px;margin-top:24px;cursor:grab;touch-action:pan-y}
+.stage3d{display:none;width:min(1400px,100%);height:calc(100vh - 170px);min-height:420px;margin-top:24px;cursor:grab;touch-action:pan-y}
 .stage3d.grabbing{cursor:grabbing}
 .stage3d canvas{display:block;width:100%!important;height:100%!important}
 .hero.has-3d .stage3d{display:block}
@@ -698,8 +698,9 @@ html.pre-clap main > section:not(.hero),html.pre-clap .bar nav,html.pre-clap .tc
       g.beginPath(); g.moveTo(x, y); g.lineTo(x + Math.cos(a) * L, y + Math.sin(a) * L); g.stroke();
     }
   }
-  function drawBoard() {
-    const w = 2048, h = 1588, c = canvas(w, h), g = c.getContext('2d');
+  function drawBoard(w) {
+    const h = 1588;
+    const  c = canvas(w, h), g = c.getContext('2d');
     g.fillStyle = '#161615'; g.fillRect(0, 0, w, h);
     for (let i = 0; i < 16; i++) {                       /* old chalk, half wiped */
       const x = rand(0, w), y = rand(0, h), r = rand(140, 460), gr = g.createRadialGradient(x, y, 0, x, y, r);
@@ -730,8 +731,8 @@ html.pre-clap main > section:not(.hero),html.pre-clap .bar nav,html.pre-clap .tc
 
     const chalk = canvas(w, h), cg = chalk.getContext('2d');  /* this take, in chalk */
     cg.fillStyle = '#f3f0e8';
-    cg.font = '700 200px "Cabin Sketch"';
-    ['Engineer.', 'Storyteller.', 'Builder.'].forEach((t, i) => cg.fillText(t, m + 40, m + 270 + i * 208));
+    cg.font = '700 220px "Cabin Sketch"';
+    ['Engineer.', 'Storyteller.', 'Builder.'].forEach((t, i) => cg.fillText(t, m + 44, m + 280 + i * 222));
     const field = (t, x, y, maxW, size) => { fit(cg, t, '"Nanum Pen Script"', 400, size, maxW); cg.fillText(t, x, y); };
     field('Munish Bhardwaj', m + 30, r1 + 170, w / 2 - m - 70, 104);
     field('Forward-deployed / AI engineer', w / 2 + 30, r1 + 170, w / 2 - m - 70, 104);
@@ -757,8 +758,8 @@ html.pre-clap main > section:not(.hero),html.pre-clap .bar nav,html.pre-clap .tc
     g.restore();
     return c;
   }
-  function drawStick(dir) {
-    const w = 2048, h = 226, c = canvas(w, h), g = c.getContext('2d');
+  function drawStick(dir, w) {
+    const h = 226, c = canvas(w, h), g = c.getContext('2d');
     g.fillStyle = '#171716'; g.fillRect(0, 0, w, h);
     const sw = 168, k = dir * h * .62;
     g.fillStyle = '#ecebe4';
@@ -794,12 +795,13 @@ html.pre-clap main > section:not(.hero),html.pre-clap .bar nav,html.pre-clap .tc
     const key = new THREE.DirectionalLight(0xffffff, .9); key.position.set(-3, 5, 7); scene.add(key);
     const rim = new THREE.DirectionalLight(0xffe9c9, .35); rim.position.set(5, -2, -4); scene.add(rim);
 
-    const W = 4, H = 3.1, D = .13, SH = .44, SD = .15, OPEN = .32, Y0 = -.86;
+    const W = 5.4, H = 3.1, D = .13, SH = .44, SD = .15, OPEN = .26, Y0 = -.86;
+    const TW = Math.round(1588 * W / H), SW = Math.round(226 * W / SH);
     const aniso = renderer.capabilities.getMaxAnisotropy();
     const mat = (c, rough) => { const t = new THREE.CanvasTexture(c); t.encoding = THREE.sRGBEncoding; t.anisotropy = aniso;
       return new THREE.MeshStandardMaterial({ map: t, roughness: rough, metalness: 0 }); };
     const edge = new THREE.MeshStandardMaterial({ color: 0x1c1c1b, roughness: .9 });
-    const front = mat(drawBoard(), .93), back = mat(drawBack(), .95), stickLo = mat(drawStick(-1), .8), stickHi = mat(drawStick(1), .8);
+    const front = mat(drawBoard(TW), .93), back = mat(drawBack(), .95), stickLo = mat(drawStick(-1, SW), .8), stickHi = mat(drawStick(1, SW), .8);
 
     const slate = new THREE.Group(); scene.add(slate);
     slate.add(new THREE.Mesh(new THREE.BoxGeometry(W, H, D), [edge, edge, edge, edge, front, back]));
@@ -822,7 +824,7 @@ html.pre-clap main > section:not(.hero),html.pre-clap .bar nav,html.pre-clap .tc
       const w = host.clientWidth, h = host.clientHeight;
       renderer.setSize(w, h, false); camera.aspect = w / h;
       const t = Math.tan(THREE.MathUtils.degToRad(camera.fov / 2));
-      camera.position.z = Math.max(2.9 / t, 2.45 / (t * camera.aspect)) + .25;
+      camera.position.z = Math.max(2.9 / t, (W / 2 + .35) / (t * camera.aspect)) + .25;
       camera.updateProjectionMatrix();
     }
     resize(); addEventListener('resize', resize);
@@ -867,7 +869,7 @@ html.pre-clap main > section:not(.hero),html.pre-clap .bar nav,html.pre-clap .tc
       clap(done) {
         if (reduce || !window.gsap) { pivot.rotation.z = 0; sfx.clap(); done(); return; }
         gsap.timeline({ onComplete: done })
-          .to(pivot.rotation, { z: OPEN + .1, duration: .2, ease: 'power2.out' })
+          .to(pivot.rotation, { z: OPEN + .08, duration: .2, ease: 'power2.out' })
           .to(pivot.rotation, { z: 0, duration: .085, ease: 'power4.in', onComplete: () => { sfx.clap(); kick = 1; } })
           .to({}, { duration: .35 });
       },
