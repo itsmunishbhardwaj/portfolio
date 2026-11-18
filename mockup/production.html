@@ -101,12 +101,12 @@ html.pre-clap{overflow:hidden}
 html.pre-clap main > section:not(.hero),html.pre-clap .bar nav,html.pre-clap .tc{opacity:0;visibility:hidden}
 
 /* the logline: the summary, at full volume */
-.logline{position:relative;overflow:hidden;background:var(--ink);color:var(--chalk);min-height:100vh;display:grid;grid-template-columns:minmax(0,1.5fr) minmax(0,1fr);align-items:end;gap:20px;padding:110px 0 0 max(32px,calc(50% - 660px))}
+.logline{position:relative;overflow:hidden;background:var(--paper);color:var(--ink);min-height:100vh;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.5fr);align-items:end;gap:40px;padding:110px max(32px,calc(50% - 660px)) 0 0}
 .logline .copy{align-self:center;padding-bottom:90px;position:relative;z-index:1}
-.lead{margin:0;align-self:end;height:min(88vh,860px);display:flex;align-items:flex-end;justify-content:flex-end}
-.lead img{height:100%;width:auto;max-width:none;object-fit:contain;object-position:bottom right;filter:grayscale(1) contrast(1.08) brightness(.96)}
+.lead{order:-1;margin:0;align-self:end;height:min(88vh,860px);display:flex;align-items:flex-end;justify-content:flex-start}
+.lead img{height:100%;width:auto;max-width:none;object-fit:contain;object-position:bottom left;filter:grayscale(1) contrast(1.08) brightness(.96)}
 .big{font-family:var(--display);font-weight:800;font-size:clamp(40px,5.4vw,100px);line-height:.98;letter-spacing:-.035em;max-width:14em;text-wrap:balance}
-.big + .big{margin-top:.45em;color:#bdb8ad}
+.big + .big{margin-top:.45em;color:#77716a}
 .big .w{display:inline-block;overflow:hidden;vertical-align:top;padding-bottom:.08em;margin-bottom:-.08em}
 .big .w > span{display:inline-block}
 .pipeline{list-style:none;display:flex;flex-wrap:wrap;gap:10px;margin:64px 0 0;padding:0;font-size:15px;font-weight:700}
@@ -240,7 +240,7 @@ html.pre-clap main > section:not(.hero),html.pre-clap .bar nav,html.pre-clap .tc
   .wrap{padding:0 20px}
   .logline{grid-template-columns:1fr;padding:90px 20px 0}
   .logline .copy{padding-bottom:20px}
-  .lead{height:52vh;justify-content:center}
+  .lead{order:0;height:52vh;justify-content:center}
   .stage3d{height:calc(100vh - 190px)}
   .stage{padding:84px 0 96px}.stage-head{margin-bottom:48px}
   .cell{padding:9px 10px 10px}.cell.w2,.cell.w3{grid-column:span 6}
