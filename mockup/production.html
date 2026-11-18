@@ -129,6 +129,12 @@ html.pre-clap main > section:not(.hero),html.pre-clap .bar nav,html.pre-clap .tc
 
 /* development: treatment + filmography */
 .treatment{max-width:62rem}
+.coming{position:relative;margin-top:80px;max-width:62rem;background:var(--yellow);color:var(--ink);padding:34px 40px 38px;border:2.5px solid var(--ink);box-shadow:8px 8px 0 var(--ink);transform:rotate(-.6deg)}
+.coming::before,.coming::after{content:"";position:absolute;top:50%;width:26px;height:26px;margin-top:-13px;border-radius:50%;background:var(--band);border:2.5px solid var(--ink)}
+.coming::before{left:-14px}.coming::after{right:-14px}
+.coming .stamp{background:var(--ink);color:var(--chalk)}
+.coming h3{font-family:var(--display);font-weight:800;font-size:clamp(34px,4.6vw,60px);line-height:1;letter-spacing:-.02em;margin:16px 0 14px}
+.coming p{max-width:56ch}
 .films{width:100%;border-collapse:collapse;margin-top:90px;border-top:2px solid var(--ink)}
 .films caption{caption-side:top;text-align:left;font-family:var(--display);font-weight:800;font-size:32px;letter-spacing:-.01em;padding-bottom:16px}
 .films td{border-bottom:1px solid rgba(20,19,18,.4);padding:18px 24px 18px 0;vertical-align:baseline}
@@ -239,6 +245,7 @@ html.pre-clap main > section:not(.hero),html.pre-clap .bar nav,html.pre-clap .tc
   .bar{gap:12px;padding:12px 16px}.tc{display:none}.rec{margin-left:auto}
   .wrap{padding:0 20px}
   .logline{padding:90px 20px}
+  .coming{padding:26px 22px 30px}
   .lead-img{float:none;display:block;height:auto!important;width:min(78vw,340px);margin:0 auto 28px;shape-outside:none}
   .stage3d{height:calc(100vh - 190px)}
   .stage{padding:84px 0 96px}.stage-head{margin-bottom:48px}
@@ -331,6 +338,12 @@ html.pre-clap main > section:not(.hero),html.pre-clap .bar nav,html.pre-clap .tc
           <p class="body">I chose engineering, and I chose it on purpose: I like building things that hold up when it matters. But I think like a filmmaker. It's in me, and it shapes how I work: I set the tone before anything is built, I plan for the edit, and I treat every system like a story that has to hold together from the first frame to the last.</p>
         </div>
       </div>
+
+      <aside class="coming" aria-label="Upcoming certification">
+        <span class="stamp c-yellow">Coming soon, January 2027</span>
+        <h3>Claude Certified Architect</h3>
+        <p>Anthropic's first technical certification, through the Claude Partner Network. It covers agentic architecture, Claude Code workflows, prompt engineering, MCP integration and context management: the same discipline I already build with, now certified.</p>
+      </aside>
 
       <table class="films">
         <caption>Filmography, all at H2O.ai</caption>
