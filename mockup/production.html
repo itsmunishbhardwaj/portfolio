@@ -101,8 +101,11 @@ html.pre-clap{overflow:hidden}
 html.pre-clap main > section:not(.hero),html.pre-clap .bar nav,html.pre-clap .tc{opacity:0;visibility:hidden}
 
 /* the logline: the summary, at full volume */
-.logline{position:relative;background:var(--ink);color:var(--chalk);min-height:100vh;display:flex;flex-direction:column;justify-content:center;padding:120px max(32px,calc(50% - 640px))}
-.big{font-family:var(--display);font-weight:800;font-size:clamp(46px,7.4vw,124px);line-height:.98;letter-spacing:-.035em;max-width:14em;text-wrap:balance}
+.logline{position:relative;overflow:hidden;background:var(--ink);color:var(--chalk);min-height:100vh;display:grid;grid-template-columns:minmax(0,1.5fr) minmax(0,1fr);align-items:end;gap:20px;padding:110px 0 0 max(32px,calc(50% - 660px))}
+.logline .copy{align-self:center;padding-bottom:90px;position:relative;z-index:1}
+.lead{margin:0;align-self:end;height:min(88vh,860px);display:flex;align-items:flex-end;justify-content:flex-end}
+.lead img{height:100%;width:auto;max-width:none;object-fit:contain;object-position:bottom right;filter:grayscale(1) contrast(1.08) brightness(.96)}
+.big{font-family:var(--display);font-weight:800;font-size:clamp(40px,5.4vw,100px);line-height:.98;letter-spacing:-.035em;max-width:14em;text-wrap:balance}
 .big + .big{margin-top:.45em;color:#bdb8ad}
 .big .w{display:inline-block;overflow:hidden;vertical-align:top;padding-bottom:.08em;margin-bottom:-.08em}
 .big .w > span{display:inline-block}
@@ -125,7 +128,7 @@ html.pre-clap main > section:not(.hero),html.pre-clap .bar nav,html.pre-clap .tc
 .js .hl.on{background-size:100% 100%}
 
 /* development: treatment + filmography */
-.treatment{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:60px;align-items:start}
+.treatment{max-width:62rem}
 .films{width:100%;border-collapse:collapse;margin-top:90px;border-top:2px solid var(--ink)}
 .films caption{caption-side:top;text-align:left;font-family:var(--display);font-weight:800;font-size:32px;letter-spacing:-.01em;padding-bottom:16px}
 .films td{border-bottom:1px solid rgba(20,19,18,.4);padding:18px 24px 18px 0;vertical-align:baseline}
@@ -235,7 +238,9 @@ html.pre-clap main > section:not(.hero),html.pre-clap .bar nav,html.pre-clap .tc
   body{font-size:16px}
   .bar{gap:12px;padding:12px 16px}.tc{display:none}.rec{margin-left:auto}
   .wrap{padding:0 20px}
-  .logline{padding:90px 20px}
+  .logline{grid-template-columns:1fr;padding:90px 20px 0}
+  .logline .copy{padding-bottom:20px}
+  .lead{height:52vh;justify-content:center}
   .stage3d{height:calc(100vh - 190px)}
   .stage{padding:84px 0 96px}.stage-head{margin-bottom:48px}
   .cell{padding:9px 10px 10px}.cell.w2,.cell.w3{grid-column:span 6}
@@ -301,11 +306,16 @@ html.pre-clap main > section:not(.hero),html.pre-clap .bar nav,html.pre-clap .tc
 
   <!-- LOGLINE -->
   <section class="logline" id="logline" aria-label="Summary">
+    <div class="copy">
     <p class="big" data-words>Six years making systems safe enough for a bank.</p>
     <p class="big" data-words>Now I build AI agents with the same discipline, and run every build like a film.</p>
     <ol class="pipeline">
       <li class="c-yellow">Development</li><li class="c-blue">Pre-production</li><li class="c-red">Production</li><li class="c-violet">Post</li><li class="c-pink">Distribution</li>
     </ol>
+    </div>
+    <figure class="lead">
+      <img src="../assets/munish-portrait.png" alt="Munish Bhardwaj, smiling, clear-framed glasses and a black tee">
+    </figure>
   </section>
 
   <!-- 1. DEVELOPMENT -->
@@ -323,10 +333,6 @@ html.pre-clap main > section:not(.hero),html.pre-clap .bar nav,html.pre-clap .tc
           <p class="body">The last year, I've been building agents the same way: deterministic where it matters, model-written only where it's safe.</p>
           <p class="body">I'm an engineer because it pays the bills. I'm a storyteller at heart, and I tell stories through my engineering. And I build things, because that part I can't switch off. Filmmaking is what I would be doing otherwise, so it is how I think about the work I do instead.</p>
         </div>
-        <button class="print" type="button" style="transform:rotate(3deg)" aria-label="Headshot of Munish. Press to retake.">
-          <span class="frame"><img src="../assets/munish-portrait.png" alt="Munish Bhardwaj, smiling, clear-framed glasses and a black tee"></span>
-          <span class="cap">the director</span>
-        </button>
       </div>
 
       <table class="films">
@@ -946,10 +952,12 @@ html.pre-clap main > section:not(.hero),html.pre-clap .bar nav,html.pre-clap .tc
   });
   gsap.set('.big .w > span', { yPercent: 110 });
   gsap.set('.pipeline li', { opacity: 0, y: 14 });
+  gsap.set('.lead img', { opacity: 0 });
   ScrollTrigger.create({ trigger: '#logline', start: 'top 60%', once: true, onEnter: () => {
     gsap.timeline()
       .to('.big .w > span', { yPercent: 0, duration: .8, ease: 'power4.out', stagger: .045 })
-      .to('.pipeline li', { opacity: 1, y: 0, duration: .4, stagger: .08, ease: 'power2.out' }, '-=.3');
+      .to('.pipeline li', { opacity: 1, y: 0, duration: .4, stagger: .08, ease: 'power2.out' }, '-=.3')
+      .fromTo('.lead img', { opacity: 0, y: 60 }, { opacity: 1, y: 0, duration: 1.1, ease: 'power3.out' }, .15);
   } });
 
   /* ---------- the reel: scroll advances the film strip ---------- */
