@@ -1,0 +1,698 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Munish Bhardwaj. Engineer, storyteller, builder.</title>
+<meta name="description" content="Munish Bhardwaj, forward-deployed and AI engineer. A portfolio run like a film production, from development to distribution.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Courier+Prime:ital,wght@0,400;0,700;1,400&family=Nanum+Myeongjo:wght@400;700;800&family=Nanum+Pen+Script&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#D6E1C9;
+  --paper-shade:#C3D2B4;
+  --ink:#11231A;
+  --forest:#1D4A34;
+  --stage:#0B1F17;        /* the dark sound stage */
+  --slate:#0E1913;
+  --tape:#EDE06C;         /* yellow gaffer tape */
+  --graphite:#3D403A;
+  --chalk:#DCE8D0;
+  --display:"Nanum Myeongjo","Iowan Old Style",Georgia,serif;
+  --mono:"Courier Prime","Courier New",Courier,monospace;
+  --hand:"Nanum Pen Script","Bradley Hand",cursive;
+  --wrap:1180px;
+  --paper-tex:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='420' height='420'%3E%3Cfilter id='p'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.75' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .1  0 0 0 0 .2  0 0 0 0 .12  0 0 0 .17 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23p)'/%3E%3C/svg%3E"),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='900' height='900'%3E%3Cfilter id='f'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.012 .03' numOctaves='3' seed='4'/%3E%3CfeColorMatrix values='0 0 0 0 .95  0 0 0 0 1  0 0 0 0 .9  0 0 0 .32 -.08'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23f)'/%3E%3C/svg%3E");
+}
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--stage);color:var(--ink);font-family:var(--mono);font-size:17px;line-height:1.55;overflow-x:hidden}
+img{max-width:100%;display:block}
+a{color:inherit}
+h1,h2,h3,p{margin:0}
+:focus-visible{outline:3px solid var(--tape);outline-offset:3px}
+
+#haze{position:fixed;inset:0;z-index:0;background:radial-gradient(110% 80% at 50% 0%,#1c4a35 0%,#0f2a1e 45%,#07140e 100%)}
+.grain{position:fixed;inset:-100px;z-index:60;pointer-events:none;opacity:.15;mix-blend-mode:soft-light;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)'/%3E%3C/svg%3E");
+  animation:grain 1.1s steps(6) infinite}
+@keyframes grain{0%{transform:translate(0,0)}20%{transform:translate(-30px,20px)}40%{transform:translate(25px,-35px)}60%{transform:translate(-45px,-15px)}80%{transform:translate(35px,40px)}100%{transform:translate(0,0)}}
+
+/* top bar: the production schedule */
+.bar{position:fixed;top:0;left:0;right:0;z-index:50;display:flex;align-items:center;gap:26px;padding:13px 28px;color:var(--chalk);font-size:14px;
+  background:rgba(9,26,19,.84);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px)}
+.bar .who{font-family:var(--display);font-weight:800;font-size:17px;text-decoration:none;white-space:nowrap}
+.bar nav{display:flex;gap:6px;margin-left:auto}
+.bar nav a{text-decoration:none;padding:5px 12px 3px;opacity:.7;border-radius:2px}
+.bar nav a:hover{opacity:1}
+.bar nav a[aria-current="true"]{opacity:1;background:var(--tape);color:var(--ink)}
+.tc{font-variant-numeric:tabular-nums;opacity:.85;white-space:nowrap}
+.rec{font:inherit;color:inherit;background:none;border:1px solid rgba(220,232,208,.45);border-radius:3px;padding:6px 12px 6px 10px;display:flex;align-items:center;gap:9px;cursor:pointer;white-space:nowrap}
+.rec i{width:10px;height:10px;border-radius:50%;background:#55615a;display:block}
+.rec[aria-pressed="true"]{border-color:var(--tape)}
+.rec[aria-pressed="true"] i{background:#E04B3A;box-shadow:0 0 0 4px rgba(224,75,58,.22);animation:blink 1.4s steps(2) infinite}
+@keyframes blink{50%{opacity:.35}}
+
+main{position:relative;z-index:1}
+.wrap{max-width:var(--wrap);margin:0 auto;padding:0 32px}
+
+/* ---------- the slate ---------- */
+.hero{min-height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center;padding:70px 20px 40px;color:var(--chalk)}
+.slate{width:min(800px,100%);filter:drop-shadow(0 40px 50px rgba(0,0,0,.55))}
+.sticks{padding-top:clamp(56px,8vw,100px)}
+.stick{height:clamp(30px,4.6vw,48px);border:3px solid var(--slate);border-radius:4px;
+  background:repeating-linear-gradient(-58deg,var(--chalk) 0 46px,var(--slate) 46px 92px)}
+.stick.top{background:repeating-linear-gradient(58deg,var(--chalk) 0 46px,var(--slate) 46px 92px);transform-origin:18px 100%}
+.board{display:grid;grid-template-columns:repeat(6,1fr);background:var(--slate);border:3px solid var(--slate);
+  background-image:radial-gradient(120% 80% at 30% 20%,rgba(220,232,208,.07),transparent 60%)}
+.cell{border:1.5px solid rgba(220,232,208,.55);padding:9px 18px 9px;min-width:0}
+.cell small{display:block;font-size:13px;letter-spacing:.06em;opacity:.75;text-transform:uppercase}
+.cell b{display:block;font-family:var(--hand);font-weight:400;font-size:clamp(26px,2.6vw,32px);line-height:1.05}
+.cell.prod{grid-column:span 6;padding:16px 18px 24px}
+.cell.w3{grid-column:span 3}.cell.w2{grid-column:span 2}
+.hero h1{font-family:var(--display);font-weight:800;font-size:clamp(40px,6.2vw,80px);line-height:.94;letter-spacing:-.03em;margin-top:4px}
+.hero h1 span{display:block}
+.calls{display:flex;flex-wrap:wrap;gap:14px;align-items:center;justify-content:center;margin-top:28px}
+.calls p{flex:0 0 100%;text-align:center;padding:0 max(0px,calc(50% - 30ch));margin:0 0 10px}
+.call{font:700 17px/1 var(--mono);padding:16px 22px 14px;border:2px solid var(--chalk);color:var(--chalk);background:transparent;text-decoration:none;cursor:pointer}
+.call.go{background:var(--tape);border-color:var(--tape);color:var(--ink)}
+.call:hover{background:var(--chalk);border-color:var(--chalk);color:var(--ink)}
+
+/* ---------- stages ---------- */
+.stage{position:relative;padding:130px 0 150px}
+.stage.on-paper{background-color:var(--paper);background-image:var(--paper-tex);color:var(--ink);box-shadow:0 0 80px rgba(0,0,0,.5)}
+.stage.on-dark{color:var(--chalk)}
+.stage-head{margin-bottom:70px}
+.tape{display:inline-block;font-family:var(--hand);font-size:28px;line-height:1;color:var(--ink);background:var(--tape);
+  padding:7px 20px 9px 16px;transform:rotate(-2deg);box-shadow:0 2px 5px rgba(0,0,0,.25);
+  clip-path:polygon(0 0,100% 0,98.5% 22%,100% 46%,98.5% 72%,100% 100%,0 100%,1.5% 70%,0 44%,1.5% 20%)}
+.stage-head h2{font-family:var(--display);font-weight:800;font-size:clamp(58px,12.5vw,178px);line-height:.9;letter-spacing:-.04em;margin:18px 0 0 -.04em}
+.stage-head p{max-width:50ch;margin-top:28px;font-size:18px}
+.lede{font-family:var(--display);font-weight:700;font-size:clamp(26px,3.5vw,44px);line-height:1.22;letter-spacing:-.012em;max-width:23em;text-wrap:pretty}
+.body{max-width:60ch;margin-top:22px}
+.hl{background:linear-gradient(transparent 12%,var(--tape) 12%,var(--tape) 90%,transparent 90%) no-repeat 0 0/100% 100%;padding:0 .12em;margin:0 -.12em;-webkit-box-decoration-break:clone;box-decoration-break:clone}
+.js .hl{background-size:0% 100%;transition:background-size .9s cubic-bezier(.2,.7,.2,1)}
+.js .hl.on{background-size:100% 100%}
+
+/* development: treatment + filmography */
+.treatment{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:60px;align-items:start}
+.films{width:100%;border-collapse:collapse;margin-top:90px;border-top:2px solid var(--ink)}
+.films caption{caption-side:top;text-align:left;font-family:var(--display);font-weight:800;font-size:32px;letter-spacing:-.01em;padding-bottom:16px}
+.films td{border-bottom:1px solid rgba(17,35,26,.45);padding:18px 24px 18px 0;vertical-align:baseline}
+.films td.yr{font-family:var(--display);font-weight:800;font-size:clamp(30px,3.8vw,46px);line-height:1;letter-spacing:-.02em;white-space:nowrap}
+.films td.role{font-weight:700;width:30%}
+
+/* prints */
+.print{position:relative;display:block;background:#F2EFE4;padding:13px 13px 52px;width:min(260px,70vw);border:0;font:inherit;color:var(--ink);text-align:left;cursor:pointer;
+  box-shadow:0 18px 30px -14px rgba(0,0,0,.65),0 1px 3px rgba(0,0,0,.3)}
+.print::before{content:"";position:absolute;top:-13px;left:50%;width:92px;height:27px;margin-left:-46px;background:rgba(237,224,108,.75);transform:rotate(-3deg)}
+.print .frame{display:block;aspect-ratio:1/1;background:var(--forest);overflow:hidden}
+.print img{width:100%;height:100%;object-fit:cover}
+.js .print img{filter:brightness(2.4) contrast(.25) sepia(.7) blur(3px);opacity:.15;transition:filter 3.2s ease-out,opacity 1.6s ease-out}
+.js .print.dev img{filter:none;opacity:1}
+.print .cap{position:absolute;left:14px;right:14px;bottom:9px;font-family:var(--hand);font-size:25px;line-height:1;color:var(--graphite)}
+.print.flash::after{content:"";position:absolute;inset:0;background:#fff;animation:flash .5s ease-out forwards}
+@keyframes flash{from{opacity:.95}to{opacity:0}}
+
+/* pre-production: storyboard */
+.boards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:28px;margin-top:80px}
+.panel{background-color:var(--paper);background-image:var(--paper-tex);color:var(--ink);padding:18px 18px 24px;box-shadow:0 24px 40px -20px rgba(0,0,0,.7)}
+.panel:nth-child(1){transform:rotate(-1.2deg)}.panel:nth-child(2){transform:translateY(22px) rotate(.6deg)}.panel:nth-child(3){transform:rotate(1.4deg)}
+.shot{aspect-ratio:16/9;border:2.5px solid var(--ink);display:flex;align-items:flex-end;padding:14px 16px;position:relative;
+  font-family:var(--display);font-weight:800;font-size:clamp(22px,2.4vw,32px);line-height:1.02;letter-spacing:-.015em}
+.shot .move{position:absolute;top:10px;right:12px;font-family:var(--hand);font-weight:400;font-size:24px;letter-spacing:0;color:var(--graphite);transform:rotate(-4deg)}
+.panel dl{margin:16px 0 0;display:grid;grid-template-columns:auto 1fr;gap:6px 12px;font-size:15.5px;line-height:1.4}
+.panel dt{font-weight:700}.panel dd{margin:0}
+
+/* production: the reel */
+.reel{position:relative}
+.strip{display:flex;flex-direction:column;gap:26px;padding:0 20px;position:relative}
+.cut{flex:none;background-color:var(--paper);background-image:var(--paper-tex);color:var(--ink);padding:38px 42px 40px;max-width:860px;margin:0 auto;width:100%}
+.cut h3{font-family:var(--display);font-weight:800;font-size:clamp(34px,4.6vw,58px);line-height:1;letter-spacing:-.02em;margin:14px 0 18px;text-wrap:balance}
+.cut p{max-width:60ch}
+.cut p + p{margin-top:12px}
+.stamp{display:inline-block;border:2px solid var(--forest);color:var(--forest);padding:3px 10px 1px;font-weight:700;font-size:14px;text-transform:uppercase;letter-spacing:.04em;transform:rotate(-2deg)}
+.facts{margin:24px 0 0;display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));border-top:2px solid var(--ink)}
+.facts div{padding:12px 12px 12px 0;border-bottom:1px solid rgba(17,35,26,.45)}
+.facts dt{font-family:var(--display);font-weight:800;font-size:34px;line-height:1;letter-spacing:-.02em}
+.facts dd{margin:5px 0 0;font-size:14.5px;line-height:1.35}
+.kit{margin-top:18px;font-size:15px}
+.can{list-style:none;margin:18px 0 0;padding:0;display:grid;grid-template-columns:1fr 1fr;gap:0 34px;border-top:2px solid var(--ink)}
+.can li{padding:10px 0;border-bottom:1px solid rgba(17,35,26,.45);font-size:15px;line-height:1.4}
+.can b{display:block;font-family:var(--display);font-weight:800;font-size:19px}
+/* pinned, horizontal: only when the viewport can hold a frame */
+.reel.pin{height:100vh;display:flex;align-items:center;overflow:hidden}
+.reel.pin .strip{flex-direction:row;width:max-content;padding:58px 8vw;background:#050f0a;gap:22px;align-items:stretch}
+.reel.pin .strip::before,.reel.pin .strip::after{content:"";position:absolute;left:0;right:0;height:24px;top:17px;
+  background:repeating-linear-gradient(90deg,transparent 0 14px,rgba(220,232,208,.82) 14px 34px,transparent 34px 48px)}
+.reel.pin .strip::after{top:auto;bottom:17px}
+.reel.pin .cut{width:min(840px,80vw);margin:0}
+.counter{display:none}
+.reel.pin .counter{display:block;position:absolute;right:28px;bottom:22px;color:var(--chalk);font-size:14px;z-index:2}
+
+/* post: the edit */
+.nle{background:#0A1811;color:var(--chalk);padding:16px 18px 20px 0;margin-top:70px;position:relative;overflow:hidden;box-shadow:0 30px 50px -24px rgba(0,0,0,.7)}
+.ruler{height:26px;margin-left:54px;border-bottom:1px solid rgba(220,232,208,.4);
+  background:repeating-linear-gradient(90deg,rgba(220,232,208,.55) 0 1px,transparent 1px 12.5%),repeating-linear-gradient(90deg,rgba(220,232,208,.25) 0 1px,transparent 1px 2.5%);
+  background-size:100% 100%,100% 9px;background-repeat:no-repeat;background-position:0 0,0 100%}
+.track{display:grid;grid-template-columns:54px 1fr;align-items:center;height:52px;border-bottom:1px solid rgba(220,232,208,.14)}
+.track > span{text-align:center;font-size:13px;opacity:.7}
+.lane{position:relative;height:38px}
+.clip{position:absolute;top:0;bottom:0;padding:9px 10px 0;font-size:13.5px;line-height:1.2;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+  background:#24583f;border-left:3px solid var(--chalk);color:var(--chalk)}
+.clip.b{background:#3a6a35}.clip.c{background:#1b4051}.clip.d{background:#4d5a26}
+.playhead{position:absolute;top:10px;bottom:0;left:54px;width:2px;background:var(--tape);z-index:2}
+.playhead::before{content:"";position:absolute;top:0;left:-6px;border:7px solid transparent;border-top:10px solid var(--tape)}
+.notes{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:44px;margin-top:80px}
+.notes article{border-top:2px solid var(--ink);padding-top:16px}
+.notes h3{font-family:var(--display);font-weight:800;font-size:26px;line-height:1.1;letter-spacing:-.01em}
+.notes p{margin-top:10px;font-size:16px}
+.notes q{display:block;font-family:var(--hand);font-size:29px;line-height:1.05;color:var(--graphite);margin-top:16px;quotes:none}
+.rushes{margin-top:70px;display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));border-top:2px solid var(--ink)}
+.rushes div{padding:14px 14px 14px 0;border-bottom:1px solid rgba(17,35,26,.45)}
+.rushes b{display:block;font-family:var(--display);font-weight:800;font-size:clamp(34px,4.4vw,54px);line-height:1;letter-spacing:-.02em}
+.rushes span{font-size:15px}
+
+/* extras */
+.extras{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:70px;align-items:center}
+.extras .prints{display:flex;gap:30px}
+.extras .print:nth-child(1){transform:rotate(-3deg)}.extras .print:nth-child(2){transform:rotate(2.5deg) translateY(22px)}
+.tbd{border:2px dashed rgba(220,232,208,.55);padding:18px 20px;margin-top:34px;max-width:56ch}
+.tbd b{display:block;font-family:var(--display);font-size:22px;font-weight:800;margin-bottom:4px}
+
+/* distribution: the ticket and the billing block */
+.ticket{display:grid;grid-template-columns:auto 1fr;margin-top:60px;border:2.5px solid var(--ink);max-width:980px}
+.stub{writing-mode:vertical-rl;transform:rotate(180deg);text-align:center;padding:20px 14px;border-left:2.5px dashed var(--ink);font-weight:700;letter-spacing:.14em;text-transform:uppercase;font-size:15px}
+.ticket-body{padding:38px 42px 42px}
+.ticket-body h3{font-family:var(--display);font-weight:800;font-size:clamp(34px,5vw,62px);line-height:1;letter-spacing:-.02em;text-wrap:balance}
+.ticket-body p{max-width:54ch;margin-top:18px}
+.cta{display:flex;flex-wrap:wrap;gap:12px;margin-top:30px}
+.btn{font:700 17px/1 var(--mono);text-decoration:none;padding:16px 22px 14px;border:2px solid var(--ink);color:var(--ink)}
+.btn.solid{background:var(--ink);color:var(--paper)}
+.btn:hover{background:var(--forest);border-color:var(--forest);color:var(--paper)}
+.billing{margin:110px auto 0;max-width:920px;text-align:center;font-family:var(--display);font-weight:700;text-transform:uppercase;letter-spacing:.09em;font-size:14px;line-height:2.1}
+.billing b{font-weight:800;font-size:1.5em;letter-spacing:.04em}
+
+@media (max-width:980px){
+  .bar nav{display:none}.tc{margin-left:auto}
+  .treatment,.extras{grid-template-columns:1fr}
+  .boards,.notes{grid-template-columns:1fr;gap:34px}
+  .panel{transform:none!important;max-width:520px}
+  .can{grid-template-columns:1fr}
+}
+@media (max-width:720px){
+  body{font-size:16px}
+  .bar{gap:12px;padding:12px 16px}.tc{display:none}.rec{margin-left:auto}
+  .wrap{padding:0 20px}
+  .stage{padding:84px 0 96px}.stage-head{margin-bottom:48px}
+  .cell{padding:9px 10px 10px}.cell.w2,.cell.w3{grid-column:span 6}
+  .cut{padding:28px 22px 30px}
+  .films td{display:block;padding:4px 0;border:0;width:auto!important}
+  .films tr{display:block;padding:16px 0;border-bottom:1px solid rgba(17,35,26,.45)}
+  .extras .prints{flex-wrap:wrap}
+  .ticket{grid-template-columns:1fr}.stub{writing-mode:horizontal-tb;transform:none;border-left:0;border-bottom:2.5px dashed var(--ink)}
+  .ticket-body{padding:26px 22px 30px}
+  .clip{font-size:11.5px;padding:10px 6px 0}
+  .billing{font-size:12px}
+}
+@media (prefers-reduced-motion:reduce){
+  .grain,.rec i{animation:none!important}
+  .js .hl,.js .print img{transition:none}
+}
+</style>
+</head>
+<body>
+<div id="haze" aria-hidden="true"></div>
+<div class="grain" aria-hidden="true"></div>
+
+<header class="bar">
+  <a class="who" href="#top">Munish Bhardwaj</a>
+  <nav aria-label="Production stages">
+    <a href="#development">Development</a>
+    <a href="#pre-production">Pre-production</a>
+    <a href="#production">Production</a>
+    <a href="#post">Post</a>
+    <a href="#distribution">Distribution</a>
+  </nav>
+  <span class="tc" id="tc" aria-hidden="true">00:00:00:00</span>
+  <button class="rec" data-sound type="button" aria-pressed="false"><i></i><span>Sound off</span></button>
+</header>
+
+<main id="top">
+
+  <!-- THE SLATE -->
+  <section class="hero">
+    <div class="slate" id="slate">
+      <div class="sticks" aria-hidden="true">
+        <div class="stick top" id="stick"></div>
+        <div class="stick"></div>
+      </div>
+      <div class="board">
+        <div class="cell prod">
+          <small>Prod.</small>
+          <h1><span>Engineer.</span><span>Storyteller.</span><span>Builder.</span></h1>
+        </div>
+        <div class="cell w3"><small>Director</small><b>Munish Bhardwaj</b></div>
+        <div class="cell w3"><small>Role</small><b>Forward-deployed / AI engineer</b></div>
+        <div class="cell w2"><small>Roll</small><b>six years in</b></div>
+        <div class="cell w2"><small>Location</small><b>remote, India</b></div>
+        <div class="cell w2"><small>Date</small><b>18 Nov 2026</b></div>
+      </div>
+    </div>
+    <div class="calls">
+      <p>Six years making systems safe enough for a bank. Now building AI agents with the same discipline, and running every build like a film: development, pre-production, production, post, distribution.</p>
+      <button class="call" data-sound type="button" aria-pressed="false">Roll sound</button>
+      <a class="call go" id="action" href="#development">Action</a>
+    </div>
+  </section>
+
+  <!-- 1. DEVELOPMENT -->
+  <section class="stage on-paper" id="development" data-stage>
+    <div class="wrap">
+      <header class="stage-head">
+        <span class="tape">stage one of five</span>
+        <h2>Development</h2>
+        <p>Before anything gets made, someone has to say what it is and who is making it.</p>
+      </header>
+
+      <div class="treatment">
+        <div>
+          <p class="lede">I've spent six years building the infrastructure, identity and evaluation layers that make automated systems <span class="hl">safe to trust</span>, for TD Bank, CBA and Snowflake.</p>
+          <p class="body">The last year, I've been building agents the same way: deterministic where it matters, model-written only where it's safe.</p>
+          <p class="body">I'm an engineer because it pays the bills. I'm a storyteller at heart, and I tell stories through my engineering. And I build things, because that part I can't switch off. Filmmaking is what I would be doing otherwise, so it is how I think about the work I do instead.</p>
+        </div>
+        <button class="print" type="button" style="transform:rotate(3deg)" aria-label="Headshot of Munish. Press to retake.">
+          <span class="frame"><img src="../assets/munish-portrait.png" alt="Munish Bhardwaj, smiling, clear-framed glasses and a black tee"></span>
+          <span class="cap">the director</span>
+        </button>
+      </div>
+
+      <table class="films">
+        <caption>Filmography, all at H2O.ai</caption>
+        <tbody>
+          <tr><td class="yr">2020</td><td class="role">Full stack and DevOps engineer</td><td>The most junior person on the team. Three enterprise integrations in three weeks, on a framework the team still uses.</td></tr>
+          <tr><td class="yr">2021</td><td class="role">Software engineer, ML platform and release</td><td>Release pipelines for CBA, TD Bank and Snowflake. 15+ production releases with teams in five countries. Release velocity up 30%.</td></tr>
+          <tr><td class="yr">2023</td><td class="role">DevOps engineer, QA and certification</td><td>10+ production environments across AWS, Azure and GCP for Fortune 500 banking clients. Every release gated by tests I wrote.</td></tr>
+          <tr><td class="yr">2026</td><td class="role">The same job, with agents in it</td><td>An LLM test report generator merged into CI, and 17+ Claude Code skills that run the QA lifecycle in plain English.</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- 2. PRE-PRODUCTION -->
+  <section class="stage on-dark" id="pre-production" data-stage>
+    <div class="wrap">
+      <header class="stage-head">
+        <span class="tape">stage two of five</span>
+        <h2>Pre-production</h2>
+        <p>Where the decisions that can't be reshot get made.</p>
+      </header>
+
+      <p class="lede">The other day I caught myself telling my manager we had to set the cinematic language of the app before we built any of it.</p>
+      <p class="body">The look and feel that can't change later. Facebook has rebuilt itself a hundred times, and the logo is still blue. You can improve the experience forever. You can't flip the tone in the third act. So this is how I board a build before a line of it exists.</p>
+
+      <div class="boards">
+        <article class="panel">
+          <div class="shot"><span class="move">hold</span>Set the language first.</div>
+          <dl><dt>Action</dt><dd>Decide the foundation before anything is built. It is the one thing you can't reshoot.</dd>
+              <dt>On the job</dt><dd>Identity, environments and guardrails first. Features after.</dd></dl>
+        </article>
+        <article class="panel">
+          <div class="shot"><span class="move">push in</span>Shoot for the edit.</div>
+          <dl><dt>Action</dt><dd>Build so the result can be checked and cut.</dd>
+              <dt>On the job</dt><dd>Evaluated before it ships, reversible when it's wrong.</dd></dl>
+        </article>
+        <article class="panel">
+          <div class="shot"><span class="move">cut to</span>Keep the continuity log.</div>
+          <dl><dt>Action</dt><dd>Write down what you rejected, not just what you shipped.</dd>
+              <dt>On the job</dt><dd>Four isolation approaches evaluated, three rejected on paper, one shipped.</dd></dl>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3. PRODUCTION -->
+  <section class="stage on-dark" id="production" data-stage style="padding-bottom:0">
+    <div class="wrap">
+      <header class="stage-head">
+        <span class="tape">stage three of five</span>
+        <h2>Production</h2>
+        <p>What got shot. Four pieces in full, then everything else in the can. Keep scrolling and the reel advances.</p>
+      </header>
+    </div>
+
+    <div class="reel" id="reel">
+      <div class="strip" id="strip">
+        <article class="cut">
+          <span class="stamp">Live, deployed</span>
+          <h3>Gauge</h3>
+          <p>An assessment engine that diagnoses the type of understanding gap, not a score.</p>
+          <p>Scores and gap type are computed in plain Python from locked thresholds. <span class="hl">The model only writes the narrative.</span> Six calls across two models, with a repair layer that strips fences and retries, because malformed JSON from a free tier is an incident, not a quirk.</p>
+          <dl class="facts">
+            <div><dt>1,652</dt><dd>lines of Python</dd></div>
+            <div><dt>8</dt><dd>REST endpoints, live on Render</dd></div>
+            <div><dt>2</dt><dd>models, routed by task</dd></div>
+            <div><dt>1</dt><dd>hackathon cycle</dd></div>
+          </dl>
+          <p class="kit">Shot on Groq, FastAPI, Supabase, Gradio, golden test cases.</p>
+        </article>
+
+        <article class="cut">
+          <span class="stamp">Shipped at H2O.ai</span>
+          <h3>The test report that cites its sources</h3>
+          <p>A reusable GitHub Actions workflow. It reads the JUnit results, hands structured test data to H2OGPTE, and renders a standalone report: pass, conditional pass or fail, with a root cause for each failure.</p>
+          <p><span class="hl">Every claim the model makes is threaded back</span> to the CI run, the source file and the test name. When the model is unavailable, the report still ships, with data only.</p>
+          <dl class="facts">
+            <div><dt>773</dt><dd>lines, merged into CI</dd></div>
+            <div><dt>3</dt><dd>verdicts it can return</dd></div>
+            <div><dt>4</dt><dd>root-cause categories</dd></div>
+          </dl>
+          <p class="kit">Shot on Python, H2OGPTE, GitHub Actions. Internal repository, so no link. I'll walk you through the merged pull request.</p>
+        </article>
+
+        <article class="cut">
+          <span class="stamp">Shipped at H2O.ai</span>
+          <h3>A QA lifecycle you can run in plain English</h3>
+          <p>17+ Claude Code skills that make the Driverless AI QA lifecycle executable by asking for it: a twelve-step cycle that understands multiple release candidates, and a skill that tests each release commit and posts a structured verification comment.</p>
+          <p>Deploy, test, verify, score and report, <span class="hl">with a human in the loop at every step that matters.</span></p>
+          <dl class="facts">
+            <div><dt>17+</dt><dd>skills in daily use</dd></div>
+            <div><dt>12</dt><dd>steps in the QA cycle</dd></div>
+            <div><dt>3</dt><dd>scoring-pipeline verifiers</dd></div>
+          </dl>
+          <p class="kit">Shot on Claude Code skills, Playwright, Kubernetes APIs. Internal repository, so no link.</p>
+        </article>
+
+        <article class="cut">
+          <span class="stamp">Seven weeks, 2025</span>
+          <h3>Zero static secrets, one banking cluster</h3>
+          <p>Ten services inside a Fortune 500 bank's environment, each holding a long-lived secret somebody had to remember to rotate. Seven weeks of cascading credential failures before the first working token.</p>
+          <p>The fix was written, not clicked: identities and credentials as Terraform loops, one script that covers every namespace in a single run, and another that audits the result.</p>
+          <dl class="facts">
+            <div><dt>24</dt><dd>federated credentials</dd></div>
+            <div><dt>13</dt><dd>managed identities</dd></div>
+            <div><dt>11</dt><dd>namespaces</dd></div>
+            <div><dt>0</dt><dd>static secrets</dd></div>
+          </dl>
+        </article>
+
+        <article class="cut">
+          <span class="stamp">Also in the can</span>
+          <h3>Seven more</h3>
+          <ul class="can">
+            <li><b>Aces</b>Production systems for a feature documentary: about 34 people, six countries, a five-person crew.</li>
+            <li><b>Needle</b>A mobile agent that turns photos and voice notes into a weekly plan in my calendar.</li>
+            <li><b>Second Brain</b>A wiki an LLM maintains. Answers get filed as pages, not returned as chat.</li>
+            <li><b>Yaadein</b>Text someone a question, they record a video answer in the browser. In build.</li>
+            <li><b>Becoming</b>A goal system where one log line resolves up to a project and a goal. 103 commits, in daily use.</li>
+            <li><b>Wisdo</b>A portable, attested knowledge-pack format for agents. Pre-alpha, and labelled as such.</li>
+            <li><b>Slack CatchUp</b>One slash command summarizes a channel and surfaces your mentions, privately.</li>
+          </ul>
+        </article>
+      </div>
+      <span class="counter" aria-hidden="true">frame <span id="frame">1</span> of 5</span>
+    </div>
+  </section>
+
+  <!-- 4. POST -->
+  <section class="stage on-paper" id="post" data-stage>
+    <div class="wrap">
+      <header class="stage-head">
+        <span class="tape">stage four of five</span>
+        <h2>Post</h2>
+        <p>Nothing ships on the first assembly. This is where it gets checked, cut, and made safe to put back.</p>
+      </header>
+
+      <p class="lede">For three years my job has been the cut: the test platform every release runs through before it reaches a bank.</p>
+
+      <div class="nle" role="img" aria-label="An edit timeline. Tracks: 1,600+ test functions across 18 modules; 198 Playwright specs; three identity providers, Keycloak, Okta and OTP; ten GitHub Actions workflows.">
+        <div class="playhead" id="playhead"></div>
+        <div class="ruler"></div>
+        <div class="track"><span>V2</span><div class="lane"><div class="clip b" style="left:18%;width:44%">198 Playwright specs, every app and connector</div></div></div>
+        <div class="track"><span>V1</span><div class="lane"><div class="clip" style="left:2%;width:92%">1,600+ test functions across 18 modules</div></div></div>
+        <div class="track"><span>A1</span><div class="lane"><div class="clip c" style="left:8%;width:22%">Keycloak</div><div class="clip c" style="left:32%;width:22%">Okta</div><div class="clip c" style="left:56%;width:22%">OTP</div></div></div>
+        <div class="track"><span>A2</span><div class="lane"><div class="clip d" style="left:40%;width:54%">10 GitHub Actions workflows, on every PR</div></div></div>
+      </div>
+      <p class="body">One release-candidate run, 26 May 2026: 47 passed, 2 failed, 4 skipped, 8 errors, in 1,583 seconds. Real signal. A suite that only ever reports green isn't trustworthy.</p>
+
+      <div class="notes">
+        <article>
+          <h3>The outage that became a runbook</h3>
+          <p>33+ pods down across nine namespaces. One expired credential in a shared registry secret, no warning. Fixed live, then turned into a script.</p>
+          <q>a fix that isn't automated is a promise to debug the same thing again</q>
+        </article>
+        <article>
+          <h3>Four options, one decision</h3>
+          <p>Isolating a production OpenShift cluster in an account shared by six. Evaluated four approaches and chose the boring one on purpose.</p>
+          <q>the best tool on paper is wrong if it doesn't match your blast radius</q>
+        </article>
+        <article>
+          <h3>PostgreSQL 15 to 18, in production</h3>
+          <p>Led the upgrade across environments with a full backup and restore and a documented rollback checklist. Zero data loss.</p>
+          <q>reversible when it's wrong</q>
+        </article>
+      </div>
+
+      <div class="rushes">
+        <div><b data-count="10" data-suffix="+">10+</b><span>production environments</span></div>
+        <div><b data-count="15" data-suffix="+">15+</b><span>production releases</span></div>
+        <div><b data-count="187">187</b><span>commits to the test suite</span></div>
+        <div><b data-count="34" data-suffix="+">34+</b><span>technical docs and runbooks</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- EXTRAS -->
+  <section class="stage on-dark" id="extras">
+    <div class="wrap extras">
+      <div>
+        <span class="tape">extras</span>
+        <h2 style="font-family:var(--display);font-weight:800;font-size:clamp(44px,7vw,96px);line-height:.95;letter-spacing:-.03em;margin-top:18px">Behind the scenes</h2>
+        <p class="body">Part-time surfer. One certified course in Varkala, and already scheming a way back. Certified cinephile: tell me your mood and I'll recommend a film you'll love. Don't challenge me at go-karting or karaoke. I'm very competitive.</p>
+        <p class="body">Kabir is my cat. He has a YouTube channel documenting life from his point of view. I work for him, and I've made peace with it.</p>
+        <div class="tbd"><b>Kit list, to come</b>The film cameras, the Polaroid, the tape recorder. This is where they go, each one playing its own sound.</div>
+      </div>
+      <div class="prints">
+        <button class="print" type="button" aria-label="Photo of Kabir the cat. Press to retake.">
+          <span class="frame"><img src="../assets/IMG_3940.jpg" alt="Kabir, a fluffy orange cat, looking off to the left under fairy lights" loading="lazy"></span>
+          <span class="cap">Kabir, exec producer</span>
+        </button>
+        <button class="print" type="button" aria-label="Photo of Munish with a surfboard. Press to retake.">
+          <span class="frame"><img src="../assets/IMG_6161.JPG" alt="Munish on a beach beside a blue surfboard" loading="lazy"></span>
+          <span class="cap">Varkala, take one</span>
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5. DISTRIBUTION -->
+  <section class="stage on-paper" id="distribution" data-stage>
+    <div class="wrap">
+      <header class="stage-head">
+        <span class="tape">stage five of five</span>
+        <h2>Distribution</h2>
+        <p>The part where it reaches an audience. In this case, you.</p>
+      </header>
+
+      <div class="ticket">
+        <div class="stub">Admit one</div>
+        <div class="ticket-body">
+          <h3>Tell me what you're building.</h3>
+          <p>Give me twenty minutes. I'll walk you through how I'd make an agent trustworthy against your actual stack: deterministic where it matters, evaluated before it ships, reversible when it's wrong.</p>
+          <div class="cta">
+            <a class="btn solid" href="https://calendly.com/iammunishbhardwaj/30min">Book 30 minutes</a>
+            <a class="btn" href="mailto:itsbhardwaj@icloud.com">Email me</a>
+            <a class="btn" href="https://www.linkedin.com/in/itsmunishbhardwaj">LinkedIn</a>
+            <a class="btn" href="https://github.com/itsmunishbhardwaj">GitHub</a>
+            <a class="btn" href="../assets/munish-bhardwaj-resume.pdf">Download resume</a>
+          </div>
+        </div>
+      </div>
+
+      <p class="billing">
+        a <b>Munish Bhardwaj</b> production<br>
+        engineered, written and shipped by <b>Munish Bhardwaj</b><br>
+        executive producer <b>Kabir</b><br>
+        shot on Python, Terraform, Kubernetes, Playwright and Claude<br>
+        filmed on location, remote from India, on US Pacific hours
+      </p>
+    </div>
+  </section>
+</main>
+
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.1.14/dist/lenis.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vanta@0.5.24/dist/vanta.fog.min.js"></script>
+<script>
+(() => {
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const $ = (s, r = document) => [...r.querySelectorAll(s)];
+
+  /* ---------- sound: synthesized stand-ins until the real recordings exist ---------- */
+  const sound = { ctx: null, on: false, hiss: null };
+  function noise(dur) {
+    const b = sound.ctx.createBuffer(1, sound.ctx.sampleRate * dur, sound.ctx.sampleRate);
+    const d = b.getChannelData(0);
+    for (let i = 0; i < d.length; i++) d[i] = Math.random() * 2 - 1;
+    return b;
+  }
+  function burst({ dur = .03, freq = 2400, q = 1.2, gain = .25, type = 'bandpass', at = 0 }) {
+    const c = sound.ctx, t = c.currentTime + at;
+    const src = c.createBufferSource(); src.buffer = noise(dur + .02);
+    const f = c.createBiquadFilter(); f.type = type; f.frequency.value = freq; f.Q.value = q;
+    const g = c.createGain(); g.gain.setValueAtTime(gain, t); g.gain.exponentialRampToValueAtTime(.0001, t + dur);
+    src.connect(f).connect(g).connect(c.destination); src.start(t); src.stop(t + dur + .02);
+  }
+  function tone({ freq = 200, dur = .08, gain = .2, type = 'sine', at = 0 }) {
+    const c = sound.ctx, t = c.currentTime + at;
+    const o = c.createOscillator(); o.type = type; o.frequency.value = freq;
+    const g = c.createGain(); g.gain.setValueAtTime(gain, t); g.gain.exponentialRampToValueAtTime(.0001, t + dur);
+    o.connect(g).connect(c.destination); o.start(t); o.stop(t + dur + .02);
+  }
+  const sfx = {
+    clap()    { if (!sound.on) return; burst({ freq: 1800, q: .6, dur: .09, gain: .7 }); tone({ freq: 420, dur: .06, gain: .3, type: 'square' }); burst({ freq: 600, dur: .25, gain: .12, type: 'lowpass', at: .02 }); },
+    advance() { if (!sound.on) return; burst({ freq: 2600, dur: .018, gain: .22 }); tone({ freq: 130, dur: .05, gain: .16, type: 'triangle', at: .015 }); burst({ freq: 1500, dur: .02, gain: .14, at: .09 }); },
+    shutter() { if (!sound.on) return; burst({ freq: 3200, dur: .02, gain: .4 }); burst({ freq: 900, dur: .05, gain: .35, type: 'lowpass', at: .07 }); tone({ freq: 95, dur: .09, gain: .22, type: 'triangle', at: .07 }); burst({ freq: 700, dur: .9, gain: .05, type: 'lowpass', at: .16 }); },
+    clunk()   { burst({ freq: 500, dur: .05, gain: .4, type: 'lowpass' }); tone({ freq: 82, dur: .12, gain: .3, type: 'square' }); }
+  };
+  function tapeHiss(start) {
+    if (start) {
+      const c = sound.ctx, src = c.createBufferSource(); src.buffer = noise(2); src.loop = true;
+      const f = c.createBiquadFilter(); f.type = 'highpass'; f.frequency.value = 3800;
+      const g = c.createGain(); g.gain.value = .012;
+      src.connect(f).connect(g).connect(c.destination); src.start(); sound.hiss = src;
+    } else if (sound.hiss) { sound.hiss.stop(); sound.hiss = null; }
+  }
+  const soundButtons = $('[data-sound]');
+  soundButtons.forEach(btn => btn.addEventListener('click', () => {
+    sound.ctx = sound.ctx || new (window.AudioContext || window.webkitAudioContext)();
+    sound.ctx.resume();
+    sound.on = !sound.on;
+    sfx.clunk(); tapeHiss(sound.on);
+    soundButtons.forEach(b => {
+      b.setAttribute('aria-pressed', sound.on);
+      const label = b.querySelector('span') || b;
+      label.textContent = b.classList.contains('rec') ? (sound.on ? 'Recording' : 'Sound off') : (sound.on ? 'Sound is rolling' : 'Roll sound');
+    });
+  }));
+
+  /* ---------- prints: a click retakes the photo ---------- */
+  $('.print').forEach(p => p.addEventListener('click', () => {
+    sfx.shutter();
+    p.classList.remove('flash', 'dev'); void p.offsetWidth;
+    p.classList.add('flash');
+    requestAnimationFrame(() => requestAnimationFrame(() => p.classList.add('dev')));
+  }));
+
+  /* ---------- timecode and current stage ---------- */
+  const tcEl = document.getElementById('tc'), links = $('.bar nav a');
+  const two = n => String(n).padStart(2, '0');
+  function onScroll() {
+    const max = document.documentElement.scrollHeight - innerHeight;
+    const frames = Math.round((max > 0 ? scrollY / max : 0) * 24 * 60 * 3);
+    tcEl.textContent = `00:${two(Math.floor(frames / 1440))}:${two(Math.floor(frames / 24) % 60)}:${two(frames % 24)}`;
+    let active = null;
+    for (const a of links) { const t = document.querySelector(a.getAttribute('href')); if (t && t.getBoundingClientRect().top < innerHeight * .5) active = a; }
+    links.forEach(a => a.setAttribute('aria-current', a === active));
+  }
+  addEventListener('scroll', onScroll, { passive: true }); onScroll();
+
+  if (reduce || !window.gsap) return;   /* everything below is motion; the page is complete without it */
+  document.documentElement.classList.add('js');
+  gsap.registerPlugin(ScrollTrigger);
+
+  /* ---------- smooth scroll ---------- */
+  let lenis = null;
+  const goTo = t => lenis ? lenis.scrollTo(t, { offset: -50 }) : t.scrollIntoView({ behavior: 'smooth' });
+  if (window.Lenis) {
+    lenis = new Lenis({ lerp: .09 });
+    lenis.on('scroll', ScrollTrigger.update);
+    gsap.ticker.add(t => lenis.raf(t * 1000));
+    gsap.ticker.lagSmoothing(0);
+  }
+  $('a[href^="#"]').forEach(a => a.addEventListener('click', e => {
+    const t = document.querySelector(a.getAttribute('href'));
+    if (!t || a.id === 'action') return;
+    e.preventDefault(); goTo(t);
+  }));
+
+  /* ---------- haze on the sound stage ---------- */
+  try {
+    if (window.VANTA && innerWidth > 760) VANTA.FOG({
+      el: '#haze', mouseControls: false, touchControls: false, gyroControls: false,
+      highlightColor: 0x2c6a49, midtoneColor: 0x153a29, lowlightColor: 0x07140e, baseColor: 0x0b1f17,
+      blurFactor: .72, speed: .7, zoom: .65
+    });
+  } catch (e) { /* the CSS gradient stays */ }
+
+  /* ---------- the one orchestrated moment: the slate ---------- */
+  const stick = document.getElementById('stick'), slate = document.getElementById('slate');
+  gsap.set(stick, { rotation: -20 });
+  gsap.from('.hero h1 span', { yPercent: 40, opacity: 0, duration: .9, ease: 'power3.out', stagger: .14, delay: .2 });
+  function clap(then) {
+    gsap.timeline({ onComplete: then })
+      .to(stick, { rotation: -24, duration: .22, ease: 'power2.out' })
+      .to(stick, { rotation: 0, duration: .09, ease: 'power4.in', onComplete: sfx.clap })
+      .fromTo(slate, { y: 5 }, { y: 0, duration: .35, ease: 'elastic.out(1,.35)' })
+      .to({}, { duration: .25 });
+  }
+  document.getElementById('action').addEventListener('click', e => {
+    e.preventDefault();
+    clap(() => goTo(document.getElementById('development')));
+  });
+  ScrollTrigger.create({ trigger: '.hero', start: 'top top', onEnterBack: () => gsap.to(stick, { rotation: -20, duration: .5 }) });
+
+  if (matchMedia('(pointer:fine)').matches) {
+    gsap.set(slate, { transformPerspective: 1600 });
+    const rx = gsap.quickTo(slate, 'rotationX', { duration: .8, ease: 'power3' });
+    const ry = gsap.quickTo(slate, 'rotationY', { duration: .8, ease: 'power3' });
+    addEventListener('pointermove', e => {
+      if (scrollY > innerHeight) return;
+      ry((e.clientX / innerWidth - .5) * 7); rx(-(e.clientY / innerHeight - .5) * 5);
+    });
+  }
+
+  /* ---------- the reel: scroll advances the film strip ---------- */
+  const reel = document.getElementById('reel'), strip = document.getElementById('strip'), frameEl = document.getElementById('frame');
+  ScrollTrigger.matchMedia({
+    '(min-width: 981px) and (min-height: 700px)': () => {
+      reel.classList.add('pin');
+      const cuts = $('.cut', strip);
+      const dist = () => strip.scrollWidth - innerWidth;
+      let last = 1;
+      const tween = gsap.to(strip, {
+        x: () => -dist(), ease: 'none',
+        scrollTrigger: {
+          trigger: reel, pin: true, scrub: .6, end: () => '+=' + dist(), invalidateOnRefresh: true,
+          onUpdate: self => {
+            const n = Math.min(cuts.length, Math.floor(self.progress * (cuts.length - .01)) + 1);
+            if (n !== last) { last = n; frameEl.textContent = n; sfx.advance(); }
+          }
+        }
+      });
+      return () => { tween.scrollTrigger && tween.scrollTrigger.kill(); tween.kill(); gsap.set(strip, { clearProps: 'transform' }); reel.classList.remove('pin'); };
+    }
+  });
+
+  /* ---------- the edit: the playhead follows the scroll ---------- */
+  const nle = document.querySelector('.nle');
+  gsap.fromTo('#playhead', { left: '54px' }, { left: 'calc(100% - 20px)', ease: 'none',
+    scrollTrigger: { trigger: nle, start: 'top 85%', end: 'bottom 25%', scrub: true } });
+
+  /* ---------- scroll-answering details ---------- */
+  $('.hl').forEach(el => ScrollTrigger.create({ trigger: el, start: 'top 78%', once: true, onEnter: () => el.classList.add('on') }));
+  $('.print').forEach(el => ScrollTrigger.create({ trigger: el, start: 'top 80%', once: true, onEnter: () => { el.classList.add('dev'); sfx.shutter(); } }));
+  $('[data-count]').forEach(el => {
+    const end = +el.dataset.count, suf = el.dataset.suffix || '', o = { v: 0 };
+    ScrollTrigger.create({ trigger: el, start: 'top 88%', once: true, onEnter: () =>
+      gsap.to(o, { v: end, duration: 1.2, ease: 'power2.out', onUpdate: () => { el.textContent = Math.round(o.v).toLocaleString('en-US') + suf; } }) });
+  });
+})();
+</script>
+</body>
+</html>
