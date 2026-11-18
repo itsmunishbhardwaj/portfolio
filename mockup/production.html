@@ -3,11 +3,12 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<script>document.documentElement.classList.add('pre-clap')</script>
 <title>Munish Bhardwaj. Engineer, storyteller, builder.</title>
 <meta name="description" content="Munish Bhardwaj, forward-deployed and AI engineer. A portfolio run like a film production, from development to distribution.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Courier+Prime:ital,wght@0,400;0,700;1,400&family=Nanum+Myeongjo:wght@400;700;800&family=Nanum+Pen+Script&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Courier+Prime:ital,wght@0,400;0,700;1,400&family=Nanum+Myeongjo:wght@400;700;800&family=Nanum+Pen+Script&family=Cabin+Sketch:wght@700&display=swap" rel="stylesheet">
 <style>
 :root{
   --paper:#F4F0E6;        /* off-white ground */
@@ -72,9 +73,7 @@ main{position:relative;z-index:1}
 .slate{width:min(800px,100%);filter:drop-shadow(0 34px 34px rgba(20,19,18,.28));color:var(--chalk)}
 .sticks{padding-top:clamp(44px,6vw,74px)}
 .stick{height:clamp(30px,4.6vw,48px);border:3px solid var(--slate);border-radius:4px;
-  background:linear-gradient(-58deg,
-    var(--yellow) 0 46px,var(--slate) 46px 92px,var(--blue) 92px 138px,var(--slate) 138px 184px,var(--red) 184px 230px,var(--slate) 230px 276px,
-    var(--violet) 276px 322px,var(--slate) 322px 368px,var(--pink) 368px 414px,var(--slate) 414px 460px) 0 0/543px 100%}
+  background:repeating-linear-gradient(-58deg,#fff 0 46px,var(--slate) 46px 92px)}
 .stick.top{background:repeating-linear-gradient(58deg,#fff 0 46px,var(--slate) 46px 92px);transform-origin:18px 100%}
 .board{display:grid;grid-template-columns:repeat(6,1fr);background:var(--slate);border:3px solid var(--slate)}
 .cell{border:1.5px solid rgba(255,255,255,.8);padding:9px 18px 9px;min-width:0}
@@ -82,13 +81,27 @@ main{position:relative;z-index:1}
 .cell b{display:block;font-family:var(--hand);font-weight:400;font-size:clamp(26px,2.6vw,32px);line-height:1.05}
 .cell.prod{grid-column:span 6;padding:16px 18px 24px}
 .cell.w3{grid-column:span 3}.cell.w2{grid-column:span 2}
-.hero h1{font-family:var(--display);font-weight:800;font-size:clamp(40px,5.6vw,72px);line-height:.94;letter-spacing:-.03em;margin-top:4px}
+.hero h1{font-family:"Cabin Sketch",var(--hand);font-weight:700;font-size:clamp(42px,6vw,78px);line-height:1;letter-spacing:.005em;margin-top:6px;color:#F4F1EA;text-shadow:0 0 2px rgba(255,255,255,.35)}
 .hero h1 span{display:block}
 .calls{display:flex;flex-wrap:wrap;gap:14px;align-items:center;justify-content:center;margin-top:22px}
-.calls p{flex:0 0 100%;text-align:center;padding:0 max(0px,calc(50% - 30ch));margin:0 0 10px}
+.calls p:not(.hint){flex:0 0 100%;text-align:center;padding:0 max(0px,calc(50% - 30ch));margin:0 0 10px}
 .call{font:700 17px/1 var(--mono);padding:16px 22px 14px;border:2px solid var(--ink);color:var(--ink);background:transparent;text-decoration:none;cursor:pointer}
 .call.go{background:var(--red);border-color:var(--red);color:#fff}
 .call:hover,.call[aria-pressed="true"]{background:var(--ink);border-color:var(--ink);color:var(--chalk)}
+
+/* 3D slate and the clap gate */
+.stage3d{display:none;width:min(980px,100%);height:min(70vh,700px);cursor:grab;touch-action:pan-y}
+.stage3d.grabbing{cursor:grabbing}
+.stage3d canvas{display:block;width:100%!important;height:100%!important}
+.hero.has-3d .stage3d{display:block}
+.hero.has-3d .slate{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.hint{flex:0 0 100%;text-align:center;font-size:14px;margin:4px 0 0;opacity:.7}
+.hint.nag{animation:nag .55s ease}
+@keyframes nag{0%,100%{transform:none;opacity:.7}25%{transform:translateX(-7px);opacity:1}50%{transform:translateX(6px)}75%{transform:translateX(-3px)}}
+main > section:not(.hero),.bar nav,.tc,.calls p:not(.hint){transition:opacity .9s ease}
+html.pre-clap{overflow:hidden}
+html.pre-clap main > section:not(.hero),html.pre-clap .bar nav,html.pre-clap .tc{opacity:0;visibility:hidden}
+html.pre-clap .calls p:not(.hint){display:none}
 
 /* ---------- stages: each one carries its own colour, like strips on a production board ---------- */
 .stage{position:relative;padding:130px 0 150px;border-top:12px solid var(--c)}
@@ -254,6 +267,7 @@ main{position:relative;z-index:1}
 
   <!-- THE SLATE -->
   <section class="hero">
+    <div class="stage3d" id="stage3d" aria-hidden="true"></div>
     <div class="slate" id="slate">
       <div class="sticks" aria-hidden="true">
         <div class="stick top" id="stick"></div>
@@ -275,6 +289,7 @@ main{position:relative;z-index:1}
       <p>Six years making systems safe enough for a bank. Now building AI agents with the same discipline, and running every build like a film: development, pre-production, production, post, distribution.</p>
       <button class="call" data-sound type="button" aria-pressed="false">Roll sound</button>
       <a class="call go" id="action" href="#development">Action</a>
+      <p class="hint" id="hint" aria-live="polite">Drag the slate to turn it. Click it, or press Action, to roll.</p>
     </div>
   </section>
 
@@ -611,15 +626,268 @@ main{position:relative;z-index:1}
   }
   addEventListener('scroll', onScroll, { passive: true }); onScroll();
 
+  /* ---------- clap gate: nothing past the slate shows until it claps ---------- */
+  const root = document.documentElement, hero = document.querySelector('.hero');
+  const hint = document.getElementById('hint'), actionBtn = document.getElementById('action');
+  const development = document.getElementById('development');
+  let goTo = t => t.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth' });
+  let clapImpl = done => done(), lenisRef = null, three = null, clapped = false, busy = false, lastNudge = 0;
+  if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
+  scrollTo(0, 0);
+  const locked = () => root.classList.contains('pre-clap');
+  function reveal() {
+    root.classList.remove('pre-clap');
+    if (lenisRef) { lenisRef.start(); lenisRef.resize(); }
+    hint.textContent = 'Rolling. Drag the slate any time.';
+    if (window.ScrollTrigger) ScrollTrigger.refresh();
+    setTimeout(() => goTo(development), reduce ? 0 : 700);
+  }
+  function callAction() {
+    if (busy) return;
+    busy = true;
+    clapImpl(() => {
+      busy = false;
+      if (!clapped) { clapped = true; reveal(); }
+      else if (three) setTimeout(three.reopen, 350);
+    });
+  }
+  function nudge() {
+    const now = Date.now();
+    if (now - lastNudge < 700) return;
+    lastNudge = now;
+    if (three) three.nudge();
+    hint.classList.remove('nag'); void hint.offsetWidth; hint.classList.add('nag');
+  }
+  actionBtn.addEventListener('click', e => { e.preventDefault(); clapped ? goTo(development) : callAction(); });
+  addEventListener('wheel', () => { if (locked()) nudge(); }, { passive: true });
+  addEventListener('scroll', () => { if (locked() && scrollY > 0) scrollTo(0, 0); }, { passive: true });
+  addEventListener('touchmove', () => { if (locked()) nudge(); }, { passive: true });
+  addEventListener('keydown', e => {
+    if (!locked()) return;
+    const onControl = e.target.closest && e.target.closest('button, a, input');
+    if ((e.key === ' ' || e.key === 'Enter') && !onControl) { e.preventDefault(); callAction(); }
+    else if (['ArrowDown', 'ArrowUp', 'PageDown', 'PageUp', 'End', 'Home', ' '].includes(e.key)) { e.preventDefault(); nudge(); }
+  });
+
+  /* ---------- the slate, in three dimensions and a little beaten up ---------- */
+  const rand = (a, b) => a + Math.random() * (b - a);
+  const canvas = (w, h) => { const c = document.createElement('canvas'); c.width = w; c.height = h; return c; };
+  function erode(c, keep) {
+    const g = c.getContext('2d'), d = g.getImageData(0, 0, c.width, c.height), p = d.data;
+    for (let i = 3; i < p.length; i += 4) {
+      if (!p[i]) continue;
+      const r = Math.random();
+      p[i] *= r < keep ? .78 + Math.random() * .22 : Math.random() * .35;
+    }
+    g.putImageData(d, 0, 0);
+    return c;
+  }
+  function fit(g, text, family, weight, size, maxW) {
+    do { g.font = `${weight} ${size}px ${family}`; size -= 3; } while (g.measureText(text).width > maxW && size > 20);
+  }
+  function scratches(g, w, h, n, alpha) {
+    for (let i = 0; i < n; i++) {
+      g.strokeStyle = `rgba(255,255,255,${rand(alpha * .3, alpha)})`; g.lineWidth = rand(.6, 1.8);
+      const x = rand(0, w), y = rand(0, h), L = rand(16, 150), a = rand(-.5, .5) + (Math.random() < .5 ? 0 : Math.PI / 2);
+      g.beginPath(); g.moveTo(x, y); g.lineTo(x + Math.cos(a) * L, y + Math.sin(a) * L); g.stroke();
+    }
+  }
+  function drawBoard() {
+    const w = 2048, h = 1588, c = canvas(w, h), g = c.getContext('2d');
+    g.fillStyle = '#161615'; g.fillRect(0, 0, w, h);
+    for (let i = 0; i < 16; i++) {                       /* old chalk, half wiped */
+      const x = rand(0, w), y = rand(0, h), r = rand(140, 460), gr = g.createRadialGradient(x, y, 0, x, y, r);
+      gr.addColorStop(0, `rgba(232,229,220,${rand(.03, .08)})`); gr.addColorStop(1, 'rgba(232,229,220,0)');
+      g.fillStyle = gr; g.fillRect(x - r, y - r, r * 2, r * 2);
+    }
+    g.lineCap = 'round';
+    for (let i = 0; i < 10; i++) {                       /* palm swipes */
+      g.strokeStyle = `rgba(230,228,220,${rand(.02, .05)})`; g.lineWidth = rand(60, 150);
+      const x = rand(0, w * .7), y = rand(80, h - 80);
+      g.beginPath(); g.moveTo(x, y); g.bezierCurveTo(x + 220, y + rand(-40, 40), x + 420, y + rand(-60, 60), x + rand(520, 920), y + rand(-50, 50)); g.stroke();
+    }
+    g.save(); g.globalAlpha = .03; g.fillStyle = '#eee'; g.font = '700 150px "Cabin Sketch"'; g.fillText('SC 41   TK 3', 1020, 690); g.restore();
+    scratches(g, w, h, 280, .12);
+
+    const m = 46, r1 = Math.round(h * .565), r2 = Math.round(h * .785);
+    const paint = canvas(w, h), pg = paint.getContext('2d');   /* painted grid, chipped */
+    pg.strokeStyle = '#ebe7dc'; pg.lineWidth = 8; pg.lineCap = 'butt';
+    const line = (x1, y1, x2, y2) => { pg.beginPath(); pg.moveTo(x1, y1); pg.lineTo(x2, y2); pg.stroke(); };
+    pg.strokeRect(m, m, w - m * 2, h - m * 2);
+    line(m, r1, w - m, r1); line(m, r2, w - m, r2); line(w / 2, r1, w / 2, r2); line(w / 3, r2, w / 3, h - m); line(w * 2 / 3, r2, w * 2 / 3, h - m);
+    pg.fillStyle = 'rgba(235,231,220,.85)'; pg.font = '700 34px "Courier Prime"';
+    [['PROD.', m + 30, m + 62], ['DIRECTOR', m + 30, r1 + 56], ['ROLE', w / 2 + 30, r1 + 56], ['ROLL', m + 30, r2 + 56], ['LOCATION', w / 3 + 30, r2 + 56], ['DATE', w * 2 / 3 + 30, r2 + 56]]
+      .forEach(([t, x, y]) => pg.fillText(t, x, y));
+    erode(paint, .9);
+    for (let i = 0; i < 70; i++) { pg.clearRect(rand(0, w), rand(0, h), rand(4, 26), rand(4, 12)); }
+    g.drawImage(paint, 0, 0);
+
+    const chalk = canvas(w, h), cg = chalk.getContext('2d');  /* this take, in chalk */
+    cg.fillStyle = '#f3f0e8';
+    cg.font = '700 200px "Cabin Sketch"';
+    ['Engineer.', 'Storyteller.', 'Builder.'].forEach((t, i) => cg.fillText(t, m + 40, m + 270 + i * 208));
+    const field = (t, x, y, maxW, size) => { fit(cg, t, '"Nanum Pen Script"', 400, size, maxW); cg.fillText(t, x, y); };
+    field('Munish Bhardwaj', m + 30, r1 + 170, w / 2 - m - 70, 104);
+    field('Forward-deployed / AI engineer', w / 2 + 30, r1 + 170, w / 2 - m - 70, 104);
+    field('six years in', m + 30, r2 + 160, w / 3 - m - 60, 96);
+    field('remote, India', w / 3 + 30, r2 + 160, w / 3 - 70, 96);
+    field('18 Nov 2026', w * 2 / 3 + 30, r2 + 160, w / 3 - m - 60, 96);
+    erode(chalk, .82);
+    g.save(); g.shadowColor = 'rgba(255,255,255,.45)'; g.shadowBlur = 7; g.drawImage(chalk, 0, 0); g.restore();
+
+    const edge = g.createLinearGradient(0, 0, 0, h);         /* rubbed edges */
+    edge.addColorStop(0, 'rgba(255,255,255,.05)'); edge.addColorStop(.08, 'rgba(255,255,255,0)');
+    edge.addColorStop(.92, 'rgba(255,255,255,0)'); edge.addColorStop(1, 'rgba(255,255,255,.06)');
+    g.fillStyle = edge; g.fillRect(0, 0, w, h);
+    return c;
+  }
+  function drawBack() {
+    const w = 1024, h = 794, c = canvas(w, h), g = c.getContext('2d');
+    g.fillStyle = '#171716'; g.fillRect(0, 0, w, h);
+    scratches(g, w, h, 160, .1);
+    g.save(); g.translate(w * .62, h * .7); g.rotate(-.05);
+    g.fillStyle = '#d8c79a'; g.fillRect(-190, -42, 380, 84);
+    g.fillStyle = '#3a3630'; g.font = '400 52px "Nanum Pen Script"'; g.fillText('property of M. Bhardwaj', -168, 14);
+    g.restore();
+    return c;
+  }
+  function drawStick(dir) {
+    const w = 2048, h = 226, c = canvas(w, h), g = c.getContext('2d');
+    g.fillStyle = '#171716'; g.fillRect(0, 0, w, h);
+    const sw = 168, k = dir * h * .62;
+    g.fillStyle = '#ecebe4';
+    for (let x = -400; x < w + 400; x += sw * 2) {
+      g.beginPath(); g.moveTo(x, h); g.lineTo(x + sw, h); g.lineTo(x + sw + k, 0); g.lineTo(x + k, 0); g.closePath(); g.fill();
+    }
+    for (let i = 0; i < 140; i++) {                      /* chips, mostly on the striking edge */
+      const edgeY = dir > 0 ? h : 0, y = Math.random() < .7 ? edgeY + (dir > 0 ? -1 : 1) * rand(0, 26) : rand(0, h);
+      const x = Math.random() < .5 ? rand(w * .55, w) : rand(0, w);
+      g.fillStyle = Math.random() < .35 ? '#6b5a47' : '#1b1b1a';
+      g.beginPath(); g.ellipse(x, y, rand(2, 11), rand(1.5, 6), rand(0, 3), 0, Math.PI * 2); g.fill();
+    }
+    for (let i = 0; i < 9; i++) {                        /* grime */
+      const x = rand(0, w), y = rand(0, h), r = rand(60, 200), gr = g.createRadialGradient(x, y, 0, x, y, r);
+      gr.addColorStop(0, `rgba(70,58,44,${rand(.08, .18)})`); gr.addColorStop(1, 'rgba(70,58,44,0)');
+      g.fillStyle = gr; g.fillRect(x - r, y - r, r * 2, r * 2);
+    }
+    scratches(g, w, h, 90, .16);
+    return c;
+  }
+  function buildSlate3D(startClosed) {
+    const host = document.getElementById('stage3d');
+    if (!window.THREE || !host) return null;
+    let renderer;
+    try { renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true }); } catch (e) { return null; }
+    hero.classList.add('has-3d');
+    renderer.setPixelRatio(Math.min(2, devicePixelRatio));
+    renderer.outputEncoding = THREE.sRGBEncoding;
+    host.appendChild(renderer.domElement);
+
+    const scene = new THREE.Scene(), camera = new THREE.PerspectiveCamera(30, 1, .1, 100);
+    scene.add(new THREE.HemisphereLight(0xfffaf0, 0xcfc4b0, .8));
+    const key = new THREE.DirectionalLight(0xffffff, .9); key.position.set(-3, 5, 7); scene.add(key);
+    const rim = new THREE.DirectionalLight(0xffe9c9, .35); rim.position.set(5, -2, -4); scene.add(rim);
+
+    const W = 4, H = 3.1, D = .13, SH = .44, SD = .15, OPEN = .4;
+    const aniso = renderer.capabilities.getMaxAnisotropy();
+    const mat = (c, rough) => { const t = new THREE.CanvasTexture(c); t.encoding = THREE.sRGBEncoding; t.anisotropy = aniso;
+      return new THREE.MeshStandardMaterial({ map: t, roughness: rough, metalness: 0 }); };
+    const edge = new THREE.MeshStandardMaterial({ color: 0x1c1c1b, roughness: .9 });
+    const front = mat(drawBoard(), .93), back = mat(drawBack(), .95), stickLo = mat(drawStick(-1), .8), stickHi = mat(drawStick(1), .8);
+
+    const slate = new THREE.Group(); scene.add(slate);
+    slate.add(new THREE.Mesh(new THREE.BoxGeometry(W, H, D), [edge, edge, edge, edge, front, back]));
+    const lower = new THREE.Mesh(new THREE.BoxGeometry(W, SH, SD), [edge, edge, edge, edge, stickLo, stickLo]);
+    lower.position.y = H / 2 + SH / 2 + .01; slate.add(lower);
+    const pivot = new THREE.Group(); pivot.position.set(-W / 2 + .03, H / 2 + SH + .02, 0); slate.add(pivot);
+    const upper = new THREE.Mesh(new THREE.BoxGeometry(W, SH, SD), [edge, edge, edge, edge, stickHi, stickHi]);
+    upper.position.set(W / 2 - .03, SH / 2, 0); pivot.add(upper);
+    const metal = new THREE.MeshStandardMaterial({ color: 0x9c978d, metalness: .85, roughness: .42 });
+    const hinge = new THREE.Mesh(new THREE.CylinderGeometry(.08, .08, SD + .08, 20), metal);
+    hinge.rotation.x = Math.PI / 2; hinge.position.copy(pivot.position); slate.add(hinge);
+    [SD / 2 + .012, -SD / 2 - .012].forEach(z => {
+      const plate = new THREE.Mesh(new THREE.BoxGeometry(.2, .34, .02), metal);
+      plate.position.set(-W / 2 + .13, H / 2 + SH / 2 + .14, z); slate.add(plate);
+    });
+    pivot.rotation.z = startClosed ? 0 : OPEN;
+    slate.position.y = -.42;
+
+    function resize() {
+      const w = host.clientWidth, h = host.clientHeight;
+      renderer.setSize(w, h, false); camera.aspect = w / h;
+      const t = Math.tan(THREE.MathUtils.degToRad(camera.fov / 2));
+      camera.position.z = Math.max(2.6 / t, 2.6 / (t * camera.aspect)) + .3;
+      camera.updateProjectionMatrix();
+    }
+    resize(); addEventListener('resize', resize);
+
+    /* drag to turn, tap to clap */
+    let rx = 0, ry = 0, tx = 0, ty = 0, vx = 0, vy = 0, drag = null, kick = 0;
+    const el = renderer.domElement;
+    el.addEventListener('pointerdown', e => { drag = { x: e.clientX, y: e.clientY, moved: 0 }; el.setPointerCapture(e.pointerId); host.classList.add('grabbing'); });
+    el.addEventListener('pointermove', e => {
+      if (!drag) return;
+      const dx = e.clientX - drag.x, dy = e.clientY - drag.y;
+      drag.x = e.clientX; drag.y = e.clientY; drag.moved += Math.abs(dx) + Math.abs(dy);
+      vy = dx * .009; vx = dy * .006; ty += vy; tx = Math.max(-.6, Math.min(.6, tx + vx));
+    });
+    const release = () => { host.classList.remove('grabbing'); if (drag && drag.moved < 6) callAction(); drag = null; };
+    el.addEventListener('pointerup', release);
+    el.addEventListener('pointercancel', () => { host.classList.remove('grabbing'); drag = null; });
+
+    const clock = new THREE.Clock();
+    let visible = true;
+    new IntersectionObserver(([en]) => { visible = en.isIntersecting; if (visible) loop(); }).observe(host);
+    function loop() {
+      if (!visible) return;
+      requestAnimationFrame(loop);
+      const t = clock.getElapsedTime();
+      if (!drag) {
+        ty += vy; tx += vx; vy *= .93; vx *= .9;
+        if (Math.abs(vy) < .002) { const rest = Math.round(ty / (Math.PI * 2)) * Math.PI * 2; ty += (rest - ty) * .03; }
+        tx += -tx * .05;
+      }
+      const idle = reduce ? 0 : 1;
+      ry += (ty + Math.sin(t * .5) * .16 * idle - ry) * .12;
+      rx += (tx + Math.sin(t * .7) * .05 * idle - rx) * .12;
+      slate.rotation.set(rx, ry, Math.sin(t * 60) * .012 * kick);
+      slate.position.y = -.42 + Math.sin(t * 1.1) * .04 * idle - kick * .05;
+      kick *= .88;
+      renderer.render(scene, camera);
+    }
+    loop();
+
+    return {
+      clap(done) {
+        if (reduce || !window.gsap) { pivot.rotation.z = 0; sfx.clap(); done(); return; }
+        gsap.timeline({ onComplete: done })
+          .to(pivot.rotation, { z: OPEN + .2, duration: .2, ease: 'power2.out' })
+          .to(pivot.rotation, { z: 0, duration: .085, ease: 'power4.in', onComplete: () => { sfx.clap(); kick = 1; } })
+          .to({}, { duration: .35 });
+      },
+      reopen() { if (window.gsap) gsap.to(pivot.rotation, { z: OPEN, duration: .6, ease: 'power2.out' }); else pivot.rotation.z = OPEN; },
+      nudge() { kick = .7; vy += .05; }
+    };
+  }
+  const fontsReady = Promise.race([
+    Promise.all(['700 100px "Cabin Sketch"', '400 100px "Nanum Pen Script"', '700 30px "Courier Prime"'].map(f => document.fonts.load(f))),
+    new Promise(r => setTimeout(r, 2500))
+  ]);
+  fontsReady.then(() => {
+    try { three = buildSlate3D(clapped); } catch (e) { three = null; hero.classList.remove('has-3d'); }
+    if (three) clapImpl = three.clap;
+  });
+
   if (reduce || !window.gsap) return;   /* everything below is motion; the page is complete without it */
   document.documentElement.classList.add('js');
   gsap.registerPlugin(ScrollTrigger);
 
   /* ---------- smooth scroll ---------- */
   let lenis = null;
-  const goTo = t => lenis ? lenis.scrollTo(t, { offset: -50 }) : t.scrollIntoView({ behavior: 'smooth' });
   if (window.Lenis) {
     lenis = new Lenis({ lerp: .09 });
+    lenisRef = lenis; if (locked()) lenis.stop();
+    goTo = t => { lenis.resize(); lenis.scrollTo(t, { offset: -50, force: true }); };
     lenis.on('scroll', ScrollTrigger.update);
     gsap.ticker.add(t => lenis.raf(t * 1000));
     gsap.ticker.lagSmoothing(0);
@@ -650,11 +918,8 @@ main{position:relative;z-index:1}
       .fromTo(slate, { y: 5 }, { y: 0, duration: .35, ease: 'elastic.out(1,.35)' })
       .to({}, { duration: .25 });
   }
-  document.getElementById('action').addEventListener('click', e => {
-    e.preventDefault();
-    clap(() => goTo(document.getElementById('development')));
-  });
-  ScrollTrigger.create({ trigger: '.hero', start: 'top top', onEnterBack: () => gsap.to(stick, { rotation: -20, duration: .5 }) });
+  if (!three) clapImpl = clap;
+  ScrollTrigger.create({ trigger: '.hero', start: 'top top', onEnterBack: () => { gsap.to(stick, { rotation: -20, duration: .5 }); if (three) three.reopen(); } });
 
   if (matchMedia('(pointer:fine)').matches) {
     gsap.set(slate, { transformPerspective: 1600 });
