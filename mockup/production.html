@@ -101,11 +101,11 @@ html.pre-clap{overflow:hidden}
 html.pre-clap main > section:not(.hero),html.pre-clap .bar nav,html.pre-clap .tc{opacity:0;visibility:hidden}
 
 /* the logline: the summary, at full volume */
-.logline{position:relative;overflow:hidden;background:var(--paper);color:var(--ink);min-height:100vh;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.5fr);align-items:end;gap:40px;padding:110px max(32px,calc(50% - 660px)) 0 0}
-.logline .copy{align-self:center;padding-bottom:90px;position:relative;z-index:1}
-.lead{order:-1;margin:0;align-self:end;height:min(88vh,860px);display:flex;align-items:flex-end;justify-content:flex-start}
-.lead img{height:100%;width:auto;max-width:none;object-fit:contain;object-position:bottom left;filter:grayscale(1) contrast(1.08) brightness(.96)}
-.big{font-family:var(--display);font-weight:800;font-size:clamp(40px,5.4vw,100px);line-height:.98;letter-spacing:-.035em;max-width:14em;text-wrap:balance}
+.logline{--pad:max(32px,calc(50% - 660px));position:relative;overflow:hidden;background:var(--paper);color:var(--ink);min-height:100vh;display:flex;align-items:center;padding:110px var(--pad) 90px}
+.logline .copy{display:flow-root;width:100%}
+.pipeline{clear:both}
+.lead-img{float:left;height:620px;width:auto;max-width:none;margin:0 10px 0 calc(-1 * var(--pad) + 8px);shape-outside:url(../assets/munish-portrait.png);shape-image-threshold:.35;shape-margin:26px;filter:grayscale(1) contrast(1.08) brightness(.96)}
+.big{font-family:var(--display);font-weight:800;font-size:var(--big,clamp(40px,5.2vw,96px));line-height:.98;letter-spacing:-.035em}
 .big + .big{margin-top:.45em;color:#77716a}
 .big .w{display:inline-block;overflow:hidden;vertical-align:top;padding-bottom:.08em;margin-bottom:-.08em}
 .big .w > span{display:inline-block}
@@ -238,9 +238,8 @@ html.pre-clap main > section:not(.hero),html.pre-clap .bar nav,html.pre-clap .tc
   body{font-size:16px}
   .bar{gap:12px;padding:12px 16px}.tc{display:none}.rec{margin-left:auto}
   .wrap{padding:0 20px}
-  .logline{grid-template-columns:1fr;padding:90px 20px 0}
-  .logline .copy{padding-bottom:20px}
-  .lead{order:0;height:52vh;justify-content:center}
+  .logline{padding:90px 20px}
+  .lead-img{float:none;display:block;height:auto!important;width:min(78vw,340px);margin:0 auto 28px;shape-outside:none}
   .stage3d{height:calc(100vh - 190px)}
   .stage{padding:84px 0 96px}.stage-head{margin-bottom:48px}
   .cell{padding:9px 10px 10px}.cell.w2,.cell.w3{grid-column:span 6}
@@ -307,15 +306,13 @@ html.pre-clap main > section:not(.hero),html.pre-clap .bar nav,html.pre-clap .tc
   <!-- LOGLINE -->
   <section class="logline" id="logline" aria-label="Summary">
     <div class="copy">
+      <img class="lead-img" src="../assets/munish-portrait.png" alt="Munish Bhardwaj, smiling, clear-framed glasses and a black tee">
     <p class="big" data-words>Six years making systems safe enough for a bank.</p>
     <p class="big" data-words>Now I build AI agents with the same discipline, and run every build like a film.</p>
     <ol class="pipeline">
       <li class="c-yellow">Development</li><li class="c-blue">Pre-production</li><li class="c-red">Production</li><li class="c-violet">Post</li><li class="c-pink">Distribution</li>
     </ol>
     </div>
-    <figure class="lead">
-      <img src="../assets/munish-portrait.png" alt="Munish Bhardwaj, smiling, clear-framed glasses and a black tee">
-    </figure>
   </section>
 
   <!-- 1. DEVELOPMENT -->
@@ -638,6 +635,33 @@ html.pre-clap main > section:not(.hero),html.pre-clap .bar nav,html.pre-clap .tc
   }
   addEventListener('scroll', onScroll, { passive: true }); onScroll();
 
+  /* ---------- the portrait ends on the last line of the summary ---------- */
+  const leadImg = document.querySelector('.lead-img'), lastBig = $('.big').pop();
+  function fitLead() {
+    const copy = leadImg.parentElement;
+    if (innerWidth <= 980) { leadImg.style.height = ''; copy.style.removeProperty('--big'); return; }
+    const h = Math.round(Math.min(innerHeight - 210, 760));
+    leadImg.style.height = h + 'px';
+    let lo = 32, hi = 150;                     /* size the words so their last line lands on the photo's bottom edge */
+    for (let i = 0; i < 12; i++) {
+      const mid = (lo + hi) / 2;
+      copy.style.setProperty('--big', mid + 'px');
+      const end = lastBig.getBoundingClientRect().bottom - leadImg.getBoundingClientRect().top;
+      if (end > h) hi = mid; else lo = mid;
+    }
+    copy.style.setProperty('--big', lo + 'px');
+    const measure = () => lastBig.getBoundingClientRect().bottom - leadImg.getBoundingClientRect().top;
+    let best = h, bestGap = Infinity;            /* then settle the photo height where its bottom meets the last line */
+    for (let ph = h; ph >= h - 160; ph -= 4) {
+      leadImg.style.height = ph + 'px';
+      const gap = Math.abs(measure() - ph);
+      if (gap < bestGap) { bestGap = gap; best = ph; }
+    }
+    leadImg.style.height = best + 'px';
+  }
+  Promise.all([document.fonts.ready, leadImg.decode().catch(() => {})]).then(fitLead);
+  addEventListener('resize', fitLead);
+
   /* ---------- clap gate: nothing past the slate shows until it claps ---------- */
   const root = document.documentElement, hero = document.querySelector('.hero');
   const hint = document.getElementById('hint'), hintText = document.getElementById('hint-text');
@@ -649,6 +673,7 @@ html.pre-clap main > section:not(.hero),html.pre-clap .bar nav,html.pre-clap .tc
   const locked = () => root.classList.contains('pre-clap');
   function reveal() {
     root.classList.remove('pre-clap');
+    fitLead();
     if (lenisRef) { lenisRef.start(); lenisRef.resize(); }
     hintText.innerHTML = 'rolling.<br>scroll on';
     if (window.ScrollTrigger) ScrollTrigger.refresh();
@@ -952,12 +977,13 @@ html.pre-clap main > section:not(.hero),html.pre-clap .bar nav,html.pre-clap .tc
   });
   gsap.set('.big .w > span', { yPercent: 110 });
   gsap.set('.pipeline li', { opacity: 0, y: 14 });
-  gsap.set('.lead img', { opacity: 0 });
+  gsap.set('.lead-img', { opacity: 0 });
+  fitLead();
   ScrollTrigger.create({ trigger: '#logline', start: 'top 60%', once: true, onEnter: () => {
     gsap.timeline()
       .to('.big .w > span', { yPercent: 0, duration: .8, ease: 'power4.out', stagger: .045 })
       .to('.pipeline li', { opacity: 1, y: 0, duration: .4, stagger: .08, ease: 'power2.out' }, '-=.3')
-      .fromTo('.lead img', { opacity: 0, y: 60 }, { opacity: 1, y: 0, duration: 1.1, ease: 'power3.out' }, .15);
+      .fromTo('.lead-img', { opacity: 0, y: 60 }, { opacity: 1, y: 0, duration: 1.1, ease: 'power3.out' }, .15);
   } });
 
   /* ---------- the reel: scroll advances the film strip ---------- */
