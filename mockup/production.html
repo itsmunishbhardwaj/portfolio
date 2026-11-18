@@ -731,8 +731,8 @@ html.pre-clap main > section:not(.hero),html.pre-clap .bar nav,html.pre-clap .tc
 
     const chalk = canvas(w, h), cg = chalk.getContext('2d');  /* this take, in chalk */
     cg.fillStyle = '#f3f0e8';
-    cg.font = '700 220px "Cabin Sketch"';
-    ['Engineer.', 'Storyteller.', 'Builder.'].forEach((t, i) => cg.fillText(t, m + 44, m + 280 + i * 222));
+    cg.font = '700 272px "Cabin Sketch"';
+    ['Engineer.', 'Storyteller.', 'Builder.'].forEach((t, i) => cg.fillText(t, m + 44, m + 296 + i * 246));
     const field = (t, x, y, maxW, size) => { fit(cg, t, '"Nanum Pen Script"', 400, size, maxW); cg.fillText(t, x, y); };
     field('Munish Bhardwaj', m + 30, r1 + 170, w / 2 - m - 70, 104);
     field('Forward-deployed / AI engineer', w / 2 + 30, r1 + 170, w / 2 - m - 70, 104);
